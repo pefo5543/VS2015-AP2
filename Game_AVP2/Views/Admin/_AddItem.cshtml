@@ -1,0 +1,60 @@
+﻿<div class="col-md-6">
+    <div class="well well-lg">
+        <div class="col-md-12">
+            <form name="addItemForm" novalidate>
+                <fieldset>
+                    <legend class="text-center">Add</legend>
+                    <div class="form-group" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+                        @*<input type="hidden" ng-model="Id" value={{Id}} />*@
+                        <ul class="my-ul">
+                            <li class="details-li">
+                                <label for="Name">Name</label>
+
+                                <input name="Name" class="form-control" ng-model="Name" type="text" ng-maxlength="25" required />
+                                <span class="text-danger" ng-show="addItemForm.Name.$invalid">A name is required.</span>
+                                <span class="text-danger" ng-show="addItemForm.Name.$error.maxlength">The name can be max 25 characters.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Type">Type</label>
+                                <fieldset>
+                                    <select name="Type" class="form-control" ng-model="Type" required>
+                                        <option ng-repeat="types in enums.TypeEnums" value={{type.name}}>{{type.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addItemForm.Type.$invalid">Select item type.</span>
+                            </li>
+                            @*<li class="details-li">
+                                <label for="Country">Country</label>
+                                <fieldset>
+                                    <select name="Country" class="form-control" ng-model="CountryM">
+                                        <option ng-click="hideCity()">Select country</option>
+                                        <option ng-repeat="c in countries" ng-click="getCities(c.Value)" value={{c.Value}}>{{c.Text}}</option>
+                                    </select>
+                                </fieldset>
+                            </li>
+                            <li class="details-li">
+                                <div ng-show="cityShow">
+                                    <label for="City">City</label>
+                                    <fieldset>
+                                        <select name="City" class="form-control" ng-model="CityM">
+                                            <option ng-repeat="city in cities" value={{city.CityId}}>{{city.Name}}</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </li>*@
+                        </ul>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="change-buttons col-md-12">
+
+            <button ng-click="addItem()" type="button" name="submit" class="btn btn-success btn-block"
+                    ng-disabled="(addItemForm.Name.$invalid) || (addItemForm.Type.$invalid)">
+                Add
+            </button>
+
+            <button ng-click="addHide=false" type="button" name="cancel" class="btn btn-warning btn-block">Cancel</button>
+        </div>
+    </div>
+</div>

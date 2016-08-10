@@ -6,12 +6,21 @@ using System.Web.Mvc;
 
 namespace Game_AVP2.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : AdminAuthorizationController
     {
         public ActionResult Index()
         {
             return View();
         }
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Admin()
+        //{
+        //    string apiUri = Url.HttpRouteUrl("DefaultApi", new { controller = "Admin", });
+        //    ViewBag.ApiUrl = new Uri(Request.Url, apiUri).AbsoluteUri.ToString();
+
+        //    return View();
+        //}
 
         public ActionResult About()
         {

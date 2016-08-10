@@ -11,7 +11,7 @@ using Game_AVP2.Models;
 namespace Game_AVP2.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : AdminAuthorizationController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
