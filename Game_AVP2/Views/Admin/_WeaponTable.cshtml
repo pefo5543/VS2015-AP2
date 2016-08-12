@@ -1,0 +1,23 @@
+﻿<div class="col-md-6">
+    <table class="col-md-12 table table-bordered table-striped myTable table-hover">
+        <thead class="">
+            <tr class="label-primary">
+                <th ng-click="sortList('Name')" class="col-md-4"><span class="text-white">Name </span><div ng-class="getListSortClass('Name')"></div></th>
+                <th ng-click="sortList('WeaponType')" class="col-md-3"><span class="text-white">Type </span><div ng-class="getListSortClass('WeaponType')"></div></th>
+                <th ng-click="sortList('Damage')" class="col-md-1"><span class="text-white">Damage </span><div ng-class="getListSortClass('Damage')"></div></th>
+                <th ng-click="sortList('ExtraDamage')" class="col-md-1"><span class="text-white">Bonus damage </span><div ng-class="getListSortClass('ExtraDamage')"></div></th>
+                <th ng-click="sortList('Rarity')" class="col-md-1"><span class="text-white">Rarity </span><div ng-class="getListSortClass('Rarity')"></div></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="w in weapons | limitTo : 50:0 | orderBy : sortListColumn : reverseListSort" class="" ng-click="changeDetail(w)">
+                <td class="col-md-4">{{w.Name}}</td>
+                <td class="col-md-3">{{w.WeaponType}}</td>
+                <td class="col-md-1">{{w.Damage}}</td>
+                <td class="col-md-1">{{w.ExtraDamage}}</td>
+                <td class="col-md-1">{{w.Rarity}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

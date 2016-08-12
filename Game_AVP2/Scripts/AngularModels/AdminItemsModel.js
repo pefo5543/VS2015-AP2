@@ -1,31 +1,102 @@
 ﻿/// <reference path="angular.min.js" />
+/// <reference path="../angular.js" />
 
 
 var AdminItemsModel = angular
     .module("AdminItemsModel", ['angular-growl'])
     .constant('Enums', {
         TypeEnums: [
-           {id: 1, name: 'Weapon'},
-            {id: 2, name: 'Armour'},
-            {id: 3, name: 'Misc'}
+           { id: 1, name: 'Dagger' },
+            { id: 2, name: 'Short Sword' },
+            { id: 3, name: 'Long Sword' },
+            { id: 4, name: 'Battle Axe' },
+            { id: 5, name: 'Spear' },
+            { id: 6, name: 'Short Bow' }
+        ],
+
+        DamageEnums: [
+    { id: 1, name: 3 },
+    { id: 2, name: 4 },
+    { id: 3, name: 5 },
+    { id: 4, name: 6 },
+    { id: 5, name: 7 },
+    { id: 6, name: 8 },
+    { id: 7, name: 9 },
+    { id: 8, name: 10 },
+    { id: 9, name: 11 },
+    { id: 10, name: 12 },
+    { id: 11, name: 13 }
+        ],
+
+        ExtraDamageEnums: [
+    { id: 1, name: 0 },
+    { id: 2, name: 1 },
+    { id: 3, name: 2 },
+    { id: 4, name: 3 },
+    { id: 5, name: 4 }
+        ],
+
+        RarityEnums: [
+    { id: 1, name: 1 },
+    { id: 2, name: 2 },
+    { id: 3, name: 3 },
+    { id: 4, name: 4 },
+    { id: 5, name: 5 }
+        ],
+        ArmourTypeEnums: [
+    { id: 1, name: 'Leather armour' },
+    { id: 2, name: 'Iron Armour' },
+    { id: 3, name: 'Steel Armour' },
+    { id: 4, name: 'Dragon Armour' }
+        ],
+
+        ProtectionEnums: [
+    { id: 1, name: 1 },
+    { id: 2, name: 2 },
+    { id: 3, name: 3 },
+    { id: 4, name: 4 },
+    { id: 5, name: 5 }
+        ],
+
+        BonusEnums: [
+    { id: 1, name: 0 },
+    { id: 2, name: 1 },
+    { id: 3, name: 2 },
+    { id: 4, name: 3 },
+    { id: 5, name: 4 }
         ]
     })
-.controller("ItemsController", function ($scope, Enums, growl, ItemsService, AddItemsService, DeleteItemsService) {
-    $scope.detail = {};
+.controller("WeaponsController", function ($scope, Enums, growl, ItemsService, EditItemsService, AddItemsService, DeleteItemsService) {
+    $scope.weapon = {};
     $scope.enums = Enums;
-    getItems(true, 0);
+    //$scope.addShow = true;
+    getWeapons(true, 0);
     $scope.init = function (name) {
         $scope.countries = name;
     }
-    function getItems() {
-        ItemsService.getItems()
+    function getWeapons(init, id) {
+        ItemsService.getWeapons()
         .success(function (p) {
-            $scope.weapons = p.WeaponList;
-            $scope.armours = p.ArmourList;
-            $scope.miscs = p.MiscList;
+            $scope.weapons = p;
+            //$scope.armours = p.ArmourList;
+            //$scope.miscs = p.MiscList;
+            if (init === true) {
+                $scope.weapon = p[0];
+            } else if (id > 0) {
+                //set detail to weapon with id
+                angular.forEach(p, function (value, key) {
+                    if (value.WeaponId === id) {
+                        $scope.weapon = value;
+                    }
+                });
+            } else {
+                $scope.weapon = {};
+                //hide edit and delete buttons
+                $scope.weaponBtnHide = true;
+            }
         })
         .error(function (error) {
-            $scope.status = 'Unable to load items data' + error.message;
+            $scope.status = 'Unable to load weapons data' + error.message;
             console.log($scope.status);
             return false;
         })
@@ -64,89 +135,232 @@ var AdminItemsModel = angular
         growl.info('This is an info message.', { title: 'Info!' });
     }
 
-    //$scope.editPeople = function () {
-    //    var dataObj = {
-    //        "Id": $scope.detail.Id,
-    //        "FirstName": $scope.detail.FirstName,
-    //        "LastName": $scope.detail.LastName,
-    //        "Email": $scope.detail.Email,
-    //        "BirthDate": $scope.detail.BirthDate,
-    //        "Phone": $scope.detail.Phone,
-    //        "CityId": $scope.CityM,
-    //        "CountryId": $scope.CountryM
-    //    };
-    //    EditService.editDetail(dataObj)
-    //    .success(function (p) {
-    //        getPeople(false, dataObj.Id);
-    //        if (p) {
-    //            $scope.editShow = false;
-    //            $scope.detailHide = false;
-    //            $scope.showSuccess("Person info successfully updated.");
-    //        }
-    //        else {
-    //            $scope.editShow = true;
-    //            $scope.showWarning("Please update some information and try again");
-    //        }
-    //    })
-    //    .error(function (error) {
-    //        $scope.status = 'Unable to edit people data' + error.message;
-    //        console.log($scope.status);
-    //    })
-    //}
+    $scope.editWeapon = function () {
+        var dataObj = {
+            "WeaponId": $scope.weapon.WeaponId,
+            "Name": $scope.weapon.Name,
+            "Description": $scope.weapon.Description,
+            "Damage": $scope.weapon.Damage,
+            "ExtraDamage": $scope.weapon.ExtraDamage,
+            "Rarity": $scope.weapon.Rarity,
+            "Value": $scope.weapon.Value,
+            "WeaponType": $scope.weapon.WeaponType
+        };
+        EditItemsService.editWeapon(dataObj)
+        .success(function (p) {
+            getWeapons(false, dataObj.Id);
+            if (p) {
+                $scope.editShow = false;
+                $scope.detailHide = false;
+                $scope.showSuccess("Weapon info successfully updated.");
+            }
+            else {
+                $scope.editShow = true;
+                $scope.showWarning("Something went wrong, please try again");
+            }
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to edit weapon' + error.message;
+            console.log($scope.status);
+        })
+    }
 
     //add person call from $scope
-    $scope.addItem = function () {
+    $scope.addWeapon = function () {
         var dataObj = {
-            "FirstName": $scope.FirstName,
-            "LastName": $scope.LastName,
-            "GenderId": $scope.Gender,
-            "Email": $scope.Email,
-            "BirthDate": $scope.BirthDate,
-            "Phone": $scope.Phone,
-            "CityId": $scope.CityM,
-            "CountryId": $scope.CountryM
+            "Name": $scope.Name,
+            "Description": $scope.Description,
+            "Damage": $scope.Damage,
+            "ExtraDamage": $scope.ExtraDamage,
+            "Rarity": $scope.Rarity,
+            "Value": $scope.Value,
+            "WeaponType": $scope.WeaponType
         };
-        AddService.addItem(dataObj)
+        AddItemsService.addWeapon(dataObj)
         .success(function (p) {
-            getItems();
+            getWeapons();
             if (p > 0) {
-                //$scope.detail = {};
-                //$scope.addShow = false;
-                $scope.showSuccess("Item successfully added.");
+                $scope.weapon = {};
+                $scope.addShow = false;
+                $scope.showSuccess("Weapon successfully added.");
             }
             else {
                 $scope.showWarning("Please change some information and try again");
             }
         })
         .error(function (error) {
-            $scope.status = 'Unable to add item data' + error.message;
+            $scope.status = 'Unable to add weapon' + error.message;
             console.log($scope.status);
         })
     }
-    $scope.deleteItem = function () {
+    $scope.deleteWeapon = function () {
         var id = {
-            "Id": $scope.Id
+            "WeaponId": $scope.WeaponId
         };
-        DeleteService.deleteItem(id)
+        DeleteItemsService.deleteWeapon(id)
         .success(function (p) {
-            getItems();
-            //$scope.editShow = false;
+            getWeapons(true);
+            $scope.editShow = false;
             $scope.showSuccess("Item deleted.");
         })
         .error(function (error) {
-            $scope.status = 'Unable to delete item data' + error.message;
+            $scope.status = 'Unable to delete weapon data' + error.message;
             $scope.showWarning("Something went wrong.");
             console.log($scope.status);
         })
     }
-    //$scope.changeDetail = function (detailObj) {
-    //    changeDetailFunc(detailObj);
-    //    $scope.personBtnHide = false;
-    //}
-    //function changeDetailFunc(detailObj) {
-    //    $scope.detail = detailObj;
-    //    $scope.BirtDateDate = new Date(detailObj.BirthDateString);
-    //}
+    $scope.changeDetail = function (detailObj) {
+        changeDetailFunc(detailObj);
+        $scope.weaponBtnHide = false;
+    }
+    function changeDetailFunc(detailObj) {
+        $scope.weapon = detailObj;
+    }
+})
+.controller("ArmoursController", function ($scope, Enums, growl, ItemsService, EditItemsService, AddItemsService, DeleteItemsService) {
+    $scope.armours = {};
+    $scope.enums = Enums;
+    //$scope.addShow = true;
+    getArmours(true, 0);
+    function getArmours(init, id) {
+        ItemsService.getArmours()
+        .success(function (p) {
+            $scope.armours = p;
+            if (init === true) {
+                $scope.armour = p[0];
+            } else if (id > 0) {
+                angular.forEach(p, function (value, key) {
+                    if (value.ArmourId === id) {
+                        $scope.armour = value;
+                    }
+                });
+            } else {
+                $scope.armour = {};
+                //hide edit and delete buttons
+                $scope.armourBtnHide = true;
+            }
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load armour data' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        return true;
+    }
+
+    $scope.reverseListSort = false;
+    $scope.sortListColumn = "Name";
+    $scope.sortList = function (column) {
+        $scope.reverseListSort = ($scope.sortListColumn == column) ? !$scope.reverseListSort : false;
+        $scope.sortListColumn = column;
+    };
+    $scope.getListSortClass = function (column) {
+        if ($scope.sortListColumn == column) {
+            return $scope.reverseListSort ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down';
+        }
+        //to remove previously set arrow class
+        return '';
+    };
+    $scope.showWarning = function (text) {
+        growl.warning(text, { title: 'Warning!' });
+    }
+    $scope.showError = function (text) {
+        growl.error(text, { title: 'Error!' });
+    }
+    $scope.showSuccess = function (text) {
+        growl.success(text, { title: 'Success!' });
+    }
+    $scope.showInfo = function () {
+        growl.info('This is an info message.', { title: 'Info!' });
+    }
+    $scope.showAll = function () {
+        growl.warning('This is warning message.', { title: 'Warning!' });
+        growl.error('This is error message.', { title: 'Error!' });
+        growl.success('This is success message.', { title: 'Success!' });
+        growl.info('This is an info message.', { title: 'Info!' });
+    }
+
+    $scope.editArmour = function () {
+        var dataObj = {
+            "ArmourId": $scope.armour.ArmourId,
+            "Name": $scope.armour.Name,
+            "Description": $scope.armour.Description,
+            "Defense": $scope.armour.Defense,
+            "ExtraDefense": $scope.armour.ExtraDefense,
+            "Rarity": $scope.armour.Rarity,
+            "Value": $scope.armour.Value,
+            "ArmourType": $scope.armour.ArmourType
+        };
+        EditItemsService.editArmour(dataObj)
+        .success(function (p) {
+            getArmours(false, dataObj.Id);
+            if (p) {
+                $scope.editShow = false;
+                $scope.detailHide = false;
+                $scope.showSuccess("Armour info successfully updated.");
+            }
+            else {
+                $scope.editShow = true;
+                $scope.showWarning("Something went wrong, please try again");
+            }
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to edit armour' + error.message;
+            console.log($scope.status);
+        })
+    }
+
+    //add person call from $scope
+    $scope.addArmour = function () {
+        var dataObj = {
+            "Name": $scope.Name,
+            "Description": $scope.Description,
+            "Defense": $scope.Defense,
+            "ExtraDefense": $scope.ExtraDefense,
+            "Rarity": $scope.Rarity,
+            "Value": $scope.Value,
+            "ArmourType": $scope.ArmourType
+        };
+        AddItemsService.addArmour(dataObj)
+        .success(function (p) {
+            getArmours();
+            if (p > 0) {
+                $scope.armour = {};
+                $scope.addShow = false;
+                $scope.showSuccess("Armour successfully added.");
+            }
+            else {
+                $scope.showWarning("Please change some information and try again");
+            }
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to add armour' + error.message;
+            console.log($scope.status);
+        })
+    }
+    $scope.deleteArmour = function () {
+        var id = {
+            "ArmourId": $scope.ArmourId
+        };
+        DeleteItemsService.deleteArmour(id)
+        .success(function (p) {
+            getArmours(true);
+            $scope.editShow = false;
+            $scope.showSuccess("Item deleted.");
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to delete armour data' + error.message;
+            $scope.showWarning("Something went wrong.");
+            console.log($scope.status);
+        })
+    }
+    $scope.changeDetail = function (detailObj) {
+        changeDetailFunc(detailObj);
+        $scope.armourBtnHide = false;
+    }
+    function changeDetailFunc(detailObj) {
+        $scope.armour = detailObj;
+    }
     //$scope.hideCity = function () {
     //    $scope.cityShow = false;
     //}
@@ -169,26 +383,35 @@ var AdminItemsModel = angular
 AdminItemsModel.factory('ItemsService', ['$http', function ($http) {
     var ItemsService = {};
 
-    ItemsService.getItems = function () {
-        return $http.get('GetItems');
+    ItemsService.getWeapons = function () {
+        return $http.get('GetWeapons');
+    }
+    ItemsService.getArmours = function () {
+        return $http.get('GetArmours');
     }
     return ItemsService;
 }])
 
 //factory post edit item
-//AdminItemsModel.factory('EditService', ['$http', function ($http) {
-//    var EditService = {};
-//    EditService.editDetail = function (dataObj) {
-//        return $http.post('Home/Edit', dataObj);
-//    }
-//    return EditService;
-//}])
+AdminItemsModel.factory('EditItemsService', ['$http', function ($http) {
+    var EditItemsService = {};
+    EditItemsService.editWeapon = function (dataObj) {
+        return $http.post('EditWeapon', dataObj);
+    }
+    EditItemsService.editArmour = function (dataObj) {
+        return $http.post('EditArmour', dataObj);
+    }
+    return EditItemsService;
+}])
 
 //factory post add item service
 AdminItemsModel.factory('AddItemsService', ['$http', function ($http) {
     var AddItemsService = {};
-    AddItemsService.addItem = function (dataObj) {
-        return $http.post('Admin/AddItem', dataObj);
+    AddItemsService.addWeapon = function (dataObj) {
+        return $http.post('AddWeapon', dataObj);
+    }
+    AddItemsService.addArmour = function (dataObj) {
+        return $http.post('AddArmour', dataObj);
     }
     return AddItemsService;
 }])
@@ -196,8 +419,11 @@ AdminItemsModel.factory('AddItemsService', ['$http', function ($http) {
 //factory post delete item
 AdminItemsModel.factory('DeleteItemsService', ['$http', function ($http) {
     var DeleteItemsService = {};
-    DeleteItemsService.deleteItem = function (id) {
-        return $http.post('Admin/DeleteItem', id);
+    DeleteItemsService.deleteWeapon = function (id) {
+        return $http.post('DeleteWeapon', id);
+    }
+    DeleteItemsService.deleteArmour = function (id) {
+        return $http.post('DeleteArmour', id);
     }
     return DeleteItemsService;
 }])

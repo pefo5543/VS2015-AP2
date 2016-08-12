@@ -38,7 +38,7 @@ namespace Game_AVP2.Models
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Armour> Armours { get; set; }
         public DbSet<Misc> Misc { get; set; }
-        public DbSet<Item> Items { get; set; }
+        //public DbSet<Item> Items { get; set; }
         public DbSet<CharacterItem> CharacterItems { get; set; }
 
         public ApplicationDbContext()
@@ -72,24 +72,24 @@ namespace Game_AVP2.Models
                          .WithOptionalPrincipal(d => d.Character)
                          .Map(t => t.MapKey("CharacterId"));  // declaring here  via MAP means NOT declared in POCO
 
-            modelBuilder.Entity<Item>().HasKey(t => t.ItemId)
-                         .HasOptional(t => t.Weapon)
-                         .WithOptionalPrincipal(d => d.Item)
-                         .Map(t => t.MapKey("ItemId"));  // declaring here  via MAP means NOT declared in POCO
-            modelBuilder.Entity<Weapon>().HasKey(t => t.WeaponId)
-                        .HasOptional(q => q.Item);
-            modelBuilder.Entity<Item>().HasKey(t => t.ItemId)
-                         .HasOptional(t => t.Misc)
-                         .WithOptionalPrincipal(d => d.Item)
-                         .Map(t => t.MapKey("ItemId"));  // declaring here  via MAP means NOT declared in POCO
-            modelBuilder.Entity<Misc>().HasKey(t => t.MiscId)
-                        .HasOptional(q => q.Item);
-            modelBuilder.Entity<Item>().HasKey(t => t.ItemId)
-                         .HasOptional(t => t.Armour)
-                         .WithOptionalPrincipal(d => d.Item)
-                         .Map(t => t.MapKey("ItemId"));  // declaring here  via MAP means NOT declared in POCO
-            modelBuilder.Entity<Armour>().HasKey(t => t.ArmourId)
-                        .HasOptional(q => q.Item);
+            //modelBuilder.Entity<Item>().HasKey(t => t.ItemId)
+            //             .HasOptional(t => t.Weapon)
+            //             .WithOptionalPrincipal(d => d.Item)
+            //             .Map(t => t.MapKey("ItemId"));  // declaring here  via MAP means NOT declared in POCO
+            //modelBuilder.Entity<Weapon>().HasKey(t => t.WeaponId)
+            //            .HasOptional(q => q.Item);
+            //modelBuilder.Entity<Item>().HasKey(t => t.ItemId)
+            //             .HasOptional(t => t.Misc)
+            //             .WithOptionalPrincipal(d => d.Item)
+            //             .Map(t => t.MapKey("ItemId"));  // declaring here  via MAP means NOT declared in POCO
+            //modelBuilder.Entity<Misc>().HasKey(t => t.MiscId)
+            //            .HasOptional(q => q.Item);
+            //modelBuilder.Entity<Item>().HasKey(t => t.ItemId)
+            //             .HasOptional(t => t.Armour)
+            //             .WithOptionalPrincipal(d => d.Item)
+            //             .Map(t => t.MapKey("ItemId"));  // declaring here  via MAP means NOT declared in POCO
+            //modelBuilder.Entity<Armour>().HasKey(t => t.ArmourId)
+            //            .HasOptional(q => q.Item);
         }
     }
 }

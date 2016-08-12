@@ -28,15 +28,15 @@ namespace Game_AVP2.Controllers
         public ActionResult Index()
         {
             //test add item
-            Weapon w = new Weapon() { Damage = 2, ExtraDamage = 0, WeaponType="Dagger"};
-            Item i = new Item() {Name = "Dagger", Type = "Weapon", Description = "A standard dagger" };
-            try
-            {
-                DbCurrent.Items.Add(i);
-            } catch
-            {
+            //Weapon w = new Weapon() { Damage = 2, ExtraDamage = 0, WeaponType="Dagger"};
+            //Item i = new Item() {ItemId = 1, Name = "Dagger", Type = "Weapon", Description = "A standard dagger" };
+            //try
+            //{
+            //    DbCurrent.Items.Add(i);
+            //} catch
+            //{
 
-            }
+            //}
             return View();
         }
 
@@ -85,16 +85,16 @@ namespace Game_AVP2.Controllers
         //}
 
         //Json get from angular to retrieve all items in db.
-        public JsonResult GetItems()
+        public JsonResult GetWeapons()
         {
-            List<Item> items = null;
+            List<Weapon> weapons = null;
             int count = 0;
-            ItemModel model = new ItemModel();
+            //ItemModel model = new ItemModel();
 
             //IEnumerable<SelectListItem> selectlist = ItemModel.GetSelectListItems();
             try
             {
-                count = DbCurrent.Items.Count();
+                count = DbCurrent.Weapons.Count();
             }
             catch
             {
@@ -102,33 +102,40 @@ namespace Game_AVP2.Controllers
             }
             try
             {
-                items = DbCurrent.Items.ToList();
+                weapons = DbCurrent.Weapons.ToList();
             }
             catch (Exception)
             {
                 //...
             }
             //IQueryable<ItemViewModel> fullItems = null;
-            if (count > 0)
-            {
-                model.RenderItemsList(items, DbCurrent);
-            }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            //if (count > 0)
+            //{
+            //model.RenderAllItems(DbCurrent);
+            //}
+            return Json(weapons, JsonRequestBehavior.AllowGet);
         }
 
         //Gets here from json post from angular
-        //public JsonResult Add([Bind(Exclude = "Id")] ItemViewModel data)
-        //{
-            //int resultId = ItemModel.AddItem(data, DbCurrent);
-
-            //return Json(resultId, JsonRequestBehavior.DenyGet);
-        //}
-        //Gets here from json post from angular
-        public JsonResult Delete(int Id)
+        public JsonResult AddWeapon([Bind(Exclude = "WeaponId")] Weapon data)
         {
-            //ItemModel.DeleteItem(Id, DbCurrent);
+            int resultId = ItemModel.AddWeapon(data, DbCurrent);
+
+            return Json(resultId, JsonRequestBehavior.DenyGet);
+        }
+        //Gets here from json post from angular
+        public JsonResult DeleteWeapon(int Id)
+        {
+            ItemModel.DeleteWeapon(Id, DbCurrent);
 
             return Json(true, JsonRequestBehavior.DenyGet);
+        }
+
+        public JsonResult EditWeapon([Bind] Weapon data)
+        {
+            bool result = ItemModel.EditWeapon(data, DbCurrent);
+
+            return Json(result, JsonRequestBehavior.DenyGet);
         }
     }
 }

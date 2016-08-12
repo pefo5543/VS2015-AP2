@@ -4,49 +4,57 @@
 }
 
 <div ng-app="AdminItemsModel">
+    <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#weapons">Weapons</a></li>
+        <li><a data-toggle="pill" href="#armours">Armours</a></li>
+        <li><a data-toggle="pill" href="#misc">Misc</a></li>
+    </ul>
 
-    <div ng-controller="ItemsController" ng-init="">
-        <div class="row">
-            <div growl></div> <!-- adding the grow directive to html -->
+    <div class="tab-content">
+        <div id="weapons" class="tab-pane fade in active">
+            <div ng-controller="WeaponsController" ng-init="">
+                <div class="row">
+                    <div growl></div> <!-- adding the grow directive to html -->
 
-            <div class="col-md-12">
-                <table class="col-md-4 table table-bordered table-striped myTable table-hover">
-                    <thead class="">
-                        <tr class="label-primary">
-                            <th ng-click="sortList('Name')" class="col-md-4"><span class="text-white">Name </span><div ng-class="getListSortClass('Name')"></div></th>
-                            <th ng-click="sortList('Description')" class="col-md-4"><span class="text-white">Description </span><div ng-class="getListSortClass('Description')"></div></th>
-                            <th ng-click="sortList('WeaponType')" class="col-md-4"><span class="text-white">Type </span><div ng-class="getListSortClass('WeaponType')"></div></th>
-                            <th ng-click="sortList('Damage')" class="col-md-4"><span class="text-white">Damage </span><div ng-class="getListSortClass('Damage')"></div></th>
-                            <th ng-click="sortList('ExtraDamage')" class="col-md-4"><span class="text-white">Extra </span><div ng-class="getListSortClass('ExtraDamage')"></div></th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="w in weapons | limitTo : 25:0 | orderBy : sortListColumn : reverseListSort" class="">
-                            <td class="col-md-4">{{w.Name}}</td>
-                            <td class="col-md-4">{{w.Description}}</td>
-                            <td class="col-md-4">{{w.WeaponType}}</td>
-                            <td class="col-md-4">{{w.Damage}}</td>
-                            <td class="col-md-4">{{w.ExtraDamage}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            @*<div ng-hide="detailHide">
-                @Html.Partial("PersonInfo")
-            </div>
-            <div ng-show="editShow">
-                @Html.Partial("_EditPersonInfo")
-            </div>*@
-            <div ng-hide="addHide">
-                @Html.Partial("_AddItem")
+                    @Html.Partial("_WeaponTable")
+                    <div ng-hide="detailHide">
+                        @Html.Partial("_WeaponInfo")
+                    </div>
+                    <div ng-show="editShow">
+                        @Html.Partial("_EditWeapon")
+                    </div>
+                    <div ng-show="addShow">
+                        @Html.Partial("_AddWeapon")
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="armours" class="tab-pane fade">
+            <div ng-controller="ArmoursController" ng-init="">
+                <div class="row">
+                    <div growl></div> <!-- adding the grow directive to html -->
+
+                    @Html.Partial("_ArmoursTable")
+                    <div ng-hide="detailHide">
+                        @Html.Partial("_ArmourInfo")
+                    </div>
+                    <div ng-show="editShow">
+                        @Html.Partial("_EditArmour")
+                    </div>
+                    <div ng-show="addShow">
+                        @Html.Partial("_AddArmour")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="misc" class="tab-pane fade">
+            <h3>Misc</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
     </div>
-    <div class="jumbotron">
-        @*<h4>AngularJS</h4>*@
+    @*<div class="jumbotron">
         <p class="lead">Angular is good</p>
         <p><a href="http://angularjs.org" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+    </div>*@
 </div>
 

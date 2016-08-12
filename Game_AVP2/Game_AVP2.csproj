@@ -207,6 +207,18 @@
     <Compile Include="Migrations\201608101318446_init.Designer.cs">
       <DependentUpon>201608101318446_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608110741069_ItemChanges.cs" />
+    <Compile Include="Migrations\201608110741069_ItemChanges.Designer.cs">
+      <DependentUpon>201608110741069_ItemChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608110811010_ItemsnewProperties.cs" />
+    <Compile Include="Migrations\201608110811010_ItemsnewProperties.Designer.cs">
+      <DependentUpon>201608110811010_ItemsnewProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608120720531_PhotoChange.cs" />
+    <Compile Include="Migrations\201608120720531_PhotoChange.Designer.cs">
+      <DependentUpon>201608120720531_PhotoChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\Items\ArmourViewModel.cs" />
     <Compile Include="Models\Avp2\Items\ItemModel.cs" />
@@ -227,6 +239,7 @@
     <Compile Include="Models\Avp2\Items\Misc.cs" />
     <Compile Include="Models\Avp2\Items\MiscViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Weapon.cs" />
+    <Compile Include="Models\Avp2\Items\WeaponPhoto.cs" />
     <Compile Include="Models\Avp2\Items\WeaponViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -1100,7 +1113,14 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\AdminItems.cshtml" />
-    <Content Include="Views\Admin\_AddItem.cshtml" />
+    <Content Include="Views\Admin\_AddWeapon.cshtml" />
+    <Content Include="Views\Admin\_WeaponInfo.cshtml" />
+    <Content Include="Views\Admin\_EditWeapon.cshtml" />
+    <Content Include="Views\Admin\_WeaponTable.cshtml" />
+    <Content Include="Views\Admin\_AddArmour.cshtml" />
+    <Content Include="Views\Admin\_EditArmour.cshtml" />
+    <Content Include="Views\Admin\_ArmourInfo.cshtml" />
+    <Content Include="Views\Admin\_ArmoursTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1117,6 +1137,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608101318446_init.resx">
       <DependentUpon>201608101318446_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608110741069_ItemChanges.resx">
+      <DependentUpon>201608110741069_ItemChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608110811010_ItemsnewProperties.resx">
+      <DependentUpon>201608110811010_ItemsnewProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608120720531_PhotoChange.resx">
+      <DependentUpon>201608120720531_PhotoChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

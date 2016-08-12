@@ -16,10 +16,24 @@ namespace Game_AVP2.Models.Avp2.Items
         //public int ItemId { get; set; }
 
         [Required]
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        [Required]
         public string MiscType { get; set; }
 
         public int HealthBonus { get; set; }
 
-        public virtual Item Item { get; set; }
+        [Required]
+        public int Rarity { get; set; }
+
+        [Required]
+        public int Value { get; set; }
+
+        public Misc()
+        {
+            this.CharacterItems = new HashSet<CharacterItem>();
+        }
+        public virtual ICollection<CharacterItem> CharacterItems { get; set; }
     }
 }

@@ -1,0 +1,82 @@
+﻿
+<div class="col-md-offset-1 col-md-4">
+    <div class="well well-lg item-details">
+        <div class="details-list col-md-12">
+            <form name="editForm" novalidate>
+                <fieldset>
+                    <legend class="text-center">Edit</legend>
+                    <div class="form-group" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+                        <input type="hidden" ng-model="weapon.WeaponId" value={{weapon.WeaponId}} />
+                        <ul class="my-ul">
+                            <li class="details-li">
+                                <label for="Name">Name</label>
+
+                                <input name="Name" class="form-control" value={{weapon.Name}} ng-model="weapon.Name" type="text" ng-maxlength="25" required />
+                                <span class="text-danger" ng-show="editForm.weapon.Name.$touched && editForm.weapon.Name.$invalid">The name is required.</span>
+                                <span class="text-danger" ng-show="editForm.weapon.Name.$error.maxlength">The name can be max 25 characters.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Description">Weapon description</label>
+
+                                <input name="Description" class="form-control" ng-model="weapon.Description" type="text" ng-maxlength="40" />
+                                <span class="text-danger" ng-show="editForm.Description.$touched && editForm.Description.$error.maxlength">The description can be max 40 characters.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="WeaponType">Weapon Type</label>
+                                <fieldset>
+                                    <select name="WeaponType" class="form-control" ng-model="weapon.WeaponType" required>
+                                        <option ng-repeat="types in enums.TypeEnums" value={{types.name}}>{{types.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.WeaponType.$touched && editForm.WeaponType.$invalid">Select weapon type.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Damage">Weapon Damage</label>
+                                <fieldset>
+                                    <select name="Damage" class="form-control" ng-model="weapon.Damage" value={{weapon.Damage}} required>
+                                        <option ng-repeat="d in enums.DamageEnums" value={{d.name}}>{{d.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.Damage.$touched && editForm.Damage.$invalid">Select damage.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="ExtraDamage">Extra Damage</label>
+                                <fieldset>
+                                    <select name="ExtraDamage" class="form-control" ng-model="weapon.ExtraDamage" required>
+                                        <option ng-repeat="ed in enums.ExtraDamageEnums" value={{ed.name}}>{{ed.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.ExtraDamage.$touched && editForm.ExtraDamage.$invalid">Select extra damage.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Rarity">Rarity</label>
+                                <fieldset>
+                                    <select name="Rarity" class="form-control" required ng-model="weapon.Rarity" ng-selected="weapon.Rarity">
+                                        <option ng-repeat="r in enums.RarityEnums" value={{r.name}}>{{r.name}} </option>
+                                        @*ng-options="option.name for option in enums.RarityEnums track by option.name">*@
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.Rarity.$touched && editForm.Rarity.$invalid">Select weapon rarity.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Value">Value</label>
+
+                                <input name="Value" class="form-control" ng-model="weapon.Value" type="number" required />
+                                <span class="text-danger" ng-show="editForm.Value.$touched && editForm.Value.$invalid">Set value to a number.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="change-buttons col-md-12">
+            <button ng-click="editWeapon()" type="button" name="submit" class="btn btn-success btn-block"
+                    ng-disabled="(editForm.Name.$dirty && editForm.Name.$invalid) ||  (editForm.WeaponType.$dirty && editForm.WeaponType.$invalid) || (editForm.Description.$dirty && editForm.Description.$invalid)
+                                                  || (editForm.ExtraDamage.$invalid) || (editForm.Damage.$dirty && editForm.Damage.$invalid) || (editForm.Rarity.$dirty && editForm.Rarity.$invalid)">
+                Submit
+            </button>
+            <button ng-click="editShow = false;detailHide=false" type="button" name="cancel" class="btn btn-warning btn-block">Cancel</button>
+        </div>
+    </div>
+</div>
+

@@ -24,10 +24,10 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         [StringLength(150, ErrorMessage = "Choose a shorter description")]
         public string Description { get; set; }
 
-        //[Required]
+        [Required]
         public int EquippedWeaponId { get; set; }
 
-        //[Required]
+        [Required]
         public int EquippedArmourId { get; set; }
 
         public virtual ICollection<Character> Characters { get; set; }
@@ -41,9 +41,11 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public virtual Ability Ability { get; set; }
 
         //[ForeignKey("EquippedWeaponId")]
-        //public virtual Weapon Weapon { get; set; }
+        //[Required]
+        //public virtual CharacterItem EquippedWeapon { get; set; }
         //[ForeignKey("EquippedArmourId")]
-        //public virtual Armour Armour { get; set; }
+        //[Required]
+        //public virtual CharacterItem EquippedArmour { get; set; }
 
 
     }
