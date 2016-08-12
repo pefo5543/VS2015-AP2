@@ -13,9 +13,6 @@ namespace Game_AVP2.Models.Avp2.Items
         [Key]
         public int WeaponId { get; set; }
 
-        //[ForeignKey("Item")]
-        //public int ItemId { get; set; }
-
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -34,15 +31,12 @@ namespace Game_AVP2.Models.Avp2.Items
         [Required]
         public int Value { get; set; }
 
-        //public virtual StaticCharacter StaticCharacter { get; set; }
-
         public Weapon()
         {
             this.CharacterWeapons = new HashSet<CharacterItem>();
         }
 
         public virtual ICollection<CharacterItem> CharacterWeapons { get; set; }
-        public virtual WeaponPhoto Photo { get; set; }
 
 
     }

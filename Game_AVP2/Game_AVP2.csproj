@@ -219,8 +219,16 @@
     <Compile Include="Migrations\201608120720531_PhotoChange.Designer.cs">
       <DependentUpon>201608120720531_PhotoChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608120805390_PhotoChange1.cs" />
+    <Compile Include="Migrations\201608120805390_PhotoChange1.Designer.cs">
+      <DependentUpon>201608120805390_PhotoChange1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608121125468_PhotoChange2.cs" />
+    <Compile Include="Migrations\201608121125468_PhotoChange2.Designer.cs">
+      <DependentUpon>201608121125468_PhotoChange2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Avp2\Items\ArmourViewModel.cs" />
+    <Compile Include="ViewModels\ArmourViewModel.cs" />
     <Compile Include="Models\Avp2\Items\ItemModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -235,12 +243,12 @@
     <Compile Include="Models\Avp2\Items\Armour.cs" />
     <Compile Include="Models\Avp2\Items\CharacterItem.cs" />
     <Compile Include="Models\Avp2\Items\Item.cs" />
-    <Compile Include="Models\Avp2\Items\ItemViewModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Misc.cs" />
-    <Compile Include="Models\Avp2\Items\MiscViewModel.cs" />
+    <Compile Include="ViewModels\MiscViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Weapon.cs" />
     <Compile Include="Models\Avp2\Items\WeaponPhoto.cs" />
-    <Compile Include="Models\Avp2\Items\WeaponViewModel.cs" />
+    <Compile Include="ViewModels\WeaponViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -252,6 +260,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\shortsword.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1146,6 +1155,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608120720531_PhotoChange.resx">
       <DependentUpon>201608120720531_PhotoChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608120805390_PhotoChange1.resx">
+      <DependentUpon>201608120805390_PhotoChange1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608121125468_PhotoChange2.resx">
+      <DependentUpon>201608121125468_PhotoChange2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

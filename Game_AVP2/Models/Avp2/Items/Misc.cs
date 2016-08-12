@@ -12,9 +12,6 @@ namespace Game_AVP2.Models.Avp2.Items
         [Key]
         public int MiscId { get; set; }
 
-        //[ForeignKey("ItemId")]
-        //public int ItemId { get; set; }
-
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }

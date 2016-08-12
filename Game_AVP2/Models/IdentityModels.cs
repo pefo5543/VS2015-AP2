@@ -40,6 +40,7 @@ namespace Game_AVP2.Models
         public DbSet<Misc> Misc { get; set; }
         //public DbSet<Item> Items { get; set; }
         public DbSet<CharacterItem> CharacterItems { get; set; }
+        public DbSet<WeaponPhoto> WeaponPhotoes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

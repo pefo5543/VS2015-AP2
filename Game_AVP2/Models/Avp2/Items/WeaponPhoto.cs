@@ -9,10 +9,9 @@ namespace Game_AVP2.Models.Avp2.Items
 {
     public class WeaponPhoto
     {
-            [Key,ForeignKey("Weapon")]
-            public int WeaponId { get; private set; }
+            [Key]
+            public int WeaponId { get; set; }
             public byte[] Image { get; set; }
 
-        public virtual Weapon Weapon { get; set; }
     }
 }

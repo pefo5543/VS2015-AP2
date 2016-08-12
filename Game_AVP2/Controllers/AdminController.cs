@@ -2,6 +2,7 @@
 using Game_AVP2.Models.Avp2.Items;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,16 +28,9 @@ namespace Game_AVP2.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            //test add item
-            //Weapon w = new Weapon() { Damage = 2, ExtraDamage = 0, WeaponType="Dagger"};
-            //Item i = new Item() {ItemId = 1, Name = "Dagger", Type = "Weapon", Description = "A standard dagger" };
-            //try
-            //{
-            //    DbCurrent.Items.Add(i);
-            //} catch
-            //{
-
-            //}
+            //test image
+            byte[] image = System.IO.File.ReadAllBytes(Server.MapPath("/Content/Images/shortsword.png"));
+            var image2 = ItemModel.ByteArrayToImage(image);
             return View();
         }
 
@@ -89,9 +83,6 @@ namespace Game_AVP2.Controllers
         {
             List<Weapon> weapons = null;
             int count = 0;
-            //ItemModel model = new ItemModel();
-
-            //IEnumerable<SelectListItem> selectlist = ItemModel.GetSelectListItems();
             try
             {
                 count = DbCurrent.Weapons.Count();
@@ -108,20 +99,24 @@ namespace Game_AVP2.Controllers
             {
                 //...
             }
-            //IQueryable<ItemViewModel> fullItems = null;
-            //if (count > 0)
-            //{
-            //model.RenderAllItems(DbCurrent);
-            //}
             return Json(weapons, JsonRequestBehavior.AllowGet);
         }
-
-        //Gets here from json post from angular
-        public JsonResult AddWeapon([Bind(Exclude = "WeaponId")] Weapon data)
+        [HttpPost]
+        public JsonResult GetWeaponImage(int WeaponId)
         {
-            int resultId = ItemModel.AddWeapon(data, DbCurrent);
-
-            return Json(resultId, JsonRequestBehavior.DenyGet);
+            string result = "";
+            byte[] image = ItemModel.GetWeaponImage(WeaponId, DbCurrent);
+            if(image != null)
+            {
+                result = System.Convert.ToBase64String(image);
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AddWeaponAndPhoto([Bind (Exclude = "WeaponId")]WeaponViewModel data)
+        {
+            ItemModel.AddWeaponAndPhoto(data, DbCurrent);
+            return Json("Weapon data Saved", JsonRequestBehavior.AllowGet);
         }
         //Gets here from json post from angular
         public JsonResult DeleteWeapon(int Id)
@@ -137,5 +132,13 @@ namespace Game_AVP2.Controllers
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }
+
+        //Gets here from json post from angular
+        //public JsonResult AddWeapon([Bind(Exclude = "WeaponId")] Weapon data)
+        //{
+        //    int resultId = ItemModel.AddWeaponToDb(data, DbCurrent);
+
+        //    return Json(resultId, JsonRequestBehavior.DenyGet);
+        //}
     }
 }

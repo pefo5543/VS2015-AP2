@@ -10,20 +10,20 @@
                             <li class="details-li">
                                 <label for="Name">Name</label>
 
-                                <input name="Name" class="form-control" ng-model="Name" type="text" ng-maxlength="25" required />
+                                <input name="Name" class="form-control" data-ng-model="add.Name" type="text" ng-maxlength="25" required />
                                 <span class="text-danger" ng-show="addItemForm.Name.$invalid">A name is required.</span>
                                 <span class="text-danger" ng-show="addItemForm.Name.$error.maxlength">The name can be max 25 characters.</span>
                             </li>
                             <li class="details-li">
                                 <label for="Description">Weapon description</label>
 
-                                <input name="Description" class="form-control" ng-model="Description" type="text" ng-maxlength="40"/>
+                                <input name="Description" class="form-control" data-ng-model="add.Description" type="text" ng-maxlength="40"/>
                                 <span class="text-danger" ng-show="addItemForm.Description.$error.maxlength">The description can be max 40 characters.</span>
                             </li>
                             <li class="details-li">
                                 <label for="WeaponType">Weapon Type</label>
                                 <fieldset>
-                                    <select name="WeaponType" class="form-control" ng-model="WeaponType" required>
+                                    <select name="WeaponType" class="form-control" data-ng-model="add.WeaponType" required>
                                         <option ng-repeat="types in enums.TypeEnums" value={{types.name}}>{{types.name}}</option>
                                     </select>
                                 </fieldset>
@@ -32,7 +32,7 @@
                             <li class="details-li">
                                 <label for="Damage">Weapon Damage</label>
                                 <fieldset>
-                                    <select name="Damage" class="form-control" ng-model="Damage" required>
+                                    <select name="Damage" class="form-control" data-ng-model="add.Damage" required>
                                         <option ng-repeat="d in enums.DamageEnums" value={{d.name}}>{{d.name}}</option>
                                     </select>
                                 </fieldset>
@@ -41,7 +41,7 @@
                             <li class="details-li">
                                 <label for="ExtraDamage">Extra Damage</label>
                                 <fieldset>
-                                    <select name="ExtraDamage" class="form-control" ng-model="ExtraDamage" required>
+                                    <select name="ExtraDamage" class="form-control" data-ng-model="add.ExtraDamage" required>
                                         <option ng-repeat="ed in enums.ExtraDamageEnums" value={{ed.name}}>{{ed.name}}</option>
                                     </select>
                                 </fieldset>
@@ -50,7 +50,7 @@
                             <li class="details-li">
                                 <label for="Rarity">Rarity</label>
                                 <fieldset>
-                                    <select name="Rarity" class="form-control" ng-model="Rarity" required>
+                                    <select name="Rarity" class="form-control" data-ng-model="add.Rarity" required>
                                         <option ng-repeat="r in enums.RarityEnums" value={{r.name}}>{{r.name}}</option>
                                     </select>
                                 </fieldset>
@@ -59,28 +59,16 @@
                             <li class="details-li">
                                 <label for="Value">Value</label>
 
-                                <input name="Value" class="form-control" ng-model="Value" type="number" required/>
+                                <input name="Value" class="form-control" data-ng-model="add.Value" type="number" required/>
                                 <span class="text-danger" ng-show="addItemForm.Value.$invalid">Set value to a number.</span>
                             </li>
-                            @*<li class="details-li">
-                                <label for="Country">Country</label>
-                                <fieldset>
-                                    <select name="Country" class="form-control" ng-model="CountryM">
-                                        <option ng-click="hideCity()">Select country</option>
-                                        <option ng-repeat="c in countries" ng-click="getCities(c.Value)" value={{c.Value}}>{{c.Text}}</option>
-                                    </select>
-                                </fieldset>
-                            </li>
                             <li class="details-li">
-                                <div ng-show="cityShow">
-                                    <label for="City">City</label>
-                                    <fieldset>
-                                        <select name="City" class="form-control" ng-model="CityM">
-                                            <option ng-repeat="city in cities" value={{city.CityId}}>{{city.Name}}</option>
-                                        </select>
-                                    </fieldset>
+                                <label for="attachment" class="col-md-2 control-label">Attachment</label>
+                                <div class="">
+                                    <input type="file" name="attachment"
+                                           class="form-control" data-ak-file-model="add.Photo" />
                                 </div>
-                            </li>*@
+                            </li>
                         </ul>
                     </div>
                 </fieldset>
@@ -88,7 +76,7 @@
         </div>
         <div class="change-buttons col-md-12">
 
-            <button ng-click="addWeapon()" type="button" name="submit" class="btn btn-success btn-block"
+            <button ng-click="addWeapon(add)" type="button" name="submit" class="btn btn-success btn-block"
                     ng-disabled="(addItemForm.Name.$invalid) || (addItemForm.WeaponType.$invalid)">
                 Add
             </button>

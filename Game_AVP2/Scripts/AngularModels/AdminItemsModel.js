@@ -3,7 +3,7 @@
 
 
 var AdminItemsModel = angular
-    .module("AdminItemsModel", ['angular-growl'])
+    .module("AdminItemsModel", ['angular-growl', "akFileUploader"])
     .constant('Enums', {
         TypeEnums: [
            { id: 1, name: 'Dagger' },
@@ -66,22 +66,37 @@ var AdminItemsModel = angular
     { id: 5, name: 4 }
         ]
     })
-.controller("WeaponsController", function ($scope, Enums, growl, ItemsService, EditItemsService, AddItemsService, DeleteItemsService) {
+.controller("WeaponsController", function ($scope, Enums, growl, ItemsService, EditItemsService, AddItemsService, DeleteItemsService, entityService) {
     $scope.weapon = {};
     $scope.enums = Enums;
     //$scope.addShow = true;
     getWeapons(true, 0);
-    $scope.init = function (name) {
-        $scope.countries = name;
-    }
+
+    $scope.addWeapon = function (add) {
+        entityService.addWeapon(add)
+            .success(function (p) {
+                getWeapons();
+                if (p > 0) {
+                    $scope.weapon = {};
+                    $scope.addShow = false;
+                    $scope.showSuccess("Weapon successfully added.");
+                }
+                else {
+                    $scope.showWarning("Please change some information and try again");
+                }
+            })
+        .error(function (error) {
+            $scope.status = 'Unable to add weapon' + error.message;
+            console.log($scope.status);
+        })
+    };
+
     function getWeapons(init, id) {
         ItemsService.getWeapons()
         .success(function (p) {
             $scope.weapons = p;
-            //$scope.armours = p.ArmourList;
-            //$scope.miscs = p.MiscList;
             if (init === true) {
-                $scope.weapon = p[0];
+                //$scope.weapon = p[0];
             } else if (id > 0) {
                 //set detail to weapon with id
                 angular.forEach(p, function (value, key) {
@@ -97,6 +112,21 @@ var AdminItemsModel = angular
         })
         .error(function (error) {
             $scope.status = 'Unable to load weapons data' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        return true;
+    }
+    function getImage(Id) {
+        var dataObj = {
+            "WeaponId": Id
+        }
+        ItemsService.getWeaponImage(dataObj)
+        .success(function (p) {
+            $scope.image = p;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load weapons image' + error.message;
             console.log($scope.status);
             return false;
         })
@@ -164,35 +194,6 @@ var AdminItemsModel = angular
             console.log($scope.status);
         })
     }
-
-    //add person call from $scope
-    $scope.addWeapon = function () {
-        var dataObj = {
-            "Name": $scope.Name,
-            "Description": $scope.Description,
-            "Damage": $scope.Damage,
-            "ExtraDamage": $scope.ExtraDamage,
-            "Rarity": $scope.Rarity,
-            "Value": $scope.Value,
-            "WeaponType": $scope.WeaponType
-        };
-        AddItemsService.addWeapon(dataObj)
-        .success(function (p) {
-            getWeapons();
-            if (p > 0) {
-                $scope.weapon = {};
-                $scope.addShow = false;
-                $scope.showSuccess("Weapon successfully added.");
-            }
-            else {
-                $scope.showWarning("Please change some information and try again");
-            }
-        })
-        .error(function (error) {
-            $scope.status = 'Unable to add weapon' + error.message;
-            console.log($scope.status);
-        })
-    }
     $scope.deleteWeapon = function () {
         var id = {
             "WeaponId": $scope.WeaponId
@@ -211,6 +212,7 @@ var AdminItemsModel = angular
     }
     $scope.changeDetail = function (detailObj) {
         changeDetailFunc(detailObj);
+        getImage(detailObj.WeaponId);
         $scope.weaponBtnHide = false;
     }
     function changeDetailFunc(detailObj) {
@@ -361,23 +363,6 @@ var AdminItemsModel = angular
     function changeDetailFunc(detailObj) {
         $scope.armour = detailObj;
     }
-    //$scope.hideCity = function () {
-    //    $scope.cityShow = false;
-    //}
-
-    //$scope.getCities = function (countryId) {
-    //    CityService.getCities(countryId)
-    //    .success(function (c) {
-    //        $scope.cities = c;
-    //        //show city select in list
-    //        $scope.cityShow = true;
-    //    })
-    //    .error(function (error) {
-    //        $scope.status = 'Unable to get cities' + error.message;
-    //        console.log($scope.status);
-    //        alert(error.message);
-    //    })
-    //}
 });
 
 AdminItemsModel.factory('ItemsService', ['$http', function ($http) {
@@ -386,8 +371,16 @@ AdminItemsModel.factory('ItemsService', ['$http', function ($http) {
     ItemsService.getWeapons = function () {
         return $http.get('GetWeapons');
     }
+    ItemsService.getWeaponImage = function (id) {
+        alert(id);
+        return $http.post('GetWeaponImage', id);
+    }
     ItemsService.getArmours = function () {
         return $http.get('GetArmours');
+    }
+    ItemsService.getArmourImage = function (id) {
+        alert(id);
+        return $http.post('GetArmourImage', id);
     }
     return ItemsService;
 }])
@@ -403,18 +396,24 @@ AdminItemsModel.factory('EditItemsService', ['$http', function ($http) {
     }
     return EditItemsService;
 }])
+AdminItemsModel.factory("entityService",
+           ["akFileUploaderService", function (akFileUploaderService) {
+               var addWeapon = function (data) {
+                   console.log(data.Name)
+                   return akFileUploaderService.saveModel(data, "/Admin/AddWeaponAndPhoto");
+               };
+               return {
+                   addWeapon: addWeapon
+               };
+               var addArmour = function (data) {
+                   console.log(data.Name)
+                   return akFileUploaderService.saveModel(data, "/Admin/AddArmourAndPhoto");
+               };
+               return {
+                   addArmour: addArmour
+               };
 
-//factory post add item service
-AdminItemsModel.factory('AddItemsService', ['$http', function ($http) {
-    var AddItemsService = {};
-    AddItemsService.addWeapon = function (dataObj) {
-        return $http.post('AddWeapon', dataObj);
-    }
-    AddItemsService.addArmour = function (dataObj) {
-        return $http.post('AddArmour', dataObj);
-    }
-    return AddItemsService;
-}])
+           }]);
 
 //factory post delete item
 AdminItemsModel.factory('DeleteItemsService', ['$http', function ($http) {
@@ -427,3 +426,101 @@ AdminItemsModel.factory('DeleteItemsService', ['$http', function ($http) {
     }
     return DeleteItemsService;
 }])
+AdminItemsModel.config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|ftp|blob):|data:image\//);
+}]);
+
+//(function () {
+
+"use strict"
+
+angular.module("akFileUploader", [])
+.factory("akFileUploaderService", ["$q", "$http",
+           function ($q, $http) {
+
+               var getModelAsFormData = function (data) {
+                   var dataAsFormData = new FormData();
+                   angular.forEach(data, function (value, key) {
+                       dataAsFormData.append(key, value);
+                   });
+                   return dataAsFormData;
+               };
+
+               var saveModel = function (data, url) {
+                   var deferred = $q.defer();
+                   $http({
+                       url: url,
+                       method: "POST",
+                       data: getModelAsFormData(data),
+                       transformRequest: angular.identity,
+                       headers: { 'Content-Type': undefined }
+                   }).success(function (result) {
+                       deferred.resolve(result);
+                   }).error(function (result, status) {
+                       deferred.reject(status);
+                   });
+                   return deferred.promise;
+               };
+
+               return {
+                   saveModel: saveModel
+               }
+           }])
+.directive("akFileModel", ["$parse",
+            function ($parse) {
+                return {
+                    restrict: "A",
+                    link: function (scope, element, attrs) {
+                        var model = $parse(attrs.akFileModel);
+                        var modelSetter = model.assign;
+                        element.bind("change", function () {
+                            scope.$apply(function () {
+                                modelSetter(scope, element[0].files[0]);
+                            });
+                        });
+                    }
+                };
+            }]);
+//})(window, document);
+
+//add person call from $scope
+//$scope.addWeapon = function () {
+//    var dataObj = {
+//        "Name": $scope.Name,
+//        "Description": $scope.Description,
+//        "Damage": $scope.Damage,
+//        "ExtraDamage": $scope.ExtraDamage,
+//        "Rarity": $scope.Rarity,
+//        "Value": $scope.Value,
+//        "WeaponType": $scope.WeaponType
+//    };
+//    AddItemsService.addWeapon(dataObj)
+//    .success(function (p) {
+//        getWeapons();
+//        if (p > 0) {
+//            $scope.weapon = {};
+//            $scope.addShow = false;
+//            $scope.showSuccess("Weapon successfully added.");
+//        }
+//        else {
+//            $scope.showWarning("Please change some information and try again");
+//        }
+//    })
+//    .error(function (error) {
+//        $scope.status = 'Unable to add weapon' + error.message;
+//        console.log($scope.status);
+//    })
+//}
+
+
+//factory post add item service
+//AdminItemsModel.factory('AddItemsService', ['$http', function ($http) {
+//    var AddItemsService = {};
+//    AddItemsService.addWeapon = function (dataObj) {
+//        return $http.post('AddWeapon', dataObj);
+//    }
+//    AddItemsService.addArmour = function (dataObj) {
+//        return $http.post('AddArmour', dataObj);
+//    }
+//    return AddItemsService;
+//}])
