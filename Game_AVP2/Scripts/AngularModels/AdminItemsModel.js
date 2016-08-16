@@ -66,29 +66,35 @@ var AdminItemsModel = angular
     { id: 5, name: 4 }
         ]
     })
-.controller("WeaponsController", function ($scope, Enums, growl, ItemsService, EditItemsService, AddItemsService, DeleteItemsService, entityService) {
+.controller("WeaponsController", function ($scope, Enums, growl, ItemsService, EditItemsService, DeleteItemsService, entityService) {
     $scope.weapon = {};
     $scope.enums = Enums;
     //$scope.addShow = true;
     getWeapons(true, 0);
+    $scope.init = function (name) {
+        $scope.images = name;
+    }
 
     $scope.addWeapon = function (add) {
         entityService.addWeapon(add)
-            .success(function (p) {
+            .then(function (p) {
                 getWeapons();
-                if (p > 0) {
+                if (p) {
                     $scope.weapon = {};
                     $scope.addShow = false;
+                    $scope.detailHide = false,
                     $scope.showSuccess("Weapon successfully added.");
                 }
                 else {
                     $scope.showWarning("Please change some information and try again");
                 }
             })
-        .error(function (error) {
-            $scope.status = 'Unable to add weapon' + error.message;
-            console.log($scope.status);
-        })
+        //.error(function (error) {
+        //    $scope.status = 'Unable to add weapon' + error.message;
+        //    $scope.showWarning("Error: unable to add weapon.");
+        //    console.log($scope.status);
+        //})
+        
     };
 
     function getWeapons(init, id) {
@@ -96,7 +102,7 @@ var AdminItemsModel = angular
         .success(function (p) {
             $scope.weapons = p;
             if (init === true) {
-                //$scope.weapon = p[0];
+                $scope.weapon = {};
             } else if (id > 0) {
                 //set detail to weapon with id
                 angular.forEach(p, function (value, key) {
@@ -123,7 +129,7 @@ var AdminItemsModel = angular
         }
         ItemsService.getWeaponImage(dataObj)
         .success(function (p) {
-            $scope.image = p;
+            $scope.imagelink = p;
         })
         .error(function (error) {
             $scope.status = 'Unable to load weapons image' + error.message;
@@ -196,11 +202,11 @@ var AdminItemsModel = angular
     }
     $scope.deleteWeapon = function () {
         var id = {
-            "WeaponId": $scope.WeaponId
+            "WeaponId": $scope.weapon.WeaponId
         };
         DeleteItemsService.deleteWeapon(id)
         .success(function (p) {
-            getWeapons(true);
+            getWeapons(true,0);
             $scope.editShow = false;
             $scope.showSuccess("Item deleted.");
         })
@@ -219,7 +225,7 @@ var AdminItemsModel = angular
         $scope.weapon = detailObj;
     }
 })
-.controller("ArmoursController", function ($scope, Enums, growl, ItemsService, EditItemsService, AddItemsService, DeleteItemsService) {
+.controller("ArmoursController", function ($scope, Enums, growl, ItemsService, EditItemsService, DeleteItemsService, entityService) {
     $scope.armours = {};
     $scope.enums = Enums;
     //$scope.addShow = true;
@@ -346,7 +352,7 @@ var AdminItemsModel = angular
         };
         DeleteItemsService.deleteArmour(id)
         .success(function (p) {
-            getArmours(true);
+            getArmours(true,0);
             $scope.editShow = false;
             $scope.showSuccess("Item deleted.");
         })
@@ -372,14 +378,14 @@ AdminItemsModel.factory('ItemsService', ['$http', function ($http) {
         return $http.get('GetWeapons');
     }
     ItemsService.getWeaponImage = function (id) {
-        alert(id);
+        //alert(id);
         return $http.post('GetWeaponImage', id);
     }
     ItemsService.getArmours = function () {
         return $http.get('GetArmours');
     }
     ItemsService.getArmourImage = function (id) {
-        alert(id);
+        //alert(id);
         return $http.post('GetArmourImage', id);
     }
     return ItemsService;
@@ -400,14 +406,16 @@ AdminItemsModel.factory("entityService",
            ["akFileUploaderService", function (akFileUploaderService) {
                var addWeapon = function (data) {
                    console.log(data.Name)
-                   return akFileUploaderService.saveModel(data, "/Admin/AddWeaponAndPhoto");
+                   console.log(data.error)
+                   return akFileUploaderService.saveModel(data, "/Admin/AddWeapon");
                };
                return {
                    addWeapon: addWeapon
                };
                var addArmour = function (data) {
                    console.log(data.Name)
-                   return akFileUploaderService.saveModel(data, "/Admin/AddArmourAndPhoto");
+                   console.log(data.error)
+                   return akFileUploaderService.saveModel(data, "/Admin/AddArmour");
                };
                return {
                    addArmour: addArmour

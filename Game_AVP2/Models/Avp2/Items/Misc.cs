@@ -31,6 +31,7 @@ namespace Game_AVP2.Models.Avp2.Items
         {
             this.CharacterItems = new HashSet<CharacterItem>();
         }
+        
         public virtual ICollection<CharacterItem> CharacterItems { get; set; }
     }
 }

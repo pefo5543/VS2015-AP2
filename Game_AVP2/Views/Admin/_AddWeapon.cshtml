@@ -1,4 +1,6 @@
-﻿<div class="col-md-offset-1 col-md-4">
+﻿@using Game_AVP2.Helpers
+@using Game_AVP2.Models.Avp2.Items
+<div class="col-md-offset-1 col-md-4">
     <div class="well well-lg item-details">
         <div class="col-md-12">
             <form name="addItemForm" novalidate>
@@ -63,12 +65,21 @@
                                 <span class="text-danger" ng-show="addItemForm.Value.$invalid">Set value to a number.</span>
                             </li>
                             <li class="details-li">
+                                <label for="Image">Image</label>
+                                <fieldset>
+                                    <select name="Image" class="form-control" data-ng-model="add.Image" required>
+                                        <option ng-repeat="i in images" value={{i.Value}}>{{i.Text}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addItemForm.Image.$invalid">Select damage.</span>
+                            </li>
+                            @*<li class="details-li">
                                 <label for="attachment" class="col-md-2 control-label">Attachment</label>
                                 <div class="">
                                     <input type="file" name="attachment"
                                            class="form-control" data-ak-file-model="add.Photo" />
                                 </div>
-                            </li>
+                            </li>*@
                         </ul>
                     </div>
                 </fieldset>

@@ -38,6 +38,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
 
         //[ForeignKey("Ability")]
         public int? AbilityId { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Ability Ability { get; set; }
 
         //[ForeignKey("EquippedWeaponId")]

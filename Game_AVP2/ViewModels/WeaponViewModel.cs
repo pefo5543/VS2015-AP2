@@ -20,13 +20,7 @@ namespace Game_AVP2.Controllers
         public int Rarity { get; set; }
 
         public int Value { get; set; }
-        public byte[] Image { get; set; }
-        public HttpPostedFileBase Photo { get; set; }
-
-        public void RenderWeaponPhoto(byte[] Image)
-        {
-            //WeaponPhoto = new WeaponPhoto();
-            //WeaponPhoto.Image = Image;
-        }
+        public string ImageName { get; set; }
+        public string Image { get; set; }
     }
 }

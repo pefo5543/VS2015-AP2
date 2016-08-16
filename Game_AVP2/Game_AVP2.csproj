@@ -90,6 +90,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -98,6 +102,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -203,6 +215,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
     <Compile Include="Migrations\201608101318446_init.cs" />
     <Compile Include="Migrations\201608101318446_init.Designer.cs">
       <DependentUpon>201608101318446_init.cs</DependentUpon>
@@ -227,7 +240,40 @@
     <Compile Include="Migrations\201608121125468_PhotoChange2.Designer.cs">
       <DependentUpon>201608121125468_PhotoChange2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608150903449_weaponimage.cs" />
+    <Compile Include="Migrations\201608150903449_weaponimage.Designer.cs">
+      <DependentUpon>201608150903449_weaponimage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608151211436_weaponimage1.cs" />
+    <Compile Include="Migrations\201608151211436_weaponimage1.Designer.cs">
+      <DependentUpon>201608151211436_weaponimage1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608151214017_weaponimage2.cs" />
+    <Compile Include="Migrations\201608151214017_weaponimage2.Designer.cs">
+      <DependentUpon>201608151214017_weaponimage2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160656081_weaponimage3.cs" />
+    <Compile Include="Migrations\201608160656081_weaponimage3.Designer.cs">
+      <DependentUpon>201608160656081_weaponimage3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160855461_changeforeignkeyweapon.cs" />
+    <Compile Include="Migrations\201608160855461_changeforeignkeyweapon.Designer.cs">
+      <DependentUpon>201608160855461_changeforeignkeyweapon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160859122_changeforeignkeyweapon1.cs" />
+    <Compile Include="Migrations\201608160859122_changeforeignkeyweapon1.Designer.cs">
+      <DependentUpon>201608160859122_changeforeignkeyweapon1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160918028_changeagainweapon.cs" />
+    <Compile Include="Migrations\201608160918028_changeagainweapon.Designer.cs">
+      <DependentUpon>201608160918028_changeagainweapon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608160930385_changeagainweapon1.cs" />
+    <Compile Include="Migrations\201608160930385_changeagainweapon1.Designer.cs">
+      <DependentUpon>201608160930385_changeagainweapon1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Avp2\Items\WeaponImage.cs" />
     <Compile Include="ViewModels\ArmourViewModel.cs" />
     <Compile Include="Models\Avp2\Items\ItemModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -260,7 +306,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\shortsword.png" />
+    <Content Include="Content\Images\weapons\shortsword.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -298,6 +344,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\AngularModels\AdminItemsModel.js" />
+    <Content Include="Scripts\AngularModels\AdminUploadImagesModel.js" />
     <Content Include="Scripts\AngularModels\ItemsService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1130,6 +1177,9 @@
     <Content Include="Views\Admin\_EditArmour.cshtml" />
     <Content Include="Views\Admin\_ArmourInfo.cshtml" />
     <Content Include="Views\Admin\_ArmoursTable.cshtml" />
+    <Content Include="Views\Admin\AdminFileUpload.cshtml" />
+    <Content Include="Views\Admin\DisplayImages.cshtml" />
+    <Content Include="Views\Admin\_WeaponPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1161,6 +1211,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608121125468_PhotoChange2.resx">
       <DependentUpon>201608121125468_PhotoChange2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608150903449_weaponimage.resx">
+      <DependentUpon>201608150903449_weaponimage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608151211436_weaponimage1.resx">
+      <DependentUpon>201608151211436_weaponimage1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608151214017_weaponimage2.resx">
+      <DependentUpon>201608151214017_weaponimage2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160656081_weaponimage3.resx">
+      <DependentUpon>201608160656081_weaponimage3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160855461_changeforeignkeyweapon.resx">
+      <DependentUpon>201608160855461_changeforeignkeyweapon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160859122_changeforeignkeyweapon1.resx">
+      <DependentUpon>201608160859122_changeforeignkeyweapon1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160918028_changeagainweapon.resx">
+      <DependentUpon>201608160918028_changeagainweapon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160930385_changeagainweapon1.resx">
+      <DependentUpon>201608160930385_changeagainweapon1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

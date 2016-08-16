@@ -1,4 +1,4 @@
-﻿using Game_AVP2.Models;
+﻿
 using Game_AVP2.Models.Avp2.Items;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +6,9 @@ using System;
 using System.Reflection;
 using System.IO;
 using System.Drawing;
+using Game_AVP2.Controllers;
 
-namespace Game_AVP2.Controllers
+namespace Game_AVP2.Models
 {
     internal class ItemModel
     {
@@ -26,20 +27,20 @@ namespace Game_AVP2.Controllers
             WeaponList = db.Weapons.ToList();
 
         }
-        internal static int AddWeaponToDb(Weapon data, ApplicationDbContext dbCurrent)
+        internal static bool AddWeaponToDb(Weapon data)
         {
-            int res = 0;
+            ApplicationDbContext db = new ApplicationDbContext();
+            bool res = true;
             try
             {
-                dbCurrent.Weapons.Add(data);
+                db.Weapons.Add(data);
             }
             catch (Exception e)
             {
-                res = 0;
+                res = false;
                 Console.WriteLine(e.Message);
             }
-            dbCurrent.SaveChanges();
-            res = data.WeaponId;
+            db.SaveChanges();
 
             return res;
         }
@@ -47,7 +48,16 @@ namespace Game_AVP2.Controllers
         internal static void DeleteWeapon(int id, ApplicationDbContext dbCurrent)
         {
             Weapon w = dbCurrent.Weapons.Find(id);
-            dbCurrent.Weapons.Remove(w);
+            if(w != null)
+            {
+                dbCurrent.Weapons.Remove(w);
+            }
+            //WeaponPhoto wp =dbCurrent.WeaponPhotoes.Find(id);
+            //if(wp != null)
+            //{
+            //    dbCurrent.WeaponPhotoes.Remove(wp);
+            //}
+
             dbCurrent.SaveChanges();
         }
 
@@ -83,42 +93,27 @@ namespace Game_AVP2.Controllers
             return noPropertyChanged;
         }
 
-        internal static byte[] GetWeaponImage(int id, ApplicationDbContext dbCurrent)
+        internal static string GetWeaponImage(int id, ApplicationDbContext dbCurrent)
         {
-            byte[] img = null;
-            WeaponPhoto obj = dbCurrent.WeaponPhotoes.Find(id);
-            if(obj != null && obj.Image != null)
-            {
-                img = obj.Image;
-            } else {
-                //No image found - return blank image
-                img = null;
-            }
-            return img;
+            Weapon w = dbCurrent.Weapons.Find(id);
+            WeaponImage wi = dbCurrent.WeaponImages.Find(w.ImageId);
+            return wi.ImageLink;
         }
 
-        internal static void AddWeaponAndPhoto(WeaponViewModel data, ApplicationDbContext dbCurrent)
+        internal static bool AddWeapon(WeaponViewModel data, ApplicationDbContext db)
         {
-            int newId = 0;
-            Weapon weapon = RenderWeapon(data);
-            newId = AddWeaponToDb(weapon, dbCurrent);
-            if (data.Photo.ContentLength > 0)
-            {
-                var filename = Path.GetFileName(data.Photo.FileName);
-
-                Image sourceimage =
-                Image.FromStream(data.Photo.InputStream);
-                AddWeaponPhoto(newId, sourceimage, dbCurrent);
-            }            
+            Weapon weapon = RenderWeapon(data,db);
+            bool result = AddWeaponToDb(weapon);
+            return result;         
         }
 
-        private static Weapon RenderWeapon(WeaponViewModel data)
+        private static Weapon RenderWeapon(WeaponViewModel data, ApplicationDbContext db)
         {
             int Id = -1;
             if(data.WeaponId != 0 && data.WeaponId != -1)
             {
                 Id = data.WeaponId;
-            } 
+            }
             Weapon weapon = new Weapon()
             {
                 WeaponId = Id,
@@ -128,27 +123,30 @@ namespace Game_AVP2.Controllers
                 Damage = data.Damage,
                 ExtraDamage = data.ExtraDamage,
                 Rarity = data.Rarity,
-                Value = data.Value
+                Value = data.Value,
+                ImageId = Int16.Parse(data.Image)
+
             };
                 return weapon;
         }
 
-        public static bool AddWeaponPhoto(int id, Image image, ApplicationDbContext db)
+        public static bool AddWeaponPhoto(int id, Image image)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             bool result = true;
             byte[] byteArray = ImageToByteArray(image);
-            WeaponPhoto img = new WeaponPhoto();
-            img.Image = byteArray;
-            img.WeaponId = id;
-            try
-            {
-                db.WeaponPhotoes.Add(img);
-                db.SaveChanges();
-            }
-            catch
-            {
-                result = false;
-            }
+            //WeaponPhoto img = new WeaponPhoto();
+            //img.Image = byteArray;
+            //img.WeaponId = id;
+            //try
+            //{
+            //    db.WeaponPhotoes.Add(img);
+            //    db.SaveChanges();
+            //}
+            //catch
+            //{
+            //    result = false;
+            //}
             return result;
         }
 
@@ -164,6 +162,75 @@ namespace Game_AVP2.Controllers
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;
+        }
+
+        public static void StoreImage(object image)
+        {
+            //if (image != null)
+
+            //{
+
+            //    string FileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+
+
+
+            //    //Save files to disk
+
+            //    FileUpload1.SaveAs(Server.MapPath("images/" + FileName));
+
+
+
+            //    //Add Entry to DataBase
+
+            //    String strConnString = System.Configuration.ConfigurationManager
+
+            //        .ConnectionStrings["conString"].ConnectionString;
+
+            //    SqlConnection con = new SqlConnection(strConnString);
+
+            //    string strQuery = "insert into tblFiles (FileName, FilePath)" +
+
+            //        " values(@FileName, @FilePath)";
+
+            //    SqlCommand cmd = new SqlCommand(strQuery);
+
+            //    cmd.Parameters.AddWithValue("@FileName", FileName);
+
+            //    cmd.Parameters.AddWithValue("@FilePath", "images/" + FileName);
+
+            //    cmd.CommandType = CommandType.Text;
+
+            //    cmd.Connection = con;
+
+            //    try
+
+            //    {
+
+            //        con.Open();
+
+            //        cmd.ExecuteNonQuery();
+
+            //    }
+
+            //    catch (Exception ex)
+
+            //    {
+
+            //        Response.Write(ex.Message);
+
+            //    }
+
+            //    finally
+
+            //    {
+
+            //        con.Close();
+
+            //        con.Dispose();
+
+            //    }
+
+            //}
         }
 
         //protected static void SetValue(object original, string theProperty, object theValue)

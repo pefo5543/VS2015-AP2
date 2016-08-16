@@ -15,6 +15,7 @@ namespace Game_AVP2.Models.Avp2.Items
 
         [Required]
         public string Name { get; set; }
+        [StringLength(200, ErrorMessage = "Too long")]
         public string Description { get; set; }
 
         [Required]
@@ -31,13 +32,16 @@ namespace Game_AVP2.Models.Avp2.Items
         [Required]
         public int Value { get; set; }
 
+        [Required]
+        public int ImageId { get; set; }
+
         public Weapon()
         {
             this.CharacterWeapons = new HashSet<CharacterItem>();
         }
 
         public virtual ICollection<CharacterItem> CharacterWeapons { get; set; }
-
-
+        //[Newtonsoft.Json.JsonIgnoreAttribute]
+        public virtual WeaponImage WeaponImage { get; set; }
     }
 }

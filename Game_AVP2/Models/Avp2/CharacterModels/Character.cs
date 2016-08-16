@@ -37,10 +37,12 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         //Relation to AspNetUsers
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         //1to1 relation to Attributes
         //[ForeignKey("Attributes")]
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual CharacterAttribute CharacterAttribute { get; set; }
 
         public virtual ICollection<Ability> Abilities { get; set; }
@@ -63,6 +65,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public int StrengthModifier { get; set; }
 
         public virtual ICollection<CharacterAttribute> CharacterAttributes { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual StaticCharacter StaticCharacter { get; set; }
     }
 
@@ -77,8 +80,9 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public int LuckModifier { get; set; }
         public int DefenceModifier { get; set; }
         public int StrengthModifier { get; set; }
-
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Attribute Attribute { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Character Character { get; set; }
     }
 
@@ -95,6 +99,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public string Description { get; set; }
 
         public virtual ICollection<Character> Characters { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual StaticCharacter StaticCharacter { get; set; }
 
     }

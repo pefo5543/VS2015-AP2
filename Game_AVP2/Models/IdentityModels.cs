@@ -40,11 +40,12 @@ namespace Game_AVP2.Models
         public DbSet<Misc> Misc { get; set; }
         //public DbSet<Item> Items { get; set; }
         public DbSet<CharacterItem> CharacterItems { get; set; }
-        public DbSet<WeaponPhoto> WeaponPhotoes { get; set; }
+        public DbSet<WeaponImage> WeaponImages { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            //this.Configuration.ProxyCreationEnabled = false; //proposed solution to circular reference error json
             //Database.SetInitializer(new ApplicationDBInitializer());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Game_AVP2.Migrations.Configuration>("ApplicationDBConnectionString"));
         }

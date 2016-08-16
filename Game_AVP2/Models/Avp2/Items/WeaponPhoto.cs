@@ -7,11 +7,11 @@ using System.Web;
 
 namespace Game_AVP2.Models.Avp2.Items
 {
-    public class WeaponPhoto
-    {
-            [Key]
-            public int WeaponId { get; set; }
-            public byte[] Image { get; set; }
+    //public class WeaponPhoto
+    //{
+    //        [Key]
+    //        public int WeaponId { get; set; }
+    //        public byte[] Image { get; set; }
 
-    }
+    //}
 }

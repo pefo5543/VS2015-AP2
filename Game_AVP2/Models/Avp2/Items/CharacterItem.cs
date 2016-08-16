@@ -12,10 +12,15 @@ namespace Game_AVP2.Models.Avp2.Items
         [Key]
         public int CharacterItemId { get; set; }
 
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Character Character { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual StaticCharacter StaticCharacter { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Armour Armour { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Weapon Weapon { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Misc Misc { get; set; }
     }
 }

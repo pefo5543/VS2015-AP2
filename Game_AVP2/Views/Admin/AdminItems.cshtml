@@ -13,20 +13,7 @@
     <div class="tab-content">
         <div id="weapons" class="tab-pane fade in active">
             <div ng-controller="WeaponsController" ng-init="">
-                <div class="row">
-                    <div growl></div> <!-- adding the grow directive to html -->
-
-                    @Html.Partial("_WeaponTable")
-                    <div ng-hide="detailHide">
-                        @Html.Partial("_WeaponInfo")
-                    </div>
-                    <div ng-show="editShow">
-                        @Html.Partial("_EditWeapon")
-                    </div>
-                    <div ng-show="addShow">
-                        @Html.Partial("_AddWeapon")
-                    </div>
-                </div>
+                    @{Html.RenderAction("WeaponPage");}
             </div>
         </div>
         <div id="armours" class="tab-pane fade">
