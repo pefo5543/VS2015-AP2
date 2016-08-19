@@ -1,0 +1,92 @@
+﻿@using Game_AVP2.Helpers
+@using Game_AVP2.Models.Avp2.Items
+<div class="col-md-offset-1 col-md-4">
+    <div class="well well-lg item-details">
+        <div class="col-md-12">
+            <form name="addItemForm" novalidate>
+                <fieldset>
+                    <legend class="text-center">Add</legend>
+                    <div class="form-group" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+                        @*<input type="hidden" ng-model="Id" value={{Id}} />*@
+                        <ul class="my-ul">
+                            <li class="details-li">
+                                <label for="Name">Name</label>
+
+                                <input name="Name" class="form-control" data-ng-model="add.Name" type="text" ng-maxlength="25" required />
+                                <span class="text-danger" ng-show="addItemForm.Name.$invalid">A name is required.</span>
+                                <span class="text-danger" ng-show="addItemForm.Name.$error.maxlength">The name can be max 25 characters.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Description">Armour description</label>
+
+                                <input name="Description" class="form-control" data-ng-model="add.Description" type="text" ng-maxlength="40" />
+                                <span class="text-danger" ng-show="addItemForm.Description.$error.maxlength">The description can be max 40 characters.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="ArmourType">Armour Type</label>
+                                <fieldset>
+                                    <select name="ArmourType" class="form-control" data-ng-model="add.ArmourType" required>
+                                        <option ng-repeat="types in enums.ArmourTypeEnums" value={{types.name}}>{{types.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addItemForm.ArmourType.$invalid">Select armour type.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Defense">Armour Defense</label>
+                                <fieldset>
+                                    <select name="Defense" class="form-control" data-ng-model="add.Defense" required>
+                                        <option ng-repeat="d in enums.DefenseEnums" value={{d.name}}>{{d.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addItemForm.Defense.$invalid">Select damage.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="ExtraDefense">Bonus defense</label>
+                                <fieldset>
+                                    <select name="ExtraDefense" class="form-control" data-ng-model="add.ExtraDefense" required>
+                                        <option ng-repeat="ed in enums.ExtraDefenseEnums" value={{ed.name}}>{{ed.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addItemForm.ExtraDefense.$invalid">Select extra damage.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Rarity">Rarity</label>
+                                <fieldset>
+                                    <select name="Rarity" class="form-control" data-ng-model="add.Rarity" required>
+                                        <option ng-repeat="r in enums.RarityEnums" value={{r.name}}>{{r.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addItemForm.Rarity.$invalid">Select weapon rarity.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Value">Value</label>
+
+                                <input name="Value" class="form-control" data-ng-model="add.Value" type="number" required />
+                                <span class="text-danger" ng-show="addItemForm.Value.$invalid">Set value to a number.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Image">Image</label>
+                                <fieldset>
+                                    <select name="Image" class="form-control" data-ng-model="add.Image" required>
+                                        <option ng-repeat="i in images" value={{i.Value}}>{{i.Text}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addItemForm.Image.$invalid">Select image.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="change-buttons col-md-12">
+
+            <button ng-click="addArmour(add)" type="button" name="submit" class="btn btn-success btn-block"
+                    ng-disabled="(addItemForm.Name.$invalid) || (addItemForm.ArmourType.$invalid) || (addItemForm.Description.$invalid)">
+                Add
+            </button>
+
+            <button ng-click="addShow=false;detailHide=false" type="button" name="cancel" class="btn btn-warning btn-block">Cancel</button>
+        </div>
+    </div>
+</div>
+

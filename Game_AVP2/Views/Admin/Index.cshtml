@@ -6,12 +6,22 @@
 <h2>Administrator area</h2>
 
 <div class="row">
-    <a href="Admin/AdminItems">
+    @*<a href="Admin/AdminItems">
         <input type="button" class="btn btn-default btn-block" value="Admin Items" />
-    </a>
+    </a>*@
     @*<a href="Admin/DisplayImages">
         <input type="button" class="btn btn-default btn-block" value="Admin File Upload" />
     </a>*@
+
+    @*<ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#items">Items</a></li>
+        <li><a data-toggle="pill" href="#characters">Characters</a></li>
+    </ul>*@
+
+    <div class="btn-group btn-group-justified">
+        @Html.ActionLink("Items","AdminItems",null,new {@class="btn btn-primary" })
+        @Html.ActionLink("Characters", "AdminCharacters", null, new { @class = "btn btn-primary" })
+    </div>
 
 </div>
 

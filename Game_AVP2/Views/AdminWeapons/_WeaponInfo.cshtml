@@ -1,0 +1,49 @@
+﻿
+<div class="col-md-offset-1 col-md-5">
+    <div class="well well-lg item-details">
+        <fieldset>
+            <legend class="text-center">Weapon info</legend>
+            <div class="details-list col-md-11">
+                <dl class="dl-horizontal">
+                    <dt>Image:</dt>
+                    <dd><img ng-src="/{{imagelink}}" /></dd>
+
+                    <dt>Name:</dt>
+                    <dd>{{weapon.Name}}</dd>
+
+                    <dt>Type:</dt>
+                    <dd>{{weapon.WeaponType}}</dd>
+
+                    <dt>Description:</dt>
+                    <dd>{{weapon.Description}}</dd>
+
+                    <dt>Damage:</dt>
+                    <dd>{{weapon.Damage}}</dd>
+
+                    <dt>Extra damage:</dt>
+                    <dd>{{weapon.ExtraDamage}}</dd>
+
+                    <dt>Rarity:</dt>
+                    <dd>{{weapon.Rarity}}</dd>
+
+                    <dt>Value:</dt>
+                    <dd>{{weapon.Value}}</dd>
+                </dl>
+            </div>
+            <div class="weapon-img col-md-1">
+
+                <img />
+            </div>
+            <div ng-hide="weaponBtnHide" class="change-buttons col-md-12">
+                <button ng-click="editShow=true; detailHide=true" type="button" name="edit" class="btn btn-success btn-block">Edit</button>
+                <button ng-click="deleteWeapon()" type="button" name="edit" class="btn btn-danger btn-block">Delete</button>
+            </div>
+        </fieldset>
+    </div>
+    <div class="btn-group">
+        <span class="button"><button ng-click="editShow=false;detailHide=true;addShow=true" type="button" name="add" class="btn btn-info">Add weapon</button></span>
+        @Html.ActionLink("Manage images","DisplayWeaponImages", "AdminWeapons" ,null,new {@class="button btn btn-default pull-right" })
+    </div>
+</div>
+
+

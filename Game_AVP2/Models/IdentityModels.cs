@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -7,7 +6,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Game_AVP2.Models.Avp2.CharacterModels;
 using System.Collections.Generic;
 using Game_AVP2.Models.Avp2.Items;
-using Game_AVP2.Models;
+using Game_AVP2.Models.Avp2.Items.Tables;
+using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 
 namespace Game_AVP2.Models
 {
@@ -41,6 +41,9 @@ namespace Game_AVP2.Models
         //public DbSet<Item> Items { get; set; }
         public DbSet<CharacterItem> CharacterItems { get; set; }
         public DbSet<WeaponImage> WeaponImages { get; set; }
+        public DbSet<ArmourImage> ArmourImages { get; set; }
+        public DbSet<CharacterImage> CharacterImages { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -58,21 +61,21 @@ namespace Game_AVP2.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<StaticCharacter>().HasKey(t => t.StaticCharacterId)
-                         .HasOptional(t => t.Ability)
-                         .WithOptionalPrincipal(d => d.StaticCharacter)
-                         .Map(t => t.MapKey("StaticCharacterId"));  // declaring here  via MAP means NOT declared in POCO
-            modelBuilder.Entity<Ability>().HasKey(t => t.AbilityId)
-                        .HasOptional(q => q.StaticCharacter)
+            //modelBuilder.Entity<StaticCharacter>().HasKey(t => t.StaticCharacterId)
+            //             .HasOptional(t => t.Ability)
+            //             .WithOptionalPrincipal(d => d.StaticCharacter)
+            //             .Map(t => t.MapKey("StaticCharacterId"));  // declaring here  via MAP means NOT declared in POCO
+            //modelBuilder.Entity<Ability>().HasKey(t => t.AbilityId)
+            //            .HasOptional(q => q.StaticCharacter)
                 // .WithOptionalPrincipal(p => p.Quotation)  //as both Principals
                 //        .WithOptionalDependent(p => p.Quotation) // as the dependent
                 //         .Map(t => t.MapKey("QuotationId"));    done in POCO.
                 ;
 
-            modelBuilder.Entity<Character>().HasKey(t => t.CharacterId)
-                         .HasOptional(t => t.CharacterAttribute)
-                         .WithOptionalPrincipal(d => d.Character)
-                         .Map(t => t.MapKey("CharacterId"));  // declaring here  via MAP means NOT declared in POCO
+            //modelBuilder.Entity<Character>().HasKey(t => t.CharacterId)
+            //             .HasOptional(t => t.CharacterAttribute)
+            //             .WithOptionalPrincipal(d => d.Character)
+            //             .Map(t => t.MapKey("CharacterId"));  // declaring here  via MAP means NOT declared in POCO
 
             //modelBuilder.Entity<Item>().HasKey(t => t.ItemId)
             //             .HasOptional(t => t.Weapon)

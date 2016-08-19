@@ -1,0 +1,18 @@
+﻿@using Game_AVP2.Helpers
+@using Game_AVP2.Models.Avp2.Items
+<div class="row">
+    <div growl></div> <!-- adding the grow directive to html -->
+
+
+    @Html.Partial("_ArmourTable")
+    <div ng-hide="detailHide">
+        @Html.Partial("_ArmourInfo")
+    </div>
+    <div ng-show="editShow">
+        @Html.Partial("_EditArmour")
+    </div>
+    <div ng-show="addShow">
+        @Html.Partial("_AddArmour")
+    </div>
+</div>
+

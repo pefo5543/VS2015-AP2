@@ -1,0 +1,24 @@
+﻿<script src="~/Scripts/AngularModels/AdminCharacterModel.js"></script>
+@{
+    ViewBag.Title = "Character administration";
+}
+
+<div ng-app="AdminCharacterModel">
+    <ul class="nav nav-pills">
+        <li><a data-toggle="pill" href="#defaultcharacters">Default characters</a></li>
+        <li><a href="Index">Back</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="defaultcharacters" class="tab-pane fade in active">
+            <div ng-controller="StaticCharacterController" ng-init="">
+                @{Html.RenderAction("CharacterStart", "AdminStaticCharacters", null);}
+            </div>
+        </div>
+    </div>
+    @*<div class="jumbotron">
+            <p class="lead">Angular is good</p>
+            <p><a href="http://angularjs.org" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>*@
+</div>
+

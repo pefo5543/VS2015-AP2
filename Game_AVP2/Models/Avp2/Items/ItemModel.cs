@@ -2,15 +2,12 @@
 using Game_AVP2.Models.Avp2.Items;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using System.Reflection;
 using System.IO;
 using System.Drawing;
-using Game_AVP2.Controllers;
 
 namespace Game_AVP2.Models
 {
-    internal class ItemModel
+    public class ItemModel : BaseModel
     {
         public List<Misc> MiscList { get; set; }
         public List<Armour> ArmourList { get; set; }
@@ -26,128 +23,6 @@ namespace Game_AVP2.Models
             ArmourList = db.Armours.ToList();
             WeaponList = db.Weapons.ToList();
 
-        }
-        internal static bool AddWeaponToDb(Weapon data)
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            bool res = true;
-            try
-            {
-                db.Weapons.Add(data);
-            }
-            catch (Exception e)
-            {
-                res = false;
-                Console.WriteLine(e.Message);
-            }
-            db.SaveChanges();
-
-            return res;
-        }
-
-        internal static void DeleteWeapon(int id, ApplicationDbContext dbCurrent)
-        {
-            Weapon w = dbCurrent.Weapons.Find(id);
-            if(w != null)
-            {
-                dbCurrent.Weapons.Remove(w);
-            }
-            //WeaponPhoto wp =dbCurrent.WeaponPhotoes.Find(id);
-            //if(wp != null)
-            //{
-            //    dbCurrent.WeaponPhotoes.Remove(wp);
-            //}
-
-            dbCurrent.SaveChanges();
-        }
-
-        internal static bool EditWeapon(Weapon updatedWeapon, ApplicationDbContext db)
-        {
-            //bool modified = false;
-            bool noPropertyChanged = true;
-            Weapon originalWeapon = new Weapon();
-            try
-            {
-                originalWeapon = db.Weapons.Find(updatedWeapon.WeaponId);
-                db.Weapons.Attach(originalWeapon);
-            }
-            catch (Exception)
-            {
-            }
-            if (originalWeapon != null)
-            {
-                var entry = db.Entry(originalWeapon);
-
-                entry.CurrentValues.SetValues(updatedWeapon);
-                entry.OriginalValues.SetValues(originalWeapon);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    noPropertyChanged = false;
-                }
-            }
-            return noPropertyChanged;
-        }
-
-        internal static string GetWeaponImage(int id, ApplicationDbContext dbCurrent)
-        {
-            Weapon w = dbCurrent.Weapons.Find(id);
-            WeaponImage wi = dbCurrent.WeaponImages.Find(w.ImageId);
-            return wi.ImageLink;
-        }
-
-        internal static bool AddWeapon(WeaponViewModel data, ApplicationDbContext db)
-        {
-            Weapon weapon = RenderWeapon(data,db);
-            bool result = AddWeaponToDb(weapon);
-            return result;         
-        }
-
-        private static Weapon RenderWeapon(WeaponViewModel data, ApplicationDbContext db)
-        {
-            int Id = -1;
-            if(data.WeaponId != 0 && data.WeaponId != -1)
-            {
-                Id = data.WeaponId;
-            }
-            Weapon weapon = new Weapon()
-            {
-                WeaponId = Id,
-                Name = data.Name,
-                Description = data.Description,
-                WeaponType = data.WeaponType,
-                Damage = data.Damage,
-                ExtraDamage = data.ExtraDamage,
-                Rarity = data.Rarity,
-                Value = data.Value,
-                ImageId = Int16.Parse(data.Image)
-
-            };
-                return weapon;
-        }
-
-        public static bool AddWeaponPhoto(int id, Image image)
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            bool result = true;
-            byte[] byteArray = ImageToByteArray(image);
-            //WeaponPhoto img = new WeaponPhoto();
-            //img.Image = byteArray;
-            //img.WeaponId = id;
-            //try
-            //{
-            //    db.WeaponPhotoes.Add(img);
-            //    db.SaveChanges();
-            //}
-            //catch
-            //{
-            //    result = false;
-            //}
-            return result;
         }
 
         public static byte[] ImageToByteArray(System.Drawing.Image imageIn)
