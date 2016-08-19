@@ -1,0 +1,83 @@
+﻿@using Game_AVP2.Helpers
+@using Game_AVP2.Models.Avp2.Items
+<div class="col-md-offset-1 col-md-4">
+    <div class="well well-lg item-details">
+        <div class="details-list col-md-12">
+            <form name="editForm" novalidate>
+                <fieldset>
+                    <legend class="text-center">Edit</legend>
+                    <div class="form-group" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+                        <input type="hidden" ng-model="armour.ArmourId" value={{armour.ArmourId}} />
+                        <input type="hidden" ng-model="armour.ImageId" value={{armour.ImageId}} />
+                        <ul class="my-ul">
+                            <li class="details-li">
+                                <label for="Name">Name</label>
+
+                                <input name="Name" class="form-control" value={{armour.Name}} ng-model="armour.Name" type="text" ng-maxlength="25" required />
+                                <span class="text-danger" ng-show="editForm.armour.Name.$touched && editForm.armour.Name.$invalid">The name is required.</span>
+                                <span class="text-danger" ng-show="editForm.armour.Name.$error.maxlength">The name can be max 25 characters.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Description">Armour description</label>
+
+                                <input name="Description" class="form-control" ng-model="armour.Description" type="text" ng-maxlength="40" />
+                                <span class="text-danger" ng-show="editForm.Description.$touched && editForm.Description.$error.maxlength">The description can be max 40 characters.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="ArmourType">Armour Type</label>
+                                <fieldset>
+                                    <select name="ArmourType" class="form-control" ng-model="armour.ArmourType" required>
+                                        <option ng-repeat="types in enums.ArmourTypeEnums" value={{types.name}}>{{types.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.ArmourType.$touched && editForm.ArmourType.$invalid">Select armour type.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Defense">Armour defense</label>
+                                <fieldset>
+                                    <select name="Defense" class="form-control" ng-model="armour.Defense" value={{armour.Defense}} required>
+                                        <option ng-repeat="d in enums.DefenseEnums" value={{d.name}}>{{d.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.Defense.$touched && editForm.Defense.$invalid">Select defense.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="ExtraDefense">Extra Defense</label>
+                                <fieldset>
+                                    <select name="ExtraDefense" class="form-control" ng-model="armour.ExtraDefense" required>
+                                        <option ng-repeat="ed in enums.ExtraDefenseEnums" value={{ed.name}}>{{ed.name}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.ExtraDefense.$touched && editForm.ExtraDefense.$invalid">Select extra defense.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Rarity">Rarity</label>
+                                <fieldset>
+                                    <select name="Rarity" class="form-control" required ng-model="armour.Rarity" ng-selected="armour.Rarity">
+                                        <option ng-repeat="r in enums.RarityEnums" value={{r.name}}>{{r.name}} </option>
+                                        @*ng-options="option.name for option in enums.RarityEnums track by option.name">*@
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="editForm.Rarity.$touched && editForm.Rarity.$invalid">Select rarity.</span>
+                            </li>
+                            <li class="details-li">
+                                <label for="Value">Value</label>
+
+                                <input name="Value" class="form-control" ng-model="armour.Value" type="number" required />
+                                <span class="text-danger" ng-show="editForm.Value.$touched && editForm.Value.$invalid">Set value to a number.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="change-buttons col-md-12">
+            <button ng-click="editArmour(armour)" type="button" name="submit" class="btn btn-success btn-block"
+                    ng-disabled="(editForm.Name.$dirty && editForm.Name.$invalid) ||  (editForm.ArmourType.$dirty && editForm.ArmourType.$invalid) || (editForm.Description.$dirty && editForm.Description.$invalid)
+                                                  || (editForm.ExtraDefense.$invalid) || (editForm.Defense.$dirty && editForm.Defense.$invalid) || (editForm.Rarity.$dirty && editForm.Rarity.$invalid)">
+                Submit
+            </button>
+            <button ng-click="editShow = false;detailHide=false" type="button" name="cancel" class="btn btn-warning btn-block">Cancel</button>
+        </div>
+    </div>
+</div>

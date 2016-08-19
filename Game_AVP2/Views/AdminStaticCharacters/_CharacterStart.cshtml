@@ -1,0 +1,17 @@
+﻿@using Game_AVP2.Helpers
+@using Game_AVP2.Models.Avp2.Items
+<div class="row">
+    <div growl></div> <!-- adding the grow directive to html -->
+
+
+    @Html.Partial("_StaticCharacterTable")
+    <div ng-hide="detailHide">
+        @Html.Partial("_StaticCharacterInfo")
+    </div>
+    <div ng-show="editShow">
+        @Html.Partial("_EditStaticCharacter")
+    </div>
+    <div ng-show="addShow">
+        @Html.Partial("_AddStaticCharacter")
+    </div>
+</div>

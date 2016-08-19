@@ -1,0 +1,25 @@
+﻿
+<div class="col-md-6">
+    <table class="col-md-12 table table-bordered table-striped myTable table-hover">
+        <thead class="">
+            <tr class="label-primary">
+                <th ng-click="sortList('Name')" class="col-md-4"><span class="text-white">Name </span><div ng-class="getListSortClass('Name')"></div></th>
+                <th ng-click="sortList('ArmourType')" class="col-md-3"><span class="text-white">Type </span><div ng-class="getListSortClass('ArmourType')"></div></th>
+                <th ng-click="sortList('Defense')" class="col-md-1"><span class="text-white">Defense </span><div ng-class="getListSortClass('Defense')"></div></th>
+                <th ng-click="sortList('ExtraDefense')" class="col-md-3"><span class="text-white">Extra defense </span><div ng-class="getListSortClass('ExtraDefense')"></div></th>
+                <th ng-click="sortList('Rarity')" class="col-md-1"><span class="text-white">Rarity </span><div ng-class="getListSortClass('Rarity')"></div></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="a in armours | limitTo : 50:0 | orderBy : sortListColumn : reverseListSort" class="" ng-click="changeDetail(a)">
+                <td class="col-md-4">{{a.Name}}</td>
+                <td class="col-md-3">{{a.ArmourType}}</td>
+                <td class="col-md-1">{{a.Defense}}</td>
+                <td class="col-md-3">{{a.ExtraDefense}}</td>
+                <td class="col-md-1">{{a.Rarity}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

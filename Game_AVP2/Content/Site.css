@@ -22,3 +22,127 @@ select,
 textarea {
     max-width: 280px;
 }
+.item-details .detail-header {
+    margin-top:2px;
+    text-align: center;
+}
+.item-details {
+    /*float:none;*/
+    /*height: 100px;*/
+    /*overflow-y: scroll;*/
+    padding:5px;
+    overflow:hidden;
+}
+.details-list {
+    list-style-type: none;
+    text-align: left;
+}
+.details-li {
+    margin-bottom: 5px;
+}
+.change-buttons {
+    margin-top:10px;
+    margin-bottom:20px;
+}
+.button {   
+}
+.my-ul {
+     list-style-type: none;
+     padding-left: 5px;
+}
+.my-ul li span.padding-right {
+    padding-right:1em;
+}
+th {
+    border:1px solid black;
+    padding: 5px;
+    text-align:left;
+    cursor:pointer;
+}
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid black;
+    display: inline-block;
+}
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid black;
+    display: inline-block;
+}
+.list-group-item-heading {
+    margin-bottom:0;
+}
+.mylist-group {
+    /*margin-bottom:0;*/
+}
+table.myTable tr:hover td{
+    cursor:pointer;
+    /*background-color:#b7f0f6*/
+}
+table.myTable thead tr .text-white{
+    color:#ffffff;
+}
+.footer {
+  position: relative;
+  margin-top: -150px; /* negative value of footer height 
+  height: 150px;
+  clear:both;
+  padding-top:20px;*/
+}
+
+input.ng-invalid {
+    background-color: #ffd4d4;
+}
+select.ng-invalid {
+    background-color: #ffd4d4;
+}
+.tab-content {
+    margin-top: 25px;
+}
+
+/*//File Upload*/
+
+/*.percent {
+    position: absolute; width: 300px; height: 14px; z-index: 1; text-align: center; font-size: 0.8em; color: white;
+}
+.progress-bar {
+    width: 300px; height: 14px;
+    border-radius: 10px;
+    border: 1px solid #CCC;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#6666cc), to(#4b4b95));
+    border-image: initial;
+}
+.uploaded {
+    padding: 0;
+    height: 14px;
+    border-radius: 10px;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#66cc00), to(#4b9500));
+    border-image: initial;
+}
+.dropbox {
+    width: 15em;
+    height: 3em;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    background-color: #FEFFEC;
+    text-align: center;
+    color: #BBB;
+    font-size: 2em;
+    font-family: Arial, sans-serif;
+}
+.dropbox span {
+    margin-top: 0.9em;
+    display: block;
+}
+.dropbox.not-available {
+    background-color: #F88;
+}
+.dropbox.over {
+    background-color: #bfb;
+}*/
