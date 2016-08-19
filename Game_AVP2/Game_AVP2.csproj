@@ -225,6 +225,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
+    <Compile Include="Models\Avp2\CharacterModels\Tables\Attribute.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\CharacterImage.cs" />
     <Compile Include="Models\Avp2\Items\ArmourModel.cs" />
     <Compile Include="Models\Avp2\BaseModel.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Models\Avp2\Items\Tables\Armour.cs" />
     <Compile Include="Models\Avp2\Items\Tables\CharacterItem.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Item.cs" />
+    <Compile Include="ModelViews\AttributeViewModel.cs" />
     <Compile Include="ModelViews\BaseViewModel.cs" />
     <Compile Include="ModelViews\CharacterBaseViewModel.cs" />
     <Compile Include="ModelViews\ItemViewModel.cs" />
@@ -272,6 +274,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\AngularModels\AdminCharacterModel.js" />
+    <Content Include="Scripts\AngularModels\FileUploader.js" />
     <Content Include="Scripts\angular\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\angular\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\angular\angular-animate.js" />
@@ -1150,6 +1153,7 @@
     <Content Include="Views\AdminStaticCharacters\_StaticCharacterInfo.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_EditStaticCharacter.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_AddStaticCharacter.cshtml" />
+    <Content Include="Views\AdminStaticCharacters\_CharacterAttributesInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

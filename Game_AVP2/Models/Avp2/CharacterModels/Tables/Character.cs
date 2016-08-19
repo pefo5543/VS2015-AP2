@@ -39,33 +39,10 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [ForeignKey("AttributeId")]
-        public virtual Attribute Attribute { get; set; }
+        public virtual Tables.Attribute Attribute { get; set; }
         //[ForeignKey("ImageId")]
         public virtual ICollection<CharacterItem> CharacterItems { get; set; }
         public virtual ICollection<Ability> Abilities { get; set; }
-    }
-
-    public class Attribute {
-        public Attribute()
-        {
-            this.Characters = new HashSet<Character>();
-        }
-
-        [Key, ForeignKey("StaticCharacter")]
-        public int StaticCharacterId { get; set; }
-
-        public int CharacterId { get; set; }
-
-        public int Health { get; set; }
-        public int Strength { get; set; }
-        public int Dexterity { get; set; }
-        public int LuckModifier { get; set; }
-        public int DefenceModifier { get; set; }
-        public int StrengthModifier { get; set; }
-
-        public virtual ICollection<Character> Characters { get; set; }
-        //[Newtonsoft.Json.JsonIgnoreAttribute]
-        public virtual StaticCharacter StaticCharacter { get; set; }
     }
 
     //public class CharacterAttribute

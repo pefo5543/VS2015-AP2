@@ -34,7 +34,7 @@ namespace Game_AVP2.Models
         public DbSet<Character> Characters { get; set; }
         public DbSet<StaticCharacter> StaticCharacters { get; set; }
         public DbSet<Ability> Abilities { get; set; }
-        public DbSet<Avp2.CharacterModels.Attribute> Attributes { get; set; }
+        public DbSet<Attribute> Attributes { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Armour> Armours { get; set; }
         public DbSet<Misc> Misc { get; set; }

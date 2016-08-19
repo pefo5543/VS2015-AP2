@@ -13,7 +13,7 @@ namespace Game_AVP2.Models.Avp2.Items
             foreach(Weapon w in list)
             {
                 WeaponViewModel viewmodel = new WeaponViewModel();
-                object o = SetViewModelProperties(viewmodel, w);
+                object o = SetModelProperties(viewmodel, w);
                 viewmodel = (WeaponViewModel) o;
                 l.Add(viewmodel);
             }
@@ -27,8 +27,8 @@ namespace Game_AVP2.Models.Avp2.Items
             try
             {
                 db.Weapons.Add(data);
-                WeaponImage wi = db.WeaponImages.Find(data.ImageId);
-                wi.Weapons.Add(data);
+                //WeaponImage wi = db.WeaponImages.Find(data.ImageId);
+                //wi.Weapons.Add(data);
                 
             }
             catch (Exception e)
@@ -86,33 +86,43 @@ namespace Game_AVP2.Models.Avp2.Items
 
         internal static bool AddWeapon(WeaponViewModel data, ApplicationDbContext db)
         {
-            Weapon weapon = RenderWeapon(data, db);
+            Weapon weapon = RenderWeapon(data);
             bool result = AddWeaponToDb(weapon);
             return result;
         }
 
-        private static Weapon RenderWeapon(WeaponViewModel data, ApplicationDbContext db)
+        private static Weapon RenderWeapon(WeaponViewModel data)
         {
-            int Id = -1;
-            if (data.WeaponId != 0 && data.WeaponId != -1)
-            {
-                Id = data.WeaponId;
-            }
-            //WeaponImage im = db.WeaponImages.Find(Int16.Parse(data.Image));
-            Weapon weapon = new Weapon()
-            {
-                WeaponId = Id,
-                Name = data.Name,
-                Description = data.Description,
-                WeaponType = data.WeaponType,
-                Damage = data.Damage,
-                ExtraDamage = data.ExtraDamage,
-                Rarity = data.Rarity,
-                Value = data.Value,
-                ImageId = Int16.Parse(data.Image)
+            //int Id = -1;
+            //if (data.WeaponId != 0 && data.WeaponId != -1)
+            //{
+            //    Id = data.WeaponId;
+            //}
+            ////WeaponImage im = db.WeaponImages.Find(Int16.Parse(data.Image));
+            //Weapon weapon = new Weapon()
+            //{
+            //    WeaponId = Id,
+            //    Name = data.Name,
+            //    Description = data.Description,
+            //    WeaponType = data.WeaponType,
+            //    Damage = data.Damage,
+            //    ExtraDamage = data.ExtraDamage,
+            //    Rarity = data.Rarity,
+            //    Value = data.Value,
+            //    ImageId = Int16.Parse(data.Image)
 
-            };
-            return weapon;
+            //};
+
+            if (data.WeaponId == 0)
+            {
+                data.WeaponId = -1;
+            }
+            Weapon w = new Weapon();
+            //Set properties auto
+            w = (Weapon)SetModelProperties(w, data);
+            w.ImageId = Int16.Parse(data.Image);
+
+            return w;
         }
     }
 }

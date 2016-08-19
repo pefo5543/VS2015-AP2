@@ -23,10 +23,10 @@ namespace Game_AVP2.Models
                 Console.WriteLine(e.Message);
             }
         }
-        protected static object SetViewModelProperties(object viewModel, object model)
+        protected static object SetModelProperties(object targetModel, object valuemodel)
         {
-            PropertyInfo[] propertyInfos = model.GetType().GetProperties();
-            PropertyInfo[] thisInfos = viewModel.GetType().GetProperties();
+            PropertyInfo[] propertyInfos = valuemodel.GetType().GetProperties();
+            PropertyInfo[] thisInfos = targetModel.GetType().GetProperties();
             foreach (PropertyInfo p in propertyInfos)
             {
                 int pos = 0;
@@ -34,14 +34,14 @@ namespace Game_AVP2.Models
                 {
                     if (p.PropertyType == t.PropertyType && p.Name == t.Name)
                     {
-                        thisInfos[pos].SetValue(viewModel, p.GetValue(model), null);
+                        thisInfos[pos].SetValue(targetModel, p.GetValue(valuemodel), null);
                         break;
                     }
                     pos++;
                 }
             }
 
-            return viewModel;
+            return targetModel;
         }
 
         protected static bool SetEditValues(ApplicationDbContext db, object original, object updated)
