@@ -1,5 +1,6 @@
 ﻿using Game_AVP2.Models.Avp2.CharacterModels;
 using Game_AVP2.Models.Avp2.CharacterModels.Tables;
+using Game_AVP2.Models.Avp2.Items;
 using Game_AVP2.ModelViews;
 using System;
 using System.Collections.Generic;
@@ -13,35 +14,48 @@ namespace Game_AVP2.Models.Avp2
         internal static List<StaticCharacterShorthandViewModel> RenderStaticSimpleList(List<StaticCharacter> list)
         {
             List<StaticCharacterShorthandViewModel> l = new List<StaticCharacterShorthandViewModel>();
-            foreach (StaticCharacter w in list)
+            foreach (StaticCharacter c in list)
             {
                 StaticCharacterShorthandViewModel viewmodel = new StaticCharacterShorthandViewModel();
-                object o = SetViewModelProperties(viewmodel, w);
-                viewmodel = (StaticCharacterShorthandViewModel)o;
+                viewmodel.StaticCharacterId = c.StaticCharacterId;
+                viewmodel.ImageId = c.ImageId;
+                viewmodel.Name = c.Name;
+                viewmodel.Strength = c.Attribute.Strength;
+                viewmodel.Dexterity = c.Attribute.Dexterity;
+                viewmodel.Health = c.Attribute.Health;
+                viewmodel.LuckModifier = c.Attribute.LuckModifier;
+                viewmodel.DefenceModifier = c.Attribute.DefenceModifier;
+                viewmodel.StrengthModifier = c.Attribute.StrengthModifier;
+                
+                //object o = SetModelProperties(viewmodel, w);
+                //viewmodel = (StaticCharacterShorthandViewModel)o;
                 l.Add(viewmodel);
             }
             return l;
         }
 
-        internal static string GetImage(int id, ApplicationDbContext dbCurrent, string context)
+        internal static StaticCharacterViewModel GetDetail(int id, ApplicationDbContext dbCurrent, string context)
         {
-            string ImageLink = "";
-            switch (context)
+            StaticCharacterViewModel character = new StaticCharacterViewModel();
+            StaticCharacter c = dbCurrent.StaticCharacters.Find(id);
+            //get characterimage
+            CharacterImage ci = c.CharacterImage;
+            if(ci != null)
             {
-               
-                case "staticC":
-                    //staticcharacter
-                    StaticCharacter c = dbCurrent.StaticCharacters.Find(id);
-                    CharacterImage ci = dbCurrent.CharacterImages.Find(c.ImageId);
-                    ImageLink = ci.ImageLink;
-                    break;
-                case "playerC":
-                    break;
-                default:
-                    break;
-
+                character.ImageLink = ci.ImageLink;
             }
-            return ImageLink;
+            //get Equipped weapon
+            if (c.WeaponEquipped != null)
+            {
+                character.EquippedWeaponName = c.WeaponEquipped.Name;
+            }
+            //get equipped armour name
+            if (c.ArmourEquipped != null)
+            {
+                character.EquippedArmourName = c.ArmourEquipped.Name;
+            }
+
+            return character;
         }
 
         internal static bool EditStaticCharacter(StaticCharacter updated, ApplicationDbContext db)
@@ -58,22 +72,101 @@ namespace Game_AVP2.Models.Avp2
             }
             if (original != null)
             {
-               noPropertyChanged = SetEditValues(db, original, updated);
+                noPropertyChanged = SetEditValues(db, original, updated);
             }
 
             return noPropertyChanged;
         }
 
-        internal static bool AddStaticCharacter(StaticCharacterViewModel data, ApplicationDbContext dbCurrent)
+        internal static List<WeaponViewModel> GetWeaponList(ApplicationDbContext dbCurrent)
         {
-            StaticCharacter sc = RenderStaticCharacter(data, dbCurrent);
-            bool result = AddStaticCharacterToDb(sc);
-            return result;
+            List<WeaponViewModel> l = new List<WeaponViewModel>();
+            List<Weapon> list = dbCurrent.Weapons.ToList();
+            foreach (Weapon w in list)
+            {
+                WeaponViewModel viewmodel = new WeaponViewModel();
+                object o = SetModelProperties(viewmodel, w);
+                viewmodel = (WeaponViewModel)o;
+                l.Add(viewmodel);
+            }
+            return l;
         }
 
-        private static bool AddStaticCharacterToDb(StaticCharacter sc)
+        internal static List<ArmourViewModel> GetArmourList(ApplicationDbContext dbCurrent)
         {
-            throw new NotImplementedException();
+            List<ArmourViewModel> l = new List<ArmourViewModel>();
+            List<Armour> list = dbCurrent.Armours.ToList();
+            foreach (Armour a in list)
+            {
+                ArmourViewModel viewmodel = new ArmourViewModel();
+                object o = SetModelProperties(viewmodel, a);
+                viewmodel = (ArmourViewModel)o;
+                l.Add(viewmodel);
+            }
+            return l;
+        }
+
+        internal static bool AddStaticCharacter(StaticCharacterViewModel data, ApplicationDbContext dbCurrent)
+        {
+            bool res = true;
+            try
+            {
+                StaticCharacter sc = RenderStaticCharacter(data);
+                int id = AddStaticCharacterToDb(sc, dbCurrent);
+                CharacterModels.Tables.Attribute a = RenderAttribute(data.Attribute, id);
+                res = AddAttributeToDb(a, dbCurrent);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                res = false;
+            }
+
+            return res;
+        }
+
+        private static bool AddAttributeToDb(CharacterModels.Tables.Attribute a, ApplicationDbContext db)
+        {
+            bool res = true;
+            try
+            {
+                db.Attributes.Add(a); 
+            }
+            catch (Exception e)
+            {
+                res = false;
+                Console.WriteLine(e.Message);
+            }
+            db.SaveChanges();
+
+            return res;
+        }
+
+        private static CharacterModels.Tables.Attribute RenderAttribute(AttributeViewModel attribute, int id)
+        {
+            attribute.StaticCharacterId = id;
+            CharacterModels.Tables.Attribute a = new CharacterModels.Tables.Attribute();
+            //Set properties auto
+            a = (CharacterModels.Tables.Attribute)SetModelProperties(a, attribute);
+            return a;
+        }
+
+        private static int AddStaticCharacterToDb(StaticCharacter sc, ApplicationDbContext db)
+        {
+            try
+            {
+                db.StaticCharacters.Add(sc); //Maybe not necessary
+                //CharacterImage ci = db.CharacterImages.Find(sc.ImageId);
+                //ci.StaticCharacters.Add(sc);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            db.SaveChanges();
+
+            return sc.StaticCharacterId;
         }
 
         internal static void DeleteCharacter(int id, ApplicationDbContext dbCurrent, string context)
@@ -88,7 +181,7 @@ namespace Game_AVP2.Models.Avp2
                         dbCurrent.StaticCharacters.Remove(s);
                     }
                     break;
-                case"playerC":
+                case "playerC":
                     break;
                 default:
                     break;
@@ -98,28 +191,26 @@ namespace Game_AVP2.Models.Avp2
             dbCurrent.SaveChanges();
         }
 
-        private static StaticCharacter RenderStaticCharacter(StaticCharacterViewModel data, ApplicationDbContext db)
+        private static StaticCharacter RenderStaticCharacter(StaticCharacterViewModel data)
         {
-            int Id = -1;
-            if (data.StaticCharacterId != 0 && data.StaticCharacterId != -1)
+            if (data.StaticCharacterId == 0)
             {
-                Id = data.StaticCharacterId;
+                data.StaticCharacterId = -1;
             }
 
-            StaticCharacter character = new StaticCharacter()
-            {
-                //WeaponId = Id,
-                //Name = data.Name,
-                //Description = data.Description,
-                //WeaponType = data.WeaponType,
-                //Damage = data.Damage,
-                //ExtraDamage = data.ExtraDamage,
-                //Rarity = data.Rarity,
-                //Value = data.Value,
-                //ImageId = Int16.Parse(data.Image)
-
-            };
+            StaticCharacterShorthandViewModel shortdata = data;
+            StaticCharacter character = new StaticCharacter();
+            //Set properties auto
+            character = (StaticCharacter)SetModelProperties(character, shortdata);
             return character;
         }
+
+        //private static CharacterModels.Attribute RenderAttributes(StaticCharacterViewModel data)
+        //{
+        //    Attribute = new StaticCharacter();
+        //    //Set properties auto
+        //    character = (StaticCharacter)SetModelProperties(character, shortdata);
+        //    return character;
+        //}
     }
 }

@@ -36,7 +36,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
 
         public virtual ICollection<Character> Characters { get; set; }
 
-        public virtual Attribute Attribute { get; set; }
+        public virtual Tables.Attribute Attribute { get; set; }
 
         [ForeignKey("EquippedWeaponId")]
         public virtual Weapon WeaponEquipped { get; set; }

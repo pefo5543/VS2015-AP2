@@ -13,7 +13,7 @@ namespace Game_AVP2.Models.Avp2.Items
             foreach (Armour a in list)
             {
                 ArmourViewModel viewmodel = new ArmourViewModel();
-                object o = SetViewModelProperties(viewmodel, a);
+                object o = SetModelProperties(viewmodel, a);
                 viewmodel = (ArmourViewModel)o;
                 l.Add(viewmodel);
             }
@@ -78,32 +78,22 @@ namespace Game_AVP2.Models.Avp2.Items
 
         internal static bool AddArmour(ArmourViewModel data, ApplicationDbContext db)
         {
-            Armour armour = RenderArmour(data, db);
+            Armour armour = RenderArmour(data);
             bool result = AddArmourToDb(armour);
             return result;
         }
 
-        private static Armour RenderArmour(ArmourViewModel data, ApplicationDbContext db)
+        private static Armour RenderArmour(ArmourViewModel data)
         {
-            int Id = -1;
-            if (data.ArmourId != 0 && data.ArmourId != -1)
+            if (data.ArmourId == 0)
             {
-                Id = data.ArmourId;
+                data.ArmourId = -1;
             }
-            Armour armour = new Armour()
-            {
-                ArmourId = Id,
-                Name = data.Name,
-                Description = data.Description,
-                ArmourType = data.ArmourType,
-                Defense = data.Defense,
-                ExtraDefense = data.ExtraDefense,
-                Rarity = data.Rarity,
-                Value = data.Value,
-                ImageId = Int16.Parse(data.Image)
-
-            };
-            return armour;
+            Armour a = new Armour();
+            //Set properties auto
+            a = (Armour)SetModelProperties(a, data);
+            a.ImageId = Int16.Parse(data.Image);
+            return a;
         }
     }
 }

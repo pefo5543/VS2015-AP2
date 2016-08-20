@@ -1,9 +1,9 @@
-﻿/// <reference path="../angular/angular.js" />
-
+﻿/// <reference path="FileUploader.js" />
+/// <reference path="../angular/angular.js" />
 
 
 var AdminItemsModel = angular
-    .module("AdminItemsModel", ['angular-growl', "akFileUploader"])
+    .module("AdminItemsModel", ['angular-growl'])
     .constant('Enums', {
         TypeEnums: [
            { id: 1, name: 'Dagger' },
@@ -370,6 +370,7 @@ var AdminItemsModel = angular
     }
 });
 
+
 AdminItemsModel.factory('ItemsService', ['$http', '$location', function ($http, $location) {
     var ItemsService = {};
     url = $location.absUrl();
@@ -405,21 +406,31 @@ AdminItemsModel.factory('EditItemsService', ['$http', '$location', function ($ht
     }
     return EditItemsService;
 }])
+
 AdminItemsModel.factory("entityService",
-           ["akFileUploaderService", '$location', function (akFileUploaderService, $location) {
+           ['$http', '$location', function ($http, $location) {
                var entityService = {};
                url = $location.absUrl();
-               entityService.addWeapon = function (data) {
-                   console.log(data.Name)
-                   console.log(data.error)
-                   return akFileUploaderService.saveModel(data, url + "/Weapons/AddWeapon");
-               };
+               entityService.addWeapon = function (dataObj) {
 
-               entityService.addArmour = function (data) {
-                   console.log(data.Name)
-                   console.log(data.error)
-                   return akFileUploaderService.saveModel(data, url + "/Armours/AddArmour");
-               };
+                   return $http.post(url + '/Weapons/AddWeapon', dataObj);
+               }
+
+               entityService.addArmour = function (dataObj) {
+                   return $http.post(url + '/Armours/AddArmour', dataObj);
+               }
+               //return EditItemsService;
+               //entityService.addWeapon = function (data) {
+               //    console.log(data.Name)
+               //    console.log(data.error)
+               //    return akFileUploaderService.saveModel(data, url + "/Weapons/AddWeapon");
+               //};
+
+               //entityService.addArmour = function (data) {
+               //    console.log(data.Name)
+               //    console.log(data.error)
+               //    return akFileUploaderService.saveModel(data, url + "/Armours/AddArmour");
+               //};
 
                return entityService;
 
@@ -443,55 +454,6 @@ AdminItemsModel.config(['$compileProvider', function ($compileProvider) {
 
 //(function () {
 
-"use strict"
-
-angular.module("akFileUploader", [])
-.factory("akFileUploaderService", ["$q", "$http",
-           function ($q, $http) {
-
-               var getModelAsFormData = function (data) {
-                   var dataAsFormData = new FormData();
-                   angular.forEach(data, function (value, key) {
-                       dataAsFormData.append(key, value);
-                   });
-                   return dataAsFormData;
-               };
-
-               var saveModel = function (data, url) {
-                   var deferred = $q.defer();
-                   $http({
-                       url: url,
-                       method: "POST",
-                       data: getModelAsFormData(data),
-                       transformRequest: angular.identity,
-                       headers: { 'Content-Type': undefined }
-                   }).success(function (result) {
-                       deferred.resolve(result);
-                   }).error(function (result, status) {
-                       deferred.reject(status);
-                   });
-                   return deferred.promise;
-               };
-
-               return {
-                   saveModel: saveModel
-               }
-           }])
-.directive("akFileModel", ["$parse",
-            function ($parse) {
-                return {
-                    restrict: "A",
-                    link: function (scope, element, attrs) {
-                        var model = $parse(attrs.akFileModel);
-                        var modelSetter = model.assign;
-                        element.bind("change", function () {
-                            scope.$apply(function () {
-                                modelSetter(scope, element[0].files[0]);
-                            });
-                        });
-                    }
-                };
-            }]);
 //})(window, document);
 
 //add person call from $scope

@@ -36,12 +36,12 @@ namespace Game_AVP2
 
             routes.MapRoute(
                "AdminCharacters",                                           // Route name
-               "Admin/AdminCharacters/Default/{action}",                            // URL with parameters
+               "Admin/AdminCharacters/StaticCharacters/{action}",                            // URL with parameters
                new { controller = "AdminStaticCharacters", action = "{action}" }  // Parameter defaults
            );
             routes.MapRoute(
                 "AdminCharacters #2",                                           // Route name
-                "Admin/AdminCharacters/Default/{action}",                            // URL with parameters
+                "Admin/AdminCharacters/AdminStaticCharacters/{action}",                            // URL with parameters
                 new { controller = "AdminStaticCharacters", action = "{action}" }  // Parameter defaults
             );
 
