@@ -1,4 +1,5 @@
-﻿using Game_AVP2.Models.Avp2.CharacterModels;
+﻿using Game_AVP2.Helpers;
+using Game_AVP2.Models.Avp2.CharacterModels;
 using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using Game_AVP2.Models.Avp2.Items;
 using Game_AVP2.ModelViews;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Game_AVP2.Models.Avp2
 {
@@ -78,33 +80,75 @@ namespace Game_AVP2.Models.Avp2
             return noPropertyChanged;
         }
 
-        internal static List<WeaponViewModel> GetWeaponList(ApplicationDbContext dbCurrent)
+        internal static IEnumerable<SelectListItem> GetArmourSelectList(ApplicationDbContext dbCurrent)
         {
-            List<WeaponViewModel> l = new List<WeaponViewModel>();
-            List<Weapon> list = dbCurrent.Weapons.ToList();
-            foreach (Weapon w in list)
-            {
-                WeaponViewModel viewmodel = new WeaponViewModel();
-                object o = SetModelProperties(viewmodel, w);
-                viewmodel = (WeaponViewModel)o;
-                l.Add(viewmodel);
-            }
-            return l;
+            var db = new ArmourSelectList();
+            var armours = db
+                        .GetArmours(dbCurrent)
+                        .Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.ArmourId.ToString(),
+                                    Text = x.Name
+                                });
+            return new SelectList(armours, "Value", "Text");
         }
 
-        internal static List<ArmourViewModel> GetArmourList(ApplicationDbContext dbCurrent)
+        internal static IEnumerable<SelectListItem> GetImagesSelectList(ApplicationDbContext dbCurrent)
         {
-            List<ArmourViewModel> l = new List<ArmourViewModel>();
-            List<Armour> list = dbCurrent.Armours.ToList();
-            foreach (Armour a in list)
-            {
-                ArmourViewModel viewmodel = new ArmourViewModel();
-                object o = SetModelProperties(viewmodel, a);
-                viewmodel = (ArmourViewModel)o;
-                l.Add(viewmodel);
-            }
-            return l;
+            var db = new CharacterImageSelectList();
+            var images = db
+                        .GetImages(dbCurrent)
+                        .Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.ImageId.ToString(),
+                                    Text = x.ImageName
+                                });
+            return new SelectList(images, "Value", "Text");
         }
+
+        internal static IEnumerable<SelectListItem> GetWeaponSelectList(ApplicationDbContext dbCurrent)
+        {
+            var db = new WeaponSelectList();
+            var weapons = db
+                        .GetWeapons(dbCurrent)
+                        .Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.WeaponId.ToString(),
+                                    Text = x.Name
+                                });
+            return new SelectList(weapons, "Value", "Text");
+        }
+
+        //internal static List<WeaponViewModel> GetWeaponList(ApplicationDbContext dbCurrent)
+        //{
+        //    List<WeaponViewModel> l = new List<WeaponViewModel>();
+        //    List<Weapon> list = dbCurrent.Weapons.ToList();
+        //    foreach (Weapon w in list)
+        //    {
+        //        WeaponViewModel viewmodel = new WeaponViewModel();
+        //        object o = SetModelProperties(viewmodel, w);
+        //        viewmodel = (WeaponViewModel)o;
+        //        l.Add(viewmodel);
+        //    }
+        //    return l;
+        //}
+
+        //internal static List<ArmourViewModel> GetArmourList(ApplicationDbContext dbCurrent)
+        //{
+        //    List<ArmourViewModel> l = new List<ArmourViewModel>();
+        //    List<Armour> list = dbCurrent.Armours.ToList();
+        //    foreach (Armour a in list)
+        //    {
+        //        ArmourViewModel viewmodel = new ArmourViewModel();
+        //        object o = SetModelProperties(viewmodel, a);
+        //        viewmodel = (ArmourViewModel)o;
+        //        l.Add(viewmodel);
+        //    }
+        //    return l;
+        //}
 
         internal static bool AddStaticCharacter(StaticCharacterViewModel data, ApplicationDbContext dbCurrent)
         {

@@ -31,8 +31,8 @@
         </fieldset>
     </div>
     <div ng-hide="weaponBtnHide" class="change-buttons col-md-12">
-        <button ng-click="editShow=true; detailHide=true" type="button" name="edit" class="btn btn-success btn-block" ng-disabled="detail!=null">Edit</button>
-        <button ng-click="deleteWeapon()" type="button" name="edit" class="btn btn-danger btn-block" ng-disabled="detail!=null">Delete</button>
+        <button ng-click="editShow=true; detailHide=true" type="button" name="edit" class="btn btn-success btn-block" ng-disabled="detail.Name==null">Edit</button>
+        <button ng-click="deleteWeapon()" type="button" name="edit" class="btn btn-danger btn-block" ng-disabled="detail.Name==null">Delete</button>
     </div>
     <div class="btn-group">
         <span class="button"><button ng-click="editShow=false;detailHide=true;addShow=true;getEquipment();" type="button" name="add" class="btn btn-info">Add Character</button></span>

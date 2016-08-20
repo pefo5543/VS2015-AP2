@@ -2,8 +2,8 @@
     ViewBag.Title = "Upload";
 }
 
-@using (Html.BeginForm("FileUpload", "AdminArmours", FormMethod.Post,
-                                                        new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("FileUpload", (string)ViewBag.Controller, FormMethod.Post,
+                                            new { enctype = "multipart/form-data" }))
 {
     <div>
         Name of image<br />
@@ -13,4 +13,3 @@
         <input type="submit" value="Upload" class="submit" />
     </div>
 }
-

@@ -25,8 +25,8 @@ namespace Game_AVP2.Controllers
         public ActionResult CharacterStart()
         {
             Context = "staticC";
-            IEnumerable<SelectListItem> imageList = GetImageList();
-            return PartialView("_CharacterStart", imageList);
+            //IEnumerable<SelectListItem> imageList = GetImageList();
+            return PartialView("_CharacterStart");
         }
 
         [HttpPost]
@@ -86,30 +86,21 @@ namespace Game_AVP2.Controllers
         [HttpGet]
         public JsonResult GetArmours()
         {
-            List<ArmourViewModel> armours = CharacterModel.GetArmourList(DbCurrent);
+            IEnumerable<SelectListItem> armours = CharacterModel.GetArmourSelectList(DbCurrent);
             return Json(armours, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetWeapons()
         {
-            List<WeaponViewModel> weapons = CharacterModel.GetWeaponList(DbCurrent);
+            IEnumerable<SelectListItem> weapons = CharacterModel.GetWeaponSelectList(DbCurrent);
             return Json(weapons, JsonRequestBehavior.AllowGet);
         }
-
-        protected IEnumerable<SelectListItem> GetImageList()
+        [HttpGet]
+        public JsonResult GetImages()
         {
-            var db = new CharacterImageSelectList();
-            var images = db
-                        .GetImages(DbCurrent)
-                        .Select(x =>
-                                new SelectListItem
-                                {
-                                    Value = x.ImageId.ToString(),
-                                    Text = x.ImageName
-                                });
-            var list = new SelectList(images, "Value", "Text");
-            return new SelectList(images, "Value", "Text");
+            IEnumerable<SelectListItem> images = CharacterModel.GetImagesSelectList(DbCurrent);
+            return Json(images, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult FileUpload(HttpPostedFileBase file)
@@ -135,7 +126,7 @@ namespace Game_AVP2.Controllers
 
             }
             //Display records
-            return RedirectToAction("../AdminCharacters/DisplayWeaponImages/");
+            return RedirectToAction("../AdminStaticCharacters/DisplayWeaponImages/");
         }
         public ActionResult DisplayCharacterImages()
         {
@@ -147,7 +138,8 @@ namespace Game_AVP2.Controllers
         [HttpGet]
         public ActionResult AdminFileUpload()
         {
-            return View("AdminCharacterFileUpload");
+            ViewBag.Controller = GetRequestString(3);
+            return View("FileUpload");
         }
     }
 }

@@ -103,7 +103,7 @@ namespace Game_AVP2.Controllers
             var list = new SelectList(images, "Value", "Text");
             return new SelectList(images, "Value", "Text");
         }
-
+        [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
 
@@ -138,7 +138,8 @@ namespace Game_AVP2.Controllers
         [HttpGet]
         public ActionResult AdminFileUpload()
         {
-            return View("AdminWeaponFileUpload");
+            ViewBag.Controller = GetRequestString(3);
+            return View("FileUpload");
         }
     }
 }

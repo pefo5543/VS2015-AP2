@@ -79,9 +79,14 @@ namespace Game_AVP2.Models.Avp2.Items
 
         internal static string GetWeaponImage(int id, ApplicationDbContext dbCurrent)
         {
+            string link = "";
             Weapon w = dbCurrent.Weapons.Find(id);
-            WeaponImage wi = dbCurrent.WeaponImages.Find(w.ImageId);
-            return wi.ImageLink;
+            if(w != null)
+            {
+                WeaponImage wi = dbCurrent.WeaponImages.Find(w.ImageId);
+                link = wi.ImageLink;
+            }
+            return link;
         }
 
         internal static bool AddWeapon(WeaponViewModel data, ApplicationDbContext db)

@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace Game_AVP2.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdminController : Controller
+    public class AdminController : AdminBaseController
     {
         protected string Context { get; set; }
         public ApplicationDbContext DbCurrent

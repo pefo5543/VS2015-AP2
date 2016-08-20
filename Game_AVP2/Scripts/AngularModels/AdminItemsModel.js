@@ -377,18 +377,18 @@ AdminItemsModel.factory('ItemsService', ['$http', '$location', function ($http, 
 
     ItemsService.getWeapons = function () {
 
-        return $http.get(url + '/Weapons/GetWeapons');
+        return $http.get(url + '/AdminWeapons/GetWeapons');
     }
     ItemsService.getWeaponImage = function (id) {
-        return $http.post(url + '/Weapons/GetWeaponImage', id);
+        return $http.post(url + '/AdminWeapons/GetWeaponImage', id);
     }
     ItemsService.getArmours = function () {
 
-        return $http.get(url + '/Armours/GetArmours');
+        return $http.get(url + '/AdminArmours/GetArmours');
     }
     ItemsService.getArmourImage = function (id) {
   
-        return $http.post(url + '/Armours/GetArmourImage', id);
+        return $http.post(url + '/AdminArmours/GetArmourImage', id);
     }
     return ItemsService;
 }])
@@ -399,10 +399,10 @@ AdminItemsModel.factory('EditItemsService', ['$http', '$location', function ($ht
     url = $location.absUrl();
     EditItemsService.editWeapon = function (dataObj) {
 
-        return $http.post(url + '/Weapons/EditWeapon', dataObj);
+        return $http.post(url + '/AdminWeapons/EditWeapon', dataObj);
     }
     EditItemsService.editArmour = function (dataObj) {
-        return $http.post(url + '/Armours/EditArmour', dataObj);
+        return $http.post(url + '/AdminArmours/EditArmour', dataObj);
     }
     return EditItemsService;
 }])
@@ -413,11 +413,11 @@ AdminItemsModel.factory("entityService",
                url = $location.absUrl();
                entityService.addWeapon = function (dataObj) {
 
-                   return $http.post(url + '/Weapons/AddWeapon', dataObj);
+                   return $http.post(url + '/AdminWeapons/AddWeapon', dataObj);
                }
 
                entityService.addArmour = function (dataObj) {
-                   return $http.post(url + '/Armours/AddArmour', dataObj);
+                   return $http.post(url + '/AdminArmours/AddArmour', dataObj);
                }
                //return EditItemsService;
                //entityService.addWeapon = function (data) {
@@ -441,10 +441,10 @@ AdminItemsModel.factory('DeleteItemsService', ['$http', '$location', function ($
     var DeleteItemsService = {};
     url = $location.absUrl();
     DeleteItemsService.deleteWeapon = function (id) {
-        return $http.post(url + '/Weapons/DeleteWeapon', id);
+        return $http.post(url + '/AdminWeapons/DeleteWeapon', id);
     }
     DeleteItemsService.deleteArmour = function (id) {
-        return $http.post(url + '/Armours/DeleteArmour', id);
+        return $http.post(url + '/AdminArmours/DeleteArmour', id);
     }
     return DeleteItemsService;
 }])

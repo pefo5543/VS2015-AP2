@@ -25,6 +25,7 @@ var AdminCharacterModel = angular
     //$scope.enums = Enums;
     //$scope.addShow = true;
     getCharacters(true, 0);
+    console.log($location.path);
     $scope.init = function (name) {
         $scope.images = name;
     }
@@ -86,30 +87,6 @@ var AdminCharacterModel = angular
         })
         return true;
     }
-    $scope.getEquipment = function getEquipment() {
-        entityService.getArmours()
-        .success(function (armourlist) {
-            console.log("hej");
-            $scope.armours = armourlist;
-        })
-        .error(function (error) {
-            $scope.status = 'Unable to load armourlist' + error.message;
-            console.log($scope.status);
-            return false;
-        })
-        entityService.getWeapons()
-        .success(function (weaponlist) {
-            $scope.weapons = weaponlist;
-            console.log("hej");
-        })
-        .error(function (error) {
-            $scope.status = 'Unable to load weaponlist' + error.message;
-            console.log($scope.status);
-            return false;
-        })
-        return true;
-    }
-
     $scope.reverseListSort = false;
     $scope.sortListColumn = "Name";
     $scope.sortList = function (column) {
@@ -181,6 +158,36 @@ var AdminCharacterModel = angular
         getCharacter(id);
         $scope.detailBtnHide = false;
     }
+    $scope.getEquipment = function getEquipment() {
+        entityService.getImages()
+        .success(function (imagelist) {
+            $scope.images = imagelist;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load imagelist' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        entityService.getArmours()
+        .success(function (armourlist) {
+            $scope.armours = armourlist;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load armourlist' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        entityService.getWeapons()
+        .success(function (weaponlist) {
+            $scope.weapons = weaponlist;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load weaponlist' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        return true;
+    }
 });
 
 AdminCharacterModel.factory('CharacterService', ['$http', '$location', function ($http, $location) {
@@ -189,10 +196,10 @@ AdminCharacterModel.factory('CharacterService', ['$http', '$location', function 
 
     CharacterService.getCharacters = function () {
 
-        return $http.get(url + '/StaticCharacters/GetStaticCharacters');
+        return $http.get(url + '/AdminStaticCharacters/GetStaticCharacters');
     }
     CharacterService.getCharacter = function (id) {
-        return $http.get(url + '/StaticCharacters/GetDetail', id);
+        return $http.get(url + '/AdminStaticCharacters/GetDetail', id);
     }
     return CharacterService;
 }])
@@ -203,7 +210,7 @@ AdminCharacterModel.factory('EditCharacterService', ['$http', '$location', funct
     url = $location.absUrl();
     EditCharacterService.editCharacter = function (dataObj) {
 
-        return $http.post(url + '/StaticCharacters/EditStaticCharacter', dataObj);
+        return $http.post(url + '/AdminStaticCharacters/EditStaticCharacter', dataObj);
     }
     return EditCharacterService;
 }])
@@ -213,14 +220,16 @@ AdminCharacterModel.factory("entityService",
                url = $location.absUrl();
                entityService.addCharacter = function (dataObj) {
 
-                   return $http.post(url + '/StaticCharacters/AddStaticCharacter', dataObj);
+                   return $http.post(url + '/AdminStaticCharacters/AddStaticCharacter', dataObj);
                }
-
+               entityService.getImages = function () {
+                   return $http.get(url + '/AdminStaticCharacters/GetImages');
+               }
                entityService.getArmours = function () {
-                   return $http.get(url + '/StaticCharacters/GetArmours');
+                   return $http.get(url + '/AdminStaticCharacters/GetArmours');
                }
                entityService.getWeapons = function () {
-                   return $http.get(url + '/StaticCharacters/GetWeapons');
+                   return $http.get(url + '/AdminStaticCharacters/GetWeapons');
                }
 
                return entityService;
@@ -231,10 +240,10 @@ AdminCharacterModel.factory('DeleteCharacterService', ['$http', '$location', fun
     var DeleteCharacterService = {};
     url = $location.absUrl();
     DeleteCharacterService.deleteCharacter = function (id) {
-        return $http.post(url + '/StaticCharacters/DeleteStaticCharacter', id);
+        return $http.post(url + '/AdminStaticCharacters/DeleteStaticCharacter', id);
     }
     DeleteCharacterService.deleteCharacter = function (id) {
-        return $http.post(url + '/StaticCharacters/DeleteCharacter', id);
+        return $http.post(url + '/AdminStaticCharacters/DeleteCharacter', id);
     }
     return DeleteCharacterService;
 }])

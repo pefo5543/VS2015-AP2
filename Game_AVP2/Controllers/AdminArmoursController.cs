@@ -129,7 +129,8 @@ namespace Game_AVP2.Controllers
         [HttpGet]
         public ActionResult AdminFileUpload()
         {
-            return View("AdminArmourFileUpload");
+            ViewBag.Controller = GetRequestString(3);
+            return View("FileUpload");
         }
     }
 }

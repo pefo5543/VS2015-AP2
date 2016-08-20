@@ -214,6 +214,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminArmoursController.cs" />
+    <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminStaticCharactersController.cs" />
     <Compile Include="Controllers\AdminWeaponsController.cs" />
@@ -304,9 +305,6 @@
     <Content Include="Scripts\angular\angular-touch.min.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Scripts\AngularModels\AdminItemsModel.js" />
     <Content Include="Scripts\AngularModels\AdminUploadImagesModel.js" />
     <Content Include="Scripts\AngularModels\ItemsService.js" />
@@ -1141,11 +1139,9 @@
     <Content Include="Views\AdminArmours\_EditArmour.cshtml" />
     <Content Include="Views\AdminArmours\_ArmourInfo.cshtml" />
     <Content Include="Views\AdminArmours\_ArmourTable.cshtml" />
-    <Content Include="Views\AdminWeapons\AdminWeaponFileUpload.cshtml" />
     <Content Include="Views\AdminWeapons\DisplayWeaponImages.cshtml" />
     <Content Include="Views\AdminWeapons\_WeaponPage.cshtml" />
     <Content Include="Views\AdminArmours\_ArmourPage.cshtml" />
-    <Content Include="Views\AdminArmours\AdminArmourFileUpload.cshtml" />
     <Content Include="Views\AdminArmours\DisplayArmourImages.cshtml" />
     <Content Include="Views\Admin\AdminCharacters.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_CharacterStart.cshtml" />
@@ -1154,11 +1150,14 @@
     <Content Include="Views\AdminStaticCharacters\_EditStaticCharacter.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_AddStaticCharacter.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_CharacterAttributesInfo.cshtml" />
+    <Content Include="Views\AdminStaticCharacters\DisplayCharacterImages.cshtml" />
+    <Content Include="Views\Shared\FileUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\armours\" />
     <Folder Include="Content\Images\characters\" />
+    <Folder Include="Views\AdminBase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1173,6 +1172,9 @@
     <EmbeddedResource Include="Migrations\201608181238242_init.resx">
       <DependentUpon>201608181238242_init.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

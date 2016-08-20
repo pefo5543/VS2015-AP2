@@ -26,7 +26,7 @@
                                 <label for="EquippedWeapon">Default weapon</label>
                                 <fieldset>
                                     <select name="EquippedWeapon" class="form-control" data-ng-model="add.EquippedWeaponId" required>
-                                        <option ng-repeat="w in weapons" value={{w.WeaponId}}>{{w.Name}}</option>
+                                        <option ng-repeat="w in weapons" value={{w.Value}}>{{w.Text}}</option>
                                     </select>
                                 </fieldset>
                                 <span class="text-danger" ng-show="addForm.EquippedWeaponId.$invalid">Select default weapon.</span>
@@ -35,12 +35,20 @@
                                 <label for="EquippedArmour">Default armour</label>
                                 <fieldset>
                                     <select name="EquippedArmour" class="form-control" data-ng-model="add.EquippedArmourId" required>
-                                        <option ng-repeat="a in armours" value={{w.ArmourId}}>{{w.Name}}</option>
+                                        <option ng-repeat="a in armours" value={{a.Value}}>{{a.Text}}</option>
                                     </select>
                                 </fieldset>
                                 <span class="text-danger" ng-show="addForm.EquippedArmourId.$invalid">Select default armour.</span>
                             </li>
-                            
+                            <li class="details-li">
+                                <label for="Image">Image</label>
+                                <fieldset>
+                                    <select name="Image" class="form-control" data-ng-model="add.ImageId" required>
+                                        <option ng-repeat="i in images" value={{i.Value}}>{{i.Text}}</option>
+                                    </select>
+                                </fieldset>
+                                <span class="text-danger" ng-show="addForm.ImageId.$invalid">Select image.</span>
+                            </li>
                         </ul>
                     </div>
                 </fieldset>

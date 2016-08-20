@@ -15,6 +15,16 @@ namespace Game_AVP2.Helpers
         public int ImageId { get; set; }
         public string ImageName { get; set; }
     }
+    public class WeaponSelect
+    {
+        public int WeaponId { get; set; }
+        public string Name { get; set; }
+    }
+    public class ArmourSelect
+    {
+        public int ArmourId { get; set; }
+        public string Name { get; set; }
+    }
 
     public class WeaponImageSelectList
     {
@@ -67,6 +77,41 @@ namespace Game_AVP2.Helpers
                 Images.Add(c);
             }
             return Images;
+        }
+    }
+
+    public class WeaponSelectList
+    {
+        public List<WeaponSelect> GetWeapons(ApplicationDbContext db)
+        {
+            List<WeaponSelect> Weapons = new List<WeaponSelect>();
+
+            List<Weapon> weaponList = db.Weapons.ToList();
+            foreach (Weapon w in weaponList)
+            {
+                WeaponSelect s = new WeaponSelect();
+                s.Name = w.Name;
+                s.WeaponId = w.WeaponId;
+                Weapons.Add(s);
+            }
+            return Weapons;
+        }
+    }
+    public class ArmourSelectList
+    {
+        public List<ArmourSelect> GetArmours(ApplicationDbContext db)
+        {
+            List<ArmourSelect> Armours = new List<ArmourSelect>();
+
+            List<Armour> armourList = db.Armours.ToList();
+            foreach (Armour a in armourList)
+            {
+                ArmourSelect s = new ArmourSelect();
+                s.Name = a.Name;
+                s.ArmourId = a.ArmourId;
+                Armours.Add(s);
+            }
+            return Armours;
         }
     }
 
