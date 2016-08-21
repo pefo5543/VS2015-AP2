@@ -22,11 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
-.item-details .detail-header {
+.item-details, .detail-header, .wellOverflow {
     margin-top:2px;
     text-align: center;
 }
-.item-details {
+.item-details, .wellOverflow {
     /*float:none;*/
     /*height: 100px;*/
     /*overflow-y: scroll;*/

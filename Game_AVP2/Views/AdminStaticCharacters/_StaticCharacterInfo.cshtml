@@ -1,6 +1,6 @@
 ﻿
 <div class="col-md-10">
-    <div class="well well-lg character-details">
+    <div class="well well-lg wellOverflow">
         <fieldset>
             <legend class="text-center">Character info</legend>
             <div class="details-list col-md-6">
@@ -29,10 +29,10 @@
                 <img ng-src="/{{detail.ImageLink}}" />
             </div>
         </fieldset>
-    </div>
-    <div ng-hide="weaponBtnHide" class="change-buttons col-md-12">
-        <button ng-click="editShow=true; detailHide=true" type="button" name="edit" class="btn btn-success btn-block" ng-disabled="detail.Name==null">Edit</button>
-        <button ng-click="deleteWeapon()" type="button" name="edit" class="btn btn-danger btn-block" ng-disabled="detail.Name==null">Delete</button>
+        <div ng-hide="weaponBtnHide" class="change-buttons col-md-12">
+            <button ng-click="editShow=true; detailHide=true" type="button" name="edit" class="btn btn-success btn-block" ng-disabled="detail.Name==null">Edit</button>
+            <button ng-click="deleteWeapon()" type="button" name="edit" class="btn btn-danger btn-block" ng-disabled="detail.Name==null">Delete</button>
+        </div>
     </div>
     <div class="btn-group">
         <span class="button"><button ng-click="editShow=false;detailHide=true;addShow=true;getEquipment();" type="button" name="add" class="btn btn-info">Add Character</button></span>

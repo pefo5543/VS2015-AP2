@@ -1,59 +1,62 @@
 ﻿@using Game_AVP2.Helpers
 @using Game_AVP2.Models.Avp2.Items
-<div class="col-md-offset-1 col-md-4">
-    <div class="well well-lg item-details">
-        <div class="col-md-12"  ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
-            <form name="addForm" novalidate>
-                <fieldset>
-                    <legend class="text-center">Add</legend>
-                    <div class="form-group">
-                        @*<input type="hidden" ng-model="Id" value={{Id}} />*@
-                        <ul class="col-md-6">
-                            <li class="details-li">
-                                <label for="Name">Name</label>
+<div class="col-md-8">
+    <div class="well well-lg wellOverflow">
+        <form name="addForm" novalidate>
+            <fieldset>
+                <legend class="text-center">Add new default character</legend>
+                <div class="col-md-6">
+                    <fieldset>
+                        <div class="form-group">
+                            @*<input type="hidden" ng-model="Id" value={{Id}} />*@
+                            <ul class="col-md-6 my-ul">
+                                <li class="details-li">
+                                    <label for="Name">Name</label>
 
-                                <input name="Name" class="form-control" data-ng-model="add.Name" type="text" ng-maxlength="50" required />
-                                <span class="text-danger" ng-show="addForm.Name.$invalid">A name is required.</span>
-                                <span class="text-danger" ng-show="addForm.Name.$error.maxlength">The name can be max 50 characters.</span>
-                            </li>
-                            <li class="details-li">
-                                <label for="Description">Description</label>
+                                    <input name="Name" class="form-control" data-ng-model="add.Name" type="text" ng-maxlength="50" required />
+                                    <span class="text-danger" ng-show="addForm.Name.$invalid">A name is required.</span>
+                                    <span class="text-danger" ng-show="addForm.Name.$error.maxlength">The name can be max 50 characters.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="Description">Description</label>
 
-                                <input name="Description" class="form-control" data-ng-model="add.Description" type="text" ng-maxlength="150" />
-                                <span class="text-danger" ng-show="addForm.Description.$error.maxlength">The description can be max 150 characters.</span>
-                            </li>
-                            <li class="details-li">
-                                <label for="EquippedWeapon">Default weapon</label>
-                                <fieldset>
-                                    <select name="EquippedWeapon" class="form-control" data-ng-model="add.EquippedWeaponId" required>
-                                        <option ng-repeat="w in weapons" value={{w.Value}}>{{w.Text}}</option>
-                                    </select>
-                                </fieldset>
-                                <span class="text-danger" ng-show="addForm.EquippedWeaponId.$invalid">Select default weapon.</span>
-                            </li>
-                            <li class="details-li">
-                                <label for="EquippedArmour">Default armour</label>
-                                <fieldset>
-                                    <select name="EquippedArmour" class="form-control" data-ng-model="add.EquippedArmourId" required>
-                                        <option ng-repeat="a in armours" value={{a.Value}}>{{a.Text}}</option>
-                                    </select>
-                                </fieldset>
-                                <span class="text-danger" ng-show="addForm.EquippedArmourId.$invalid">Select default armour.</span>
-                            </li>
-                            <li class="details-li">
-                                <label for="Image">Image</label>
-                                <fieldset>
-                                    <select name="Image" class="form-control" data-ng-model="add.ImageId" required>
-                                        <option ng-repeat="i in images" value={{i.Value}}>{{i.Text}}</option>
-                                    </select>
-                                </fieldset>
-                                <span class="text-danger" ng-show="addForm.ImageId.$invalid">Select image.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+                                    <input name="Description" class="form-control" data-ng-model="add.Description" type="text" ng-maxlength="150" />
+                                    <span class="text-danger" ng-show="addForm.Description.$error.maxlength">The description can be max 150 characters.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="EquippedWeapon">Default weapon</label>
+                                    <fieldset>
+                                        <select name="EquippedWeapon" class="form-control" data-ng-model="add.EquippedWeaponId" required>
+                                            <option ng-repeat="w in weapons" value={{w.Value}}>{{w.Text}}</option>
+                                        </select>
+                                    </fieldset>
+                                    <span class="text-danger" ng-show="addForm.EquippedWeaponId.$invalid">Select default weapon.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="EquippedArmour">Default armour</label>
+                                    <fieldset>
+                                        <select name="EquippedArmour" class="form-control" data-ng-model="add.EquippedArmourId" required>
+                                            <option ng-repeat="a in armours" value={{a.Value}}>{{a.Text}}</option>
+                                        </select>
+                                    </fieldset>
+                                    <span class="text-danger" ng-show="addForm.EquippedArmourId.$invalid">Select default armour.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="Image">Image</label>
+                                    <fieldset>
+                                        <select name="Image" class="form-control" data-ng-model="add.ImageId" required>
+                                            <option ng-repeat="i in images" value={{i.Value}}>{{i.Text}}</option>
+                                        </select>
+                                    </fieldset>
+                                    <span class="text-danger" ng-show="addForm.ImageId.$invalid">Select image.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </div>
+                @Html.Partial("_AddAttributes");
+            </fieldset>
+        </form>
         <div class="change-buttons col-md-12">
 
             <button ng-click="addWeapon(add)" type="button" name="submit" class="btn btn-success btn-block"

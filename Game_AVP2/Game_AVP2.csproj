@@ -1152,6 +1152,7 @@
     <Content Include="Views\AdminStaticCharacters\_CharacterAttributesInfo.cshtml" />
     <Content Include="Views\AdminStaticCharacters\DisplayCharacterImages.cshtml" />
     <Content Include="Views\Shared\FileUpload.cshtml" />
+    <Content Include="Views\AdminStaticCharacters\_AddAttributes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,6 +6,7 @@
             <form name="editForm" novalidate>
                 <fieldset>
                     <legend class="text-center">Edit</legend>
+                    <img class="center-block" ng-src="/{{imagelink}}" />
                     <div class="form-group" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
                         <input type="hidden" ng-model="weapon.WeaponId" value={{weapon.WeaponId}} />
                         <input type="hidden" ng-model="weapon.ImageId" value={{weapon.ImageId}} />
