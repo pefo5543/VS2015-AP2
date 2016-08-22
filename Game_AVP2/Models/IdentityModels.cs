@@ -62,10 +62,19 @@ namespace Game_AVP2.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<StaticCharacter>()
-        //.HasOptional(a => a.Attribute)
-        //.WithOptionalDependent(ad =>ad.StaticCharacter)
-        //.WillCascadeOnDelete(true);
+            //behövs
+            modelBuilder.Entity<Attribute>()
+    .HasRequired(m => m.StaticCharacter)
+    .WithOptional(m => m.Attribute)
+    .WillCascadeOnDelete(true);
+            modelBuilder.Entity<CharacterAttribute>()
+    .HasRequired(m => m.Character)
+    .WithOptional(m => m.CharacterAttribute)
+    .WillCascadeOnDelete(true);
+            //    modelBuilder.Entity<StaticCharacter>()
+            //.HasOptional(a => a.Attribute)
+            //.WithOptionalDependent(ad => ad.StaticCharacter)
+            //.WillCascadeOnDelete(true);
             //modelBuilder.Entity<StaticCharacter>()
             //    .HasOptional(s => s.Attribute)
             //    .WithRequired(ad => ad.StaticCharacter);

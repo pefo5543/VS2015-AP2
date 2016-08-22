@@ -24,7 +24,7 @@ namespace Game_AVP2.Controllers
 
         public ActionResult CharacterStart()
         {
-            Context = "staticC";
+            Context = "staticCharacter";
             //IEnumerable<SelectListItem> imageList = GetImageList();
             return PartialView("_CharacterStart");
         }

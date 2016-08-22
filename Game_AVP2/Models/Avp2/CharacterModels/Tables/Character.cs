@@ -11,7 +11,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
 {
     public class Character
     {
-        [Key,ForeignKey("CharacterAttribute")]
+        [Key]
         public int CharacterId { get; set; }
 
         //[Required]
@@ -36,7 +36,8 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public int StaticCharacterId { get; set; }
         [ForeignKey("StaticCharacterId")]
         public virtual StaticCharacter StaticCharacter { get; set; }
-        //Relation to AspNetUsers    
+        //Relation to AspNetUsers   
+        [Required] 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }

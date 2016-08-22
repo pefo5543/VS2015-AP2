@@ -180,26 +180,44 @@ namespace Game_AVP2.Models.Avp2
             return sc.StaticCharacterId;
         }
 
-        internal static void DeleteCharacter(int id, ApplicationDbContext dbCurrent, string context)
+        internal static bool DeleteCharacter(int id, ApplicationDbContext dbCurrent, string context)
         {
+            bool res = false;
+            bool isInContext = false;
             switch (context)
             {
-
-                case "staticC":
+                case "staticCharacter":
                     StaticCharacter s = dbCurrent.StaticCharacters.Find(id);
                     if (s != null)
                     {
                         dbCurrent.StaticCharacters.Remove(s);
                     }
+                    isInContext = true;
                     break;
-                case "playerC":
+                case "character":
+                    Character c = dbCurrent.Characters.Find(id);
+                    if (c != null)
+                    {
+                        dbCurrent.Characters.Remove(c);
+                    }
+                    isInContext = true;
                     break;
                 default:
+                    res = false;
                     break;
-
             }
-
-            dbCurrent.SaveChanges();
+            try
+            {
+                if (isInContext)
+                    dbCurrent.SaveChanges();
+                res = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                res = false;
+            }
+            return res;
         }
 
         private static StaticCharacter RenderStaticCharacter(StaticCharacterShorthandViewModel data)

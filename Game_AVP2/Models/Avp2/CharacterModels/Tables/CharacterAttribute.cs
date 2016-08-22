@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,8 +9,8 @@ namespace Game_AVP2.Models.Avp2.CharacterModels.Tables
 {
     public class CharacterAttribute
     {
-        [Key]
-        public int CharacterAttributeId { get; set;}
+        [Key, ForeignKey("Character")]
+        public int CharacterId { get; set;}
         [Required]
         public int AttributeId { get; set; }
         public int Health { get; set; }

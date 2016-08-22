@@ -220,13 +220,13 @@
     <Compile Include="Controllers\AdminWeaponsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
-    <Compile Include="Migrations\201608221347266_init.cs" />
-    <Compile Include="Migrations\201608221347266_init.Designer.cs">
-      <DependentUpon>201608221347266_init.cs</DependentUpon>
+    <Compile Include="Migrations\201608221941116_init.cs" />
+    <Compile Include="Migrations\201608221941116_init.Designer.cs">
+      <DependentUpon>201608221941116_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608221353518_Test.cs" />
-    <Compile Include="Migrations\201608221353518_Test.Designer.cs">
-      <DependentUpon>201608221353518_Test.cs</DependentUpon>
+    <Compile Include="Migrations\201608221949124_Character.cs" />
+    <Compile Include="Migrations\201608221949124_Character.Designer.cs">
+      <DependentUpon>201608221949124_Character.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
@@ -1179,11 +1179,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608221347266_init.resx">
-      <DependentUpon>201608221347266_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608221941116_init.resx">
+      <DependentUpon>201608221941116_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608221353518_Test.resx">
-      <DependentUpon>201608221353518_Test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608221949124_Character.resx">
+      <DependentUpon>201608221949124_Character.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
