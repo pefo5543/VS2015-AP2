@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Game_AVP2.Models.Avp2.CharacterModels.Tables
 {
-    public class Attribute
+    public class CharacterAttribute
     {
-        [Key, ForeignKey("StaticCharacter")]
-        public int StaticCharacterId { get; set; }
-        //[ForeignKey("StaticCharacter")]
-        //[Column(Order = 1)]
-        //[Required]
-        //public int StaticCharacterId { get; set; }
-
-        //[ForeignKey("Character")]
-        //[Column(Order = 2)]
-
+        [Key]
+        public int CharacterAttributeId { get; set;}
+        [Required]
+        public int AttributeId { get; set; }
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Dexterity { get; set; }
@@ -26,6 +19,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels.Tables
         public int DefenceModifier { get; set; }
         public int StrengthModifier { get; set; }
 
-        public virtual StaticCharacter StaticCharacter { get; set; }
+        public virtual Character Character { get; set; }
+        public virtual Tables.Attribute Attribute { get; set; }
     }
 }

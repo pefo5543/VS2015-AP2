@@ -6,6 +6,22 @@ var AdminCharacterModel = angular
     .module("AdminCharacterModel", ['angular-growl'])
     .constant('Enums', {
 
+        HealthEnums: [
+    { id: 1, name: 30 },
+    { id: 2, name: 35 },
+    { id: 3, name: 40 },
+    { id: 4, name: 45 },
+    { id: 5, name: 50 },
+    { id: 6, name: 55 },
+    { id: 7, name: 60 },
+    { id: 8, name: 65 },
+    { id: 9, name: 70 },
+    { id: 10, name: 75 },
+    { id: 11, name: 80 },
+    { id: 12, name: 85 },
+    { id: 13, name: 90 },
+    { id: 14, name: 95 }
+        ],
         AttributeEnums: [
     { id: 1, name: 7 },
     { id: 2, name: 8 },
@@ -19,11 +35,12 @@ var AdminCharacterModel = angular
     { id: 10, name: 16 }
         ],
         AttributeLowEnums: [
-    { id: 1, name: 1 },
-    { id: 2, name: 2 },
-    { id: 3, name: 3 },
-    { id: 4, name: 4 },
-    { id: 5, name: 5 }
+            { id: 1, name: 0 },
+            { id: 2, name: 1 },
+    { id: 3, name: 2 },
+    { id: 4, name: 3 },
+    { id: 5, name: 4 },
+    { id: 6, name: 5 }
         ],
     })
 .controller("StaticCharacterController", function ($scope, $location, Enums, growl, CharacterService, EditCharacterService, DeleteCharacterService, entityService) {
@@ -58,6 +75,7 @@ var AdminCharacterModel = angular
             $scope.characters = p;
             if (init === true) {
                 $scope.detail = {};
+                $scope.detailBtnHide = true;
             } else if (id > 0) {
                 //set detail to character with id
                 angular.forEach(p, function (value, key) {
@@ -78,21 +96,21 @@ var AdminCharacterModel = angular
         })
         return true;
     }
-    function getCharacter(Id) {
-        var dataObj = {
-            "StaticCharacterId": Id
-        }
-        CharacterService.getCharacter(dataObj)
-        .success(function (character) {
-            $scope.detail = character;
-        })
-        .error(function (error) {
-            $scope.status = 'Unable to load character' + error.message;
-            console.log($scope.status);
-            return false;
-        })
-        return true;
-    }
+    //function getCharacter(Id) {
+    //    var dataObj = {
+    //        "StaticCharacterId": Id
+    //    }
+    //    CharacterService.getCharacter(dataObj)
+    //    .success(function (character) {
+    //        $scope.detail = character;
+    //    })
+    //    .error(function (error) {
+    //        $scope.status = 'Unable to load character' + error.message;
+    //        console.log($scope.status);
+    //        return false;
+    //    })
+    //    return true;
+    //}
     $scope.reverseListSort = false;
     $scope.sortListColumn = "Name";
     $scope.sortList = function (column) {
@@ -160,9 +178,12 @@ var AdminCharacterModel = angular
             console.log($scope.status);
         })
     }
-    $scope.changeDetail = function (id) {
-        getCharacter(id);
+    $scope.changeDetail = function (detailObj) {
+        changeDetailFunc(detailObj)
         $scope.detailBtnHide = false;
+    }
+    function changeDetailFunc(detailObj) {
+        $scope.detail = detailObj;
     }
     $scope.getEquipment = function getEquipment() {
         entityService.getImages()

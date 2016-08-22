@@ -1,4 +1,4 @@
-﻿<div class="col-md-6">
+﻿<div class="col-md-4">
     <fieldset>
         <div class="form-group">
             <ul class="col-md-6 my-ul">
@@ -15,7 +15,7 @@
                     <label for="Health">Health</label>
                     <fieldset>
                         <select name="Health" class="form-control" data-ng-model="add.Health" required>
-                            <option ng-repeat="r in enums.AttributeEnums" value={{r.name}}>{{r.name}}</option>
+                            <option ng-repeat="r in enums.HealthEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>
                     <span class="text-danger" ng-show="addItemForm.Health.$invalid">Select characters health.</span>

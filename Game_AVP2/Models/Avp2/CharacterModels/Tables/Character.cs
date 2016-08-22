@@ -11,8 +11,11 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
 {
     public class Character
     {
-        [Key]
+        [Key,ForeignKey("CharacterAttribute")]
         public int CharacterId { get; set; }
+
+        //[Required]
+        //public int CharacterAttributeId { get; set;}
 
         public Character()
         {
@@ -21,7 +24,6 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         }
 
         //public int ImageId { get; set; }
-        public int AttributeId { get; set; }
         [Required]
         [StringLength(50, ErrorMessage = "Choose a shorter name of your character")]
         public string Name { get; set; }
@@ -30,16 +32,16 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         [Required]
         public int Credits { get; set; }
         //Relation to StaticCharacter
-        [ForeignKey("StaticCharacter")]
+        [Required]
         public int StaticCharacterId { get; set; }
+        [ForeignKey("StaticCharacterId")]
         public virtual StaticCharacter StaticCharacter { get; set; }
         //Relation to AspNetUsers    
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        [ForeignKey("AttributeId")]
-        public virtual Tables.Attribute Attribute { get; set; }
+        public virtual Tables.CharacterAttribute CharacterAttribute { get; set; }
         //[ForeignKey("ImageId")]
         public virtual ICollection<CharacterItem> CharacterItems { get; set; }
         public virtual ICollection<Ability> Abilities { get; set; }

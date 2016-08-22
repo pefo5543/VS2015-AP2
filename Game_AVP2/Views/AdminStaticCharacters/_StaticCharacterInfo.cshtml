@@ -1,5 +1,5 @@
 ﻿
-<div class="col-md-10">
+<div class="col-md-7">
     <div class="well well-lg wellOverflow">
         <fieldset>
             <legend class="text-center">Character info</legend>
@@ -24,13 +24,13 @@
             </div>
             @Html.Partial("_CharacterAttributesInfo")
 
-            <div class="weapon-img col-md-12">
+            <div class="weapon-img col-md-2">
 
                 <img ng-src="/{{detail.ImageLink}}" />
             </div>
         </fieldset>
-        <div ng-hide="weaponBtnHide" class="change-buttons col-md-12">
-            <button ng-click="editShow=true; detailHide=true" type="button" name="edit" class="btn btn-success btn-block" ng-disabled="detail.Name==null">Edit</button>
+        <div ng-hide="detailBtnHide" class="change-buttons col-md-12">
+            <button ng-click="editShow=true; detailHide=true; getEquipment()" type="button" name="edit" class="btn btn-success btn-block" ng-disabled="detail.Name==null">Edit</button>
             <button ng-click="deleteWeapon()" type="button" name="edit" class="btn btn-danger btn-block" ng-disabled="detail.Name==null">Delete</button>
         </div>
     </div>

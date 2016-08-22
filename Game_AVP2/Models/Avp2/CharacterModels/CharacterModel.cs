@@ -13,24 +13,14 @@ namespace Game_AVP2.Models.Avp2
 {
     public class CharacterModel : BaseModel
     {
-        internal static List<StaticCharacterShorthandViewModel> RenderStaticSimpleList(List<StaticCharacter> list)
+        internal static List<StaticCharacterViewModel> RenderStaticSimpleList(List<StaticCharacter> list, ApplicationDbContext db)
         {
-            List<StaticCharacterShorthandViewModel> l = new List<StaticCharacterShorthandViewModel>();
+            List<StaticCharacterViewModel> l = new List<StaticCharacterViewModel>();
             foreach (StaticCharacter c in list)
             {
-                StaticCharacterShorthandViewModel viewmodel = new StaticCharacterShorthandViewModel();
-                viewmodel.StaticCharacterId = c.StaticCharacterId;
-                viewmodel.ImageId = c.ImageId;
-                viewmodel.Name = c.Name;
-                viewmodel.Strength = c.Attribute.Strength;
-                viewmodel.Dexterity = c.Attribute.Dexterity;
-                viewmodel.Health = c.Attribute.Health;
-                viewmodel.LuckModifier = c.Attribute.LuckModifier;
-                viewmodel.DefenceModifier = c.Attribute.DefenceModifier;
-                viewmodel.StrengthModifier = c.Attribute.StrengthModifier;
-                
-                //object o = SetModelProperties(viewmodel, w);
-                //viewmodel = (StaticCharacterShorthandViewModel)o;
+                CharacterModels.Tables.Attribute a = db.Attributes.Find(c.StaticCharacterId);
+                c.Attribute = a;
+                StaticCharacterViewModel viewmodel = new StaticCharacterViewModel(c);
                 l.Add(viewmodel);
             }
             return l;
@@ -60,7 +50,7 @@ namespace Game_AVP2.Models.Avp2
             return character;
         }
 
-        internal static bool EditStaticCharacter(StaticCharacter updated, ApplicationDbContext db)
+        internal static bool EditStaticCharacter(StaticCharacterViewModel updated, ApplicationDbContext db)
         {
             bool noPropertyChanged = false;
             StaticCharacter original = new StaticCharacter();
@@ -122,42 +112,14 @@ namespace Game_AVP2.Models.Avp2
             return new SelectList(weapons, "Value", "Text");
         }
 
-        //internal static List<WeaponViewModel> GetWeaponList(ApplicationDbContext dbCurrent)
-        //{
-        //    List<WeaponViewModel> l = new List<WeaponViewModel>();
-        //    List<Weapon> list = dbCurrent.Weapons.ToList();
-        //    foreach (Weapon w in list)
-        //    {
-        //        WeaponViewModel viewmodel = new WeaponViewModel();
-        //        object o = SetModelProperties(viewmodel, w);
-        //        viewmodel = (WeaponViewModel)o;
-        //        l.Add(viewmodel);
-        //    }
-        //    return l;
-        //}
-
-        //internal static List<ArmourViewModel> GetArmourList(ApplicationDbContext dbCurrent)
-        //{
-        //    List<ArmourViewModel> l = new List<ArmourViewModel>();
-        //    List<Armour> list = dbCurrent.Armours.ToList();
-        //    foreach (Armour a in list)
-        //    {
-        //        ArmourViewModel viewmodel = new ArmourViewModel();
-        //        object o = SetModelProperties(viewmodel, a);
-        //        viewmodel = (ArmourViewModel)o;
-        //        l.Add(viewmodel);
-        //    }
-        //    return l;
-        //}
-
-        internal static bool AddStaticCharacter(StaticCharacterViewModel data, ApplicationDbContext dbCurrent)
+        internal static bool AddStaticCharacter(StaticCharacterShorthandViewModel data, ApplicationDbContext dbCurrent)
         {
             bool res = true;
             try
             {
                 StaticCharacter sc = RenderStaticCharacter(data);
                 int id = AddStaticCharacterToDb(sc, dbCurrent);
-                CharacterModels.Tables.Attribute a = RenderAttribute(data.Attribute, id);
+                CharacterModels.Tables.Attribute a = RenderAttribute(data, id);
                 res = AddAttributeToDb(a, dbCurrent);
             }
             catch (Exception e)
@@ -186,12 +148,17 @@ namespace Game_AVP2.Models.Avp2
             return res;
         }
 
-        private static CharacterModels.Tables.Attribute RenderAttribute(AttributeViewModel attribute, int id)
+        private static CharacterModels.Tables.Attribute RenderAttribute(StaticCharacterShorthandViewModel data, int id)
         {
-            attribute.StaticCharacterId = id;
             CharacterModels.Tables.Attribute a = new CharacterModels.Tables.Attribute();
             //Set properties auto
-            a = (CharacterModels.Tables.Attribute)SetModelProperties(a, attribute);
+            a.Dexterity = data.Dexterity;
+            a.Strength = data.Strength;
+            a.Health = data.Health;
+            a.LuckModifier = data.LuckModifier;
+            a.StrengthModifier = data.StrengthModifier;
+            a.DefenceModifier = data.DefenceModifier;
+            a.StaticCharacterId = id;
             return a;
         }
 
@@ -235,7 +202,7 @@ namespace Game_AVP2.Models.Avp2
             dbCurrent.SaveChanges();
         }
 
-        private static StaticCharacter RenderStaticCharacter(StaticCharacterViewModel data)
+        private static StaticCharacter RenderStaticCharacter(StaticCharacterShorthandViewModel data)
         {
             if (data.StaticCharacterId == 0)
             {

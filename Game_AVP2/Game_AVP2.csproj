@@ -220,20 +220,25 @@
     <Compile Include="Controllers\AdminWeaponsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
-    <Compile Include="Migrations\201608181238242_init.cs" />
-    <Compile Include="Migrations\201608181238242_init.Designer.cs">
-      <DependentUpon>201608181238242_init.cs</DependentUpon>
+    <Compile Include="Migrations\201608221347266_init.cs" />
+    <Compile Include="Migrations\201608221347266_init.Designer.cs">
+      <DependentUpon>201608221347266_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608221353518_Test.cs" />
+    <Compile Include="Migrations\201608221353518_Test.Designer.cs">
+      <DependentUpon>201608221353518_Test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\Attribute.cs" />
+    <Compile Include="Models\Avp2\CharacterModels\Tables\CharacterAttribute.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\CharacterImage.cs" />
     <Compile Include="Models\Avp2\Items\ArmourModel.cs" />
     <Compile Include="Models\Avp2\BaseModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\ArmourImage.cs" />
     <Compile Include="Models\Avp2\Items\Tables\WeaponImage.cs" />
     <Compile Include="Models\Avp2\Items\WeaponModel.cs" />
-    <Compile Include="ModelViews\ArmourViewModel.cs" />
+    <Compile Include="ModelViews\Armour\ArmourViewModel.cs" />
     <Compile Include="Models\Avp2\Items\ItemModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -250,14 +255,14 @@
     <Compile Include="Models\Avp2\Items\Tables\Item.cs" />
     <Compile Include="ModelViews\AttributeViewModel.cs" />
     <Compile Include="ModelViews\BaseViewModel.cs" />
-    <Compile Include="ModelViews\CharacterBaseViewModel.cs" />
+    <Compile Include="ModelViews\Character\CharacterBaseViewModel.cs" />
     <Compile Include="ModelViews\ItemViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Misc.cs" />
     <Compile Include="ModelViews\MiscViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Weapon.cs" />
-    <Compile Include="ModelViews\StaticCharacterShorthandViewModel.cs" />
-    <Compile Include="ModelViews\StaticCharacterViewModel.cs" />
-    <Compile Include="ModelViews\WeaponViewModel.cs" />
+    <Compile Include="ModelViews\Character\StaticCharacterShorthandViewModel.cs" />
+    <Compile Include="ModelViews\Character\StaticCharacterViewModel.cs" />
+    <Compile Include="ModelViews\Weapon\WeaponViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1153,6 +1158,7 @@
     <Content Include="Views\AdminStaticCharacters\DisplayCharacterImages.cshtml" />
     <Content Include="Views\Shared\FileUpload.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_AddAttributes.cshtml" />
+    <Content Include="Views\AdminStaticCharacters\_EditAttributes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1170,12 +1176,15 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608181238242_init.resx">
-      <DependentUpon>201608181238242_init.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <EmbeddedResource Include="Migrations\201608221347266_init.resx">
+      <DependentUpon>201608221347266_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608221353518_Test.resx">
+      <DependentUpon>201608221353518_Test.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

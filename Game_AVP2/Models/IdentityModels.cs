@@ -43,6 +43,7 @@ namespace Game_AVP2.Models
         public DbSet<WeaponImage> WeaponImages { get; set; }
         public DbSet<ArmourImage> ArmourImages { get; set; }
         public DbSet<CharacterImage> CharacterImages { get; set; }
+        public DbSet<CharacterAttribute> CharacterAttributes { get; set; }
 
 
         public ApplicationDbContext()
@@ -61,16 +62,22 @@ namespace Game_AVP2.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<StaticCharacter>().HasKey(t => t.StaticCharacterId)
-            //             .HasOptional(t => t.Ability)
-            //             .WithOptionalPrincipal(d => d.StaticCharacter)
-            //             .Map(t => t.MapKey("StaticCharacterId"));  // declaring here  via MAP means NOT declared in POCO
+        //    modelBuilder.Entity<StaticCharacter>()
+        //.HasOptional(a => a.Attribute)
+        //.WithOptionalDependent(ad =>ad.StaticCharacter)
+        //.WillCascadeOnDelete(true);
+            //modelBuilder.Entity<StaticCharacter>()
+            //    .HasOptional(s => s.Attribute)
+            //    .WithRequired(ad => ad.StaticCharacter);
+            //modelBuilder.Entity<CharacterAttribute>()
+            //    .HasOptional(s => s.Character)
+            //    .WithRequired(ad => ad.CharacterAttribute);
             //modelBuilder.Entity<Ability>().HasKey(t => t.AbilityId)
             //            .HasOptional(q => q.StaticCharacter)
-                // .WithOptionalPrincipal(p => p.Quotation)  //as both Principals
-                //        .WithOptionalDependent(p => p.Quotation) // as the dependent
-                //         .Map(t => t.MapKey("QuotationId"));    done in POCO.
-                ;
+            // .WithOptionalPrincipal(p => p.Quotation)  //as both Principals
+            //        .WithOptionalDependent(p => p.Quotation) // as the dependent
+            //         .Map(t => t.MapKey("QuotationId"));    done in POCO.
+            ;
 
             //modelBuilder.Entity<Character>().HasKey(t => t.CharacterId)
             //             .HasOptional(t => t.CharacterAttribute)

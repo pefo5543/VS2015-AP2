@@ -54,12 +54,12 @@
                         </div>
                     </fieldset>
                 </div>
-                @Html.Partial("_AddAttributes");
+                @Html.Partial("_AddAttributes")
             </fieldset>
         </form>
         <div class="change-buttons col-md-12">
 
-            <button ng-click="addWeapon(add)" type="button" name="submit" class="btn btn-success btn-block"
+            <button ng-click="addCharacter(add)" type="button" name="submit" class="btn btn-success btn-block"
                     ng-disabled="(addForm.Name.$invalid) || (addForm.WeaponType.$invalid)">
                 Add
             </button>

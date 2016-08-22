@@ -30,7 +30,7 @@ namespace Game_AVP2.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddStaticCharacter([Bind(Exclude = "StaticCharacterId")]StaticCharacterViewModel data)
+        public ActionResult AddStaticCharacter([Bind(Exclude = "StaticCharacterId")]StaticCharacterShorthandViewModel data)
         {
             bool result = CharacterModel.AddStaticCharacter(data, DbCurrent);
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -43,7 +43,7 @@ namespace Game_AVP2.Controllers
             return Json(true, JsonRequestBehavior.DenyGet);
         }
 
-        public JsonResult EditStaticCharacter([Bind] StaticCharacter data)
+        public JsonResult EditStaticCharacter([Bind] StaticCharacterViewModel data)
         {
             bool result = CharacterModel.EditStaticCharacter(data, DbCurrent);
 
@@ -71,7 +71,7 @@ namespace Game_AVP2.Controllers
             {
                 //...
             }
-            List<StaticCharacterShorthandViewModel> list = CharacterModel.RenderStaticSimpleList(characters);
+            List<StaticCharacterViewModel> list = CharacterModel.RenderStaticSimpleList(characters, DbCurrent);
 
             return Json(list, JsonRequestBehavior.AllowGet);
     }
@@ -126,7 +126,7 @@ namespace Game_AVP2.Controllers
 
             }
             //Display records
-            return RedirectToAction("../AdminStaticCharacters/DisplayWeaponImages/");
+            return RedirectToAction("../AdminStaticCharacters/DisplayCharacterImages/");
         }
         public ActionResult DisplayCharacterImages()
         {
