@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Game_AVP2.Models.Avp2.CharacterModels;
+using Game_AVP2.ModelViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,8 +10,7 @@ namespace Game_AVP2.Models
 {
     public class BaseModel
     {
-
-        private static void SetValue(object original, string theProperty, object theValue)
+        private void SetValue(object original, string theProperty, object theValue)
         {
             try
             {
@@ -23,7 +24,7 @@ namespace Game_AVP2.Models
                 Console.WriteLine(e.Message);
             }
         }
-        protected static object SetModelProperties(object targetModel, object valuemodel)
+        protected object SetModelProperties(object targetModel, object valuemodel)
         {
             PropertyInfo[] propertyInfos = valuemodel.GetType().GetProperties();
             PropertyInfo[] thisInfos = targetModel.GetType().GetProperties();
@@ -44,7 +45,7 @@ namespace Game_AVP2.Models
             return targetModel;
         }
 
-        protected static bool SetEditValues(ApplicationDbContext db, object original, object updated)
+        protected bool SetEditValues(ApplicationDbContext db, object original, object updated)
         {
             var entry = db.Entry(original);
             bool noPropertyChanged = true;

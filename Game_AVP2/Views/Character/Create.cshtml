@@ -1,0 +1,23 @@
+﻿@using Game_AVP2.ModelViews
+@model List<StaticCharacterViewModel>
+<script src="~/Scripts/AngularModels/CharacterModel.js"></script>
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Choose a character</h2>
+
+<div class="row col-md-12" ng-app="CharacterModel">
+    <div ng-controller="CharacterController" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+        <div class="col-md-7">
+            @Html.Partial("_CharactersList")
+        </div>
+        <div class="col-md-5" ng-show="detailShow">
+    @Html.Partial("_CharacterDetail")
+</div>
+
+    </div>
+
+
+</div>
+

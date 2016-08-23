@@ -218,6 +218,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminStaticCharactersController.cs" />
     <Compile Include="Controllers\AdminWeaponsController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
     <Compile Include="Migrations\201608221941116_init.cs" />
@@ -280,6 +282,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\AngularModels\AdminCharacterModel.js" />
+    <Content Include="Scripts\AngularModels\CharacterModel.js" />
     <Content Include="Scripts\AngularModels\FileUploader.js" />
     <Content Include="Scripts\angular\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\angular\ai.0.15.0-build58334.min.js" />
@@ -1154,17 +1157,22 @@
     <Content Include="Views\AdminStaticCharacters\_StaticCharacterInfo.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_EditStaticCharacter.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_AddStaticCharacter.cshtml" />
-    <Content Include="Views\AdminStaticCharacters\_CharacterAttributesInfo.cshtml" />
+    <Content Include="Views\Shared\_CharacterAttributesInfo.cshtml" />
     <Content Include="Views\AdminStaticCharacters\DisplayCharacterImages.cshtml" />
     <Content Include="Views\Shared\FileUpload.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_AddAttributes.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_EditAttributes.cshtml" />
+    <Content Include="Views\Character\Index.cshtml" />
+    <Content Include="Views\Character\Create.cshtml" />
+    <Content Include="Views\Character\_CharacterDetail.cshtml" />
+    <Content Include="Views\Character\_CharactersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\armours\" />
     <Folder Include="Content\Images\characters\" />
     <Folder Include="Views\AdminBase\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

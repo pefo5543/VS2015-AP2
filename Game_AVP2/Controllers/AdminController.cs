@@ -15,20 +15,6 @@ namespace Game_AVP2.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : AdminBaseController
     {
-        protected string Context { get; set; }
-        public ApplicationDbContext DbCurrent
-        {
-            get
-            {
-                var db = HttpContext.Session["Db"] as ApplicationDbContext;
-                if (null == db)
-                {
-                    db = new ApplicationDbContext();
-                    HttpContext.Session["Db"] = db;
-                }
-                return db;
-            }
-        }
         // GET: Admin
         public ActionResult Index()
         {

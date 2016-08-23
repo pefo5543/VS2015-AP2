@@ -7,7 +7,7 @@ namespace Game_AVP2.Models.Avp2.Items
 {
     public class ArmourModel : ItemModel
     {
-        internal static List<ArmourViewModel> RenderArmourSimpleList(List<Armour> list)
+        internal List<ArmourViewModel> RenderArmourSimpleList(List<Armour> list)
         {
             List<ArmourViewModel> l = new List<ArmourViewModel>();
             foreach (Armour a in list)
@@ -20,7 +20,7 @@ namespace Game_AVP2.Models.Avp2.Items
             return l;
         }
 
-        internal static bool AddArmourToDb(Armour data)
+        internal bool AddArmourToDb(Armour data)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             bool res = true;
@@ -38,7 +38,7 @@ namespace Game_AVP2.Models.Avp2.Items
             return res;
         }
 
-        internal static void DeleteArmour(int id, ApplicationDbContext dbCurrent)
+        internal void DeleteArmour(int id, ApplicationDbContext dbCurrent)
         {
             Armour w = dbCurrent.Armours.Find(id);
             if (w != null)
@@ -49,7 +49,7 @@ namespace Game_AVP2.Models.Avp2.Items
             dbCurrent.SaveChanges();
         }
 
-        internal static bool EditArmour(Armour updatedArmour, ApplicationDbContext db)
+        internal bool EditArmour(Armour updatedArmour, ApplicationDbContext db)
         {
             //bool modified = false;
             bool noPropertyChanged = true;
@@ -69,21 +69,21 @@ namespace Game_AVP2.Models.Avp2.Items
             return noPropertyChanged;
         }
 
-        internal static string GetArmourImage(int id, ApplicationDbContext dbCurrent)
+        internal string GetArmourImage(int id, ApplicationDbContext dbCurrent)
         {
             Armour w = dbCurrent.Armours.Find(id);
             ArmourImage wi = dbCurrent.ArmourImages.Find(w.ImageId);
             return wi.ImageLink;
         }
 
-        internal static bool AddArmour(ArmourViewModel data, ApplicationDbContext db)
+        internal bool AddArmour(ArmourViewModel data, ApplicationDbContext db)
         {
             Armour armour = RenderArmour(data);
             bool result = AddArmourToDb(armour);
             return result;
         }
 
-        private static Armour RenderArmour(ArmourViewModel data)
+        private Armour RenderArmour(ArmourViewModel data)
         {
             if (data.ArmourId == 0)
             {

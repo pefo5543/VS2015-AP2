@@ -7,7 +7,7 @@ namespace Game_AVP2.Models.Avp2.Items
     public class WeaponModel : ItemModel
     {
 
-        internal static List<WeaponViewModel> RenderWeaponSimpleList(List<Weapon> list)
+        internal List<WeaponViewModel> RenderWeaponSimpleList(List<Weapon> list)
         {
             List<WeaponViewModel> l = new List<WeaponViewModel>();
             foreach(Weapon w in list)
@@ -20,7 +20,7 @@ namespace Game_AVP2.Models.Avp2.Items
             return l;
         }
 
-        internal static bool AddWeaponToDb(Weapon data)
+        internal bool AddWeaponToDb(Weapon data)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             bool res = true;
@@ -41,7 +41,7 @@ namespace Game_AVP2.Models.Avp2.Items
             return res;
         }
 
-        internal static void DeleteWeapon(int id, ApplicationDbContext dbCurrent)
+        internal void DeleteWeapon(int id, ApplicationDbContext dbCurrent)
         {
             Weapon w = dbCurrent.Weapons.Find(id);
             if (w != null)
@@ -57,7 +57,7 @@ namespace Game_AVP2.Models.Avp2.Items
             dbCurrent.SaveChanges();
         }
 
-        internal static bool EditWeapon(Weapon updatedWeapon, ApplicationDbContext db)
+        internal bool EditWeapon(Weapon updatedWeapon, ApplicationDbContext db)
         {
             //bool modified = false;
             bool noPropertyChanged = true;
@@ -77,7 +77,7 @@ namespace Game_AVP2.Models.Avp2.Items
             return noPropertyChanged;
         }
 
-        internal static string GetWeaponImage(int id, ApplicationDbContext dbCurrent)
+        internal string GetWeaponImage(int id, ApplicationDbContext dbCurrent)
         {
             string link = "";
             Weapon w = dbCurrent.Weapons.Find(id);
@@ -89,14 +89,14 @@ namespace Game_AVP2.Models.Avp2.Items
             return link;
         }
 
-        internal static bool AddWeapon(WeaponViewModel data, ApplicationDbContext db)
+        internal bool AddWeapon(WeaponViewModel data, ApplicationDbContext db)
         {
             Weapon weapon = RenderWeapon(data);
             bool result = AddWeaponToDb(weapon);
             return result;
         }
 
-        private static Weapon RenderWeapon(WeaponViewModel data)
+        private Weapon RenderWeapon(WeaponViewModel data)
         {
             //int Id = -1;
             //if (data.WeaponId != 0 && data.WeaponId != -1)

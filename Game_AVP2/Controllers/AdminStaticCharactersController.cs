@@ -14,6 +14,11 @@ namespace Game_AVP2.Controllers
 {
     public class AdminStaticCharactersController : AdminController
     {
+        public CharacterModel model { get; set; }
+        public AdminStaticCharactersController()
+        {
+            model = new CharacterModel();
+        }
         // GET: AdminStaticCharacters
         public new ActionResult Index()
         {
@@ -32,20 +37,20 @@ namespace Game_AVP2.Controllers
         [HttpPost]
         public ActionResult AddStaticCharacter([Bind(Exclude = "StaticCharacterId")]StaticCharacterShorthandViewModel data)
         {
-            bool result = CharacterModel.AddStaticCharacter(data, DbCurrent);
+            bool result = model.AddStaticCharacter(data, DbCurrent);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //Gets here from json post from angular
         public JsonResult DeleteStaticCharacter(int Id)
         {
-            CharacterModel.DeleteCharacter(Id, DbCurrent, Context);
+            bool result = model.DeleteCharacter(Id, DbCurrent);
 
-            return Json(true, JsonRequestBehavior.DenyGet);
+            return Json(result, JsonRequestBehavior.DenyGet);
         }
 
         public JsonResult EditStaticCharacter([Bind] StaticCharacterViewModel data)
         {
-            bool result = CharacterModel.EditStaticCharacter(data, DbCurrent);
+            bool result = model.EditStaticCharacter(data, DbCurrent);
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }
@@ -71,7 +76,7 @@ namespace Game_AVP2.Controllers
             {
                 //...
             }
-            List<StaticCharacterViewModel> list = CharacterModel.RenderStaticSimpleList(characters, DbCurrent);
+            List<StaticCharacterViewModel> list = model.RenderStaticCharacterList(characters, DbCurrent);
 
             return Json(list, JsonRequestBehavior.AllowGet);
     }
@@ -79,27 +84,27 @@ namespace Game_AVP2.Controllers
         [HttpPost]
         public JsonResult GetDetail(int Id)
         {
-            StaticCharacterViewModel c = CharacterModel.GetDetail(Id, DbCurrent, Context);
+            StaticCharacterViewModel c = model.GetDetail(Id, DbCurrent, Context);
             return Json(c, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetArmours()
         {
-            IEnumerable<SelectListItem> armours = CharacterModel.GetArmourSelectList(DbCurrent);
+            IEnumerable<SelectListItem> armours = model.GetArmourSelectList(DbCurrent);
             return Json(armours, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetWeapons()
         {
-            IEnumerable<SelectListItem> weapons = CharacterModel.GetWeaponSelectList(DbCurrent);
+            IEnumerable<SelectListItem> weapons = model.GetWeaponSelectList(DbCurrent);
             return Json(weapons, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public JsonResult GetImages()
         {
-            IEnumerable<SelectListItem> images = CharacterModel.GetImagesSelectList(DbCurrent);
+            IEnumerable<SelectListItem> images = model.GetImagesSelectList(DbCurrent);
             return Json(images, JsonRequestBehavior.AllowGet);
         }
 

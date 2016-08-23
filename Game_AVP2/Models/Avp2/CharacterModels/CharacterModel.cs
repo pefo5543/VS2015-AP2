@@ -13,26 +13,25 @@ namespace Game_AVP2.Models.Avp2
 {
     public class CharacterModel : BaseModel
     {
-        internal static List<StaticCharacterViewModel> RenderStaticSimpleList(List<StaticCharacter> list, ApplicationDbContext db)
+        internal List<StaticCharacterViewModel> RenderStaticCharacterList(List<StaticCharacter> list, ApplicationDbContext db)
         {
             List<StaticCharacterViewModel> l = new List<StaticCharacterViewModel>();
             foreach (StaticCharacter c in list)
             {
-                CharacterModels.Tables.Attribute a = db.Attributes.Find(c.StaticCharacterId);
-                c.Attribute = a;
+                //CharacterModels.Tables.Attribute a = db.Attributes.Find(c.StaticCharacterId);
+                //c.Attribute = a;
                 StaticCharacterViewModel viewmodel = new StaticCharacterViewModel(c);
                 l.Add(viewmodel);
             }
             return l;
         }
-
-        internal static StaticCharacterViewModel GetDetail(int id, ApplicationDbContext dbCurrent, string context)
+        internal StaticCharacterViewModel GetDetail(int id, ApplicationDbContext dbCurrent, string context)
         {
             StaticCharacterViewModel character = new StaticCharacterViewModel();
             StaticCharacter c = dbCurrent.StaticCharacters.Find(id);
             //get characterimage
             CharacterImage ci = c.CharacterImage;
-            if(ci != null)
+            if (ci != null)
             {
                 character.ImageLink = ci.ImageLink;
             }
@@ -50,7 +49,7 @@ namespace Game_AVP2.Models.Avp2
             return character;
         }
 
-        internal static bool EditStaticCharacter(StaticCharacterViewModel updated, ApplicationDbContext db)
+        internal bool EditStaticCharacter(StaticCharacterViewModel updated, ApplicationDbContext db)
         {
             bool noPropertyChanged = false;
             StaticCharacter original = new StaticCharacter();
@@ -70,7 +69,7 @@ namespace Game_AVP2.Models.Avp2
             return noPropertyChanged;
         }
 
-        internal static IEnumerable<SelectListItem> GetArmourSelectList(ApplicationDbContext dbCurrent)
+        internal IEnumerable<SelectListItem> GetArmourSelectList(ApplicationDbContext dbCurrent)
         {
             var db = new ArmourSelectList();
             var armours = db
@@ -84,7 +83,7 @@ namespace Game_AVP2.Models.Avp2
             return new SelectList(armours, "Value", "Text");
         }
 
-        internal static IEnumerable<SelectListItem> GetImagesSelectList(ApplicationDbContext dbCurrent)
+        internal IEnumerable<SelectListItem> GetImagesSelectList(ApplicationDbContext dbCurrent)
         {
             var db = new CharacterImageSelectList();
             var images = db
@@ -98,7 +97,7 @@ namespace Game_AVP2.Models.Avp2
             return new SelectList(images, "Value", "Text");
         }
 
-        internal static IEnumerable<SelectListItem> GetWeaponSelectList(ApplicationDbContext dbCurrent)
+        internal IEnumerable<SelectListItem> GetWeaponSelectList(ApplicationDbContext dbCurrent)
         {
             var db = new WeaponSelectList();
             var weapons = db
@@ -112,7 +111,7 @@ namespace Game_AVP2.Models.Avp2
             return new SelectList(weapons, "Value", "Text");
         }
 
-        internal static bool AddStaticCharacter(StaticCharacterShorthandViewModel data, ApplicationDbContext dbCurrent)
+        internal bool AddStaticCharacter(StaticCharacterShorthandViewModel data, ApplicationDbContext dbCurrent)
         {
             bool res = true;
             try
@@ -131,12 +130,12 @@ namespace Game_AVP2.Models.Avp2
             return res;
         }
 
-        private static bool AddAttributeToDb(CharacterModels.Tables.Attribute a, ApplicationDbContext db)
+        private bool AddAttributeToDb(CharacterModels.Tables.Attribute a, ApplicationDbContext db)
         {
             bool res = true;
             try
             {
-                db.Attributes.Add(a); 
+                db.Attributes.Add(a);
             }
             catch (Exception e)
             {
@@ -148,7 +147,7 @@ namespace Game_AVP2.Models.Avp2
             return res;
         }
 
-        private static CharacterModels.Tables.Attribute RenderAttribute(StaticCharacterShorthandViewModel data, int id)
+        private CharacterModels.Tables.Attribute RenderAttribute(StaticCharacterShorthandViewModel data, int id)
         {
             CharacterModels.Tables.Attribute a = new CharacterModels.Tables.Attribute();
             //Set properties auto
@@ -162,7 +161,7 @@ namespace Game_AVP2.Models.Avp2
             return a;
         }
 
-        private static int AddStaticCharacterToDb(StaticCharacter sc, ApplicationDbContext db)
+        private int AddStaticCharacterToDb(StaticCharacter sc, ApplicationDbContext db)
         {
             try
             {
@@ -180,36 +179,17 @@ namespace Game_AVP2.Models.Avp2
             return sc.StaticCharacterId;
         }
 
-        internal static bool DeleteCharacter(int id, ApplicationDbContext dbCurrent, string context)
+        internal bool DeleteCharacter(int id, ApplicationDbContext dbCurrent)
         {
             bool res = false;
-            bool isInContext = false;
-            switch (context)
+            StaticCharacter s = dbCurrent.StaticCharacters.Find(id);
+            if (s != null)
             {
-                case "staticCharacter":
-                    StaticCharacter s = dbCurrent.StaticCharacters.Find(id);
-                    if (s != null)
-                    {
-                        dbCurrent.StaticCharacters.Remove(s);
-                    }
-                    isInContext = true;
-                    break;
-                case "character":
-                    Character c = dbCurrent.Characters.Find(id);
-                    if (c != null)
-                    {
-                        dbCurrent.Characters.Remove(c);
-                    }
-                    isInContext = true;
-                    break;
-                default:
-                    res = false;
-                    break;
+                dbCurrent.StaticCharacters.Remove(s);
             }
             try
             {
-                if (isInContext)
-                    dbCurrent.SaveChanges();
+                dbCurrent.SaveChanges();
                 res = true;
             }
             catch (Exception e)
@@ -220,7 +200,7 @@ namespace Game_AVP2.Models.Avp2
             return res;
         }
 
-        private static StaticCharacter RenderStaticCharacter(StaticCharacterShorthandViewModel data)
+        private StaticCharacter RenderStaticCharacter(StaticCharacterShorthandViewModel data)
         {
             if (data.StaticCharacterId == 0)
             {

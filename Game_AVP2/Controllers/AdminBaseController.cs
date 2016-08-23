@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Game_AVP2.Controllers
 {
-    public abstract class AdminBaseController : Controller
+    public abstract class AdminBaseController : BaseController
     {
         public string GetRequestString(int index)
         {

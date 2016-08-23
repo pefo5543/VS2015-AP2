@@ -1,0 +1,62 @@
+﻿@*@using Game_AVP2.ModelViews
+    @model List<StaticCharacterViewModel>*@
+
+@*<table class="col-md-12 table table-bordered table-striped myTable table-hover">
+        <thead class="">
+            <tr class="label-primary">
+                <th ng-click="sortList('Name')" class="col-md-2"><span class="text-white">Name </span><div ng-class="getListSortClass('Name')"></div></th>
+                <th ng-click="sortList('Strength')" class="col-md-1"><span class="text-white">Strength </span><div ng-class="getListSortClass('Strength')"></div></th>
+                <th ng-click="sortList('Health')" class="col-md-1"><span class="text-white">Health </span><div ng-class="getListSortClass('Health')"></div></th>
+                <th ng-click="sortList('Dexterity')" class="col-md-2"><span class="text-white">Dexterity </span><div ng-class="getListSortClass('Dexterity')"></div></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="s in characters | limitTo : 20:0 | orderBy : sortListColumn : reverseListSort" class="" ng-click="changeDetail(s)">
+                <td class="col-md-2">{{s.Name}}</td>
+                <td class="col-md-1">{{s.Strength}}</td>
+                <td class="col-md-1">{{s.Health}}</td>
+                <td class="col-md-2">{{s.Dexterity}}</td>
+            </tr>
+        </tbody>
+    </table>*@
+<div class="col-md-12">
+    <div class="col-md-6" ng-repeat="c in characters" ng-click="changeDetail(c)">
+        <div class="well well-lg wellOverflow hoverElem">
+            <h4 class="text-capitalize">{{c.Name}} </h4>
+            <div class="details-list">
+                @*<span class=""><img class="img-responsive" ng-src="/{{c.EquippedWeaponLink}}" /></span>
+                <span class=""><img class="img-responsive img-circle" ng-src="/{{c.ImageLink}}" /></span>
+<img class="img-responsive" ng-src="/{{c.EquippedArmourLink}}" />*@
+            </div>
+            <ul class="list-group transparent-ul">
+                @*<li class="list-group-item col-md-12">
+                    Equipment
+                    <span class="pull-left"><img class="img-responsive center-block" ng-src="/{{c.EquippedWeaponLink}}" /></span>
+                    <span class="pull-right"><img class="img-responsive center-block" ng-src="/{{c.EquippedArmourLink}}" /></span>
+                </li>*@
+                <li class="list-group-item">
+                    <span class=""><img class="img-responsive float-left pull-left" title="{{c.EquippedWeaponName}}" ng-src="/{{c.EquippedWeaponLink}}" />
+                    <img class="img-responsive img-circle float-left" ng-src="/{{c.ImageLink}}" />
+                    <img class="img-responsive float-left pull-right" ng-src="/{{c.EquippedArmourLink}}" /></span>
+                </li>
+                <li class="list-group-item">
+                    Description:
+                    <span class="pull-xs-right">{{c.Description}}</span>
+                </li>
+                <li class="list-group-item col-md-12">
+                    Strength:
+                    <span class="tag tag-pill tag-default pull-right">{{c.Strength}}</span>                   
+                </li>
+                <li class="list-group-item col-md-12">
+                    Health:
+                    <span class="tag tag-default tag-pill pull-xs-right">{{c.Health}}</span>
+                </li>
+                <li class="list-group-item col-md-12">
+                    Dexterity:
+                    <span class="tag tag-default tag-pill pull-xs-right">{{c.Dexterity}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div><!--/col-12-->

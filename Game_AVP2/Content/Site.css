@@ -108,3 +108,15 @@ select.ng-invalid option {
 .tab-content {
     margin-top: 25px;
 }
+/**  Character create/*/
+.transparent-ul li {
+    background-color: transparent;
+    display:inline-block;
+}
+.hoverElem:hover {
+    background-color: #cde8eb;
+    cursor:pointer;
+}
+.float-left {
+    float:left;
+}

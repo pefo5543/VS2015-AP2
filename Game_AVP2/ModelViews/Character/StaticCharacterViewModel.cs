@@ -14,6 +14,8 @@ namespace Game_AVP2.ModelViews
         public string ImageLink { get; set; }
         public string EquippedWeaponName { get; set; }
         public string EquippedArmourName { get; set; }
+        public string EquippedWeaponLink { get; set; }
+        public string EquippedArmourLink { get; set; }
 
         public StaticCharacterViewModel()
         {
@@ -33,8 +35,10 @@ namespace Game_AVP2.ModelViews
             StrengthModifier = s.Attribute.StrengthModifier;
             EquippedArmourName = s.ArmourEquipped.Name;
             EquippedArmourId = s.ArmourEquipped.ArmourId;
+            EquippedArmourLink = s.ArmourEquipped.ArmourImage.ImageLink;
             EquippedWeaponName = s.WeaponEquipped.Name;
             EquippedWeaponId = s.WeaponEquipped.WeaponId;
+            EquippedWeaponLink = s.WeaponEquipped.WeaponImage.ImageLink;
             AbilityID = s.AbilityID;
         }
     }

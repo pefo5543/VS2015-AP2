@@ -13,6 +13,11 @@ namespace Game_AVP2.Controllers
 {
     public class AdminWeaponsController : AdminController
     {
+        public WeaponModel model { get; set; }
+        public AdminWeaponsController()
+        {
+            model = new WeaponModel();
+        }
         // GET: AdminWeapons
         public new ActionResult Index()
         {
@@ -29,20 +34,20 @@ namespace Game_AVP2.Controllers
         [HttpPost]
         public ActionResult AddWeapon([Bind(Exclude = "WeaponId")]WeaponViewModel data)
         {
-            bool result = WeaponModel.AddWeapon(data, DbCurrent);
+            bool result = model.AddWeapon(data, DbCurrent);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //Gets here from json post from angular
         public JsonResult DeleteWeapon(int WeaponId)
         {
-            WeaponModel.DeleteWeapon(WeaponId, DbCurrent);
+            model.DeleteWeapon(WeaponId, DbCurrent);
 
             return Json(true, JsonRequestBehavior.DenyGet);
         }
 
         public JsonResult EditWeapon([Bind] Weapon data)
         {
-            bool result = WeaponModel.EditWeapon(data, DbCurrent);
+            bool result = model.EditWeapon(data, DbCurrent);
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }
@@ -68,7 +73,7 @@ namespace Game_AVP2.Controllers
             {
                 //...
             }
-            List<WeaponViewModel> list = WeaponModel.RenderWeaponSimpleList(weapons);
+            List<WeaponViewModel> list = model.RenderWeaponSimpleList(weapons);
 
             return Json(list, JsonRequestBehavior.AllowGet);
 
@@ -85,7 +90,7 @@ namespace Game_AVP2.Controllers
         [HttpPost]
         public JsonResult GetWeaponImage(int WeaponId)
         {
-            string link = WeaponModel.GetWeaponImage(WeaponId, DbCurrent);
+            string link = model.GetWeaponImage(WeaponId, DbCurrent);
             return Json(link, JsonRequestBehavior.AllowGet);
         }
 

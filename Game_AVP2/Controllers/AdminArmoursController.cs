@@ -13,6 +13,11 @@ namespace Game_AVP2.Controllers
 {
     public class AdminArmoursController : AdminController
     {
+        public ArmourModel model { get; set; }
+        public AdminArmoursController()
+        {
+            model = new ArmourModel();
+        }
         // GET: AdminArmours
         public new ActionResult Index()
         {
@@ -30,20 +35,20 @@ namespace Game_AVP2.Controllers
         [HttpPost]
         public ActionResult AddArmour([Bind(Exclude = "ArmourId")]ArmourViewModel data)
         {
-            bool result = ArmourModel.AddArmour(data, DbCurrent);
+            bool result = model.AddArmour(data, DbCurrent);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //Gets here from json post from angular
         public JsonResult DeleteArmour(int ArmourId)
         {
-            ArmourModel.DeleteArmour(ArmourId, DbCurrent);
+            model.DeleteArmour(ArmourId, DbCurrent);
 
             return Json(true, JsonRequestBehavior.DenyGet);
         }
 
         public JsonResult EditArmour([Bind] Armour data)
         {
-            bool result = ArmourModel.EditArmour(data, DbCurrent);
+            bool result = model.EditArmour(data, DbCurrent);
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }
@@ -69,14 +74,14 @@ namespace Game_AVP2.Controllers
             {
                 //...
             }
-            List<ArmourViewModel> list = ArmourModel.RenderArmourSimpleList(armours);
+            List<ArmourViewModel> list = model.RenderArmourSimpleList(armours);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult GetArmourImage(int ArmourId)
         {
-            string link = ArmourModel.GetArmourImage(ArmourId, DbCurrent);
+            string link = model.GetArmourImage(ArmourId, DbCurrent);
             return Json(link, JsonRequestBehavior.AllowGet);
         }
 

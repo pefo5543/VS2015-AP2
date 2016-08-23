@@ -75,6 +75,7 @@ var AdminCharacterModel = angular
             $scope.characters = p;
             if (init === true) {
                 $scope.detail = {};
+                $scope.detail.ImageLink = {};
                 $scope.detailBtnHide = true;
             } else if (id > 0) {
                 //set detail to character with id
@@ -162,9 +163,9 @@ var AdminCharacterModel = angular
             console.log($scope.status);
         })
     }
-    $scope.deleteCharacter = function () {
+    $scope.delete = function () {
         var id = {
-            "StaticCharacterId": $scope.detail.StaticCharacterId
+            "Id": $scope.detail.StaticCharacterId
         };
         DeleteCharacterService.deleteCharacter(id)
         .success(function (p) {
@@ -268,9 +269,6 @@ AdminCharacterModel.factory('DeleteCharacterService', ['$http', '$location', fun
     url = $location.absUrl();
     DeleteCharacterService.deleteCharacter = function (id) {
         return $http.post(url + '/AdminStaticCharacters/DeleteStaticCharacter', id);
-    }
-    DeleteCharacterService.deleteCharacter = function (id) {
-        return $http.post(url + '/AdminStaticCharacters/DeleteCharacter', id);
     }
     return DeleteCharacterService;
 }])
