@@ -1,0 +1,46 @@
+﻿
+<div>
+    <div class="well well-lg wellOverflow">
+        <fieldset>
+            <legend class="text-center">Character info</legend>
+            <div class="col-md-12">
+                <img class="center-block" ng-src="/{{detail.ImageLink}}" />
+            </div>
+            <div class="col-md-6 nopadding">
+                <dl class="dl-horizontal">
+                    <dt>Name:</dt>
+                    <dd>{{detail.Name}}</dd>
+                    <dt>Description:</dt>
+                    <dd>{{detail.Description}}</dd>
+                    <dt>Ability:</dt>
+                    <dd>Not implemented</dd>
+                    <dt>Armour:</dt>
+                    <dd>{{detail.EquippedArmourName}}</dd>
+                    <dt>Weapon:</dt>
+                    <dd>{{detail.EquippedWeaponName}}</dd>
+                </dl>
+            </div>
+            @Html.Partial("_CharacterAttributesInfo")
+
+
+            <div id="accordion" class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseBackground">Background</a>
+                        </h4>
+                    </div>
+                    <div id="collapseBackground" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>{{detail.Background}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div ng-hide="detailBtnHide" class="change-buttons col-md-12">
+            <button ng-click="selectCharacter(detail.StaticCharacterId)" type="button" name="select" class="btn btn-success btn-block" ng-disabled="detail.Name==null">Select</button>
+        </div>
+    </div>
+</div>
+

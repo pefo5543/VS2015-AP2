@@ -219,7 +219,7 @@
     <Compile Include="Controllers\AdminStaticCharactersController.cs" />
     <Compile Include="Controllers\AdminWeaponsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
     <Compile Include="Migrations\201608221941116_init.cs" />
@@ -230,6 +230,22 @@
     <Compile Include="Migrations\201608221949124_Character.Designer.cs">
       <DependentUpon>201608221949124_Character.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608240828525_backgroundcolumn.cs" />
+    <Compile Include="Migrations\201608240828525_backgroundcolumn.Designer.cs">
+      <DependentUpon>201608240828525_backgroundcolumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608240956370_characteritems.cs" />
+    <Compile Include="Migrations\201608240956370_characteritems.Designer.cs">
+      <DependentUpon>201608240956370_characteritems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608241059195_characteritems2.cs" />
+    <Compile Include="Migrations\201608241059195_characteritems2.Designer.cs">
+      <DependentUpon>201608241059195_characteritems2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608241218530_charateritemsequipped.cs" />
+    <Compile Include="Migrations\201608241218530_charateritemsequipped.Designer.cs">
+      <DependentUpon>201608241218530_charateritemsequipped.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\Attribute.cs" />
@@ -238,6 +254,8 @@
     <Compile Include="Models\Avp2\Items\ArmourModel.cs" />
     <Compile Include="Models\Avp2\BaseModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\ArmourImage.cs" />
+    <Compile Include="Models\Avp2\Items\Tables\CharacterArmour.cs" />
+    <Compile Include="Models\Avp2\Items\Tables\CharacterItem.cs" />
     <Compile Include="Models\Avp2\Items\Tables\WeaponImage.cs" />
     <Compile Include="Models\Avp2\Items\WeaponModel.cs" />
     <Compile Include="ModelViews\Armour\ArmourViewModel.cs" />
@@ -253,11 +271,12 @@
     <Compile Include="Models\Avp2\CharacterModels\Tables\Character.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\StaticCharacter.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Armour.cs" />
-    <Compile Include="Models\Avp2\Items\Tables\CharacterItem.cs" />
+    <Compile Include="Models\Avp2\Items\Tables\CharacterWeapon.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Item.cs" />
     <Compile Include="ModelViews\AttributeViewModel.cs" />
     <Compile Include="ModelViews\BaseViewModel.cs" />
     <Compile Include="ModelViews\Character\CharacterBaseViewModel.cs" />
+    <Compile Include="ModelViews\Character\CreateCharacterViewModel.cs" />
     <Compile Include="ModelViews\ItemViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Misc.cs" />
     <Compile Include="ModelViews\MiscViewModel.cs" />
@@ -1162,10 +1181,10 @@
     <Content Include="Views\Shared\FileUpload.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_AddAttributes.cshtml" />
     <Content Include="Views\AdminStaticCharacters\_EditAttributes.cshtml" />
-    <Content Include="Views\Character\Index.cshtml" />
-    <Content Include="Views\Character\Create.cshtml" />
-    <Content Include="Views\Character\_CharacterDetail.cshtml" />
-    <Content Include="Views\Character\_CharactersList.cshtml" />
+    <Content Include="Views\Characters\Index.cshtml" />
+    <Content Include="Views\Characters\Create.cshtml" />
+    <Content Include="Views\Characters\_CharacterDetail.cshtml" />
+    <Content Include="Views\Characters\_CharactersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1192,6 +1211,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608221949124_Character.resx">
       <DependentUpon>201608221949124_Character.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608240828525_backgroundcolumn.resx">
+      <DependentUpon>201608240828525_backgroundcolumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608240956370_characteritems.resx">
+      <DependentUpon>201608240956370_characteritems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608241059195_characteritems2.resx">
+      <DependentUpon>201608241059195_characteritems2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608241218530_charateritemsequipped.resx">
+      <DependentUpon>201608241218530_charateritemsequipped.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

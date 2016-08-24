@@ -7,10 +7,6 @@ namespace Game_AVP2.ModelViews
 {
     public class AttributeViewModel
     {
-        public int StaticCharacterId { get; set; }
-
-        public int CharacterId { get; set; }
-
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Dexterity { get; set; }

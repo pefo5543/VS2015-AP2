@@ -1,5 +1,6 @@
 ﻿using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using Game_AVP2.Models.Avp2.Items;
+using Game_AVP2.Models.Avp2.Items.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,8 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public Character()
         {
             this.Abilities = new HashSet<Ability>();
-            this.CharacterItems = new HashSet<CharacterItem>();
+            this.CharacterWeapons = new HashSet<CharacterWeapon>();
+            this.CharacterArmours = new HashSet<CharacterArmour>();
         }
 
         //public int ImageId { get; set; }
@@ -31,6 +33,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public int Experience { get; set; }
         [Required]
         public int Credits { get; set; }
+        public string Background { get; set; }
         //Relation to StaticCharacter
         [Required]
         public int StaticCharacterId { get; set; }
@@ -43,8 +46,9 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public virtual Tables.CharacterAttribute CharacterAttribute { get; set; }
-        //[ForeignKey("ImageId")]
-        public virtual ICollection<CharacterItem> CharacterItems { get; set; }
+
+        public virtual ICollection<CharacterWeapon> CharacterWeapons { get; set; }
+        public virtual ICollection<CharacterArmour> CharacterArmours { get; set; }
         public virtual ICollection<Ability> Abilities { get; set; }
     }
 

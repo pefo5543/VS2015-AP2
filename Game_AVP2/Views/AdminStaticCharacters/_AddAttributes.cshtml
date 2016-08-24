@@ -5,7 +5,7 @@
                 <li class="details-li">
                     <label class="" for="Strength">Strength</label>
                     <fieldset>
-                        <select name="Strength" class="form-control" data-ng-model="add.Strength" required>
+                        <select name="Strength" class="form-control" data-ng-model="add.Attribute.Strength" required>
                             <option ng-repeat="r in enums.AttributeEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>
@@ -14,7 +14,7 @@
                 <li class="details-li">
                     <label for="Health">Health</label>
                     <fieldset>
-                        <select name="Health" class="form-control" data-ng-model="add.Health" required>
+                        <select name="Health" class="form-control" data-ng-model="add.Attribute.Health" required>
                             <option ng-repeat="r in enums.HealthEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>
@@ -23,7 +23,7 @@
                 <li class="details-li">
                     <label for="Dexterity">Dexterity</label>
                     <fieldset>
-                        <select name="Dexterity" class="form-control" data-ng-model="add.Dexterity" required>
+                        <select name="Dexterity" class="form-control" data-ng-model="add.Attribute.Dexterity" required>
                             <option ng-repeat="r in enums.AttributeEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>
@@ -32,7 +32,7 @@
                 <li class="details-li">
                     <label for="Luck">Luck</label>
                     <fieldset>
-                        <select name="Luck" class="form-control" data-ng-model="add.LuckModifier" required>
+                        <select name="Luck" class="form-control" data-ng-model="add.Attribute.LuckModifier" required>
                             <option ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>
@@ -41,7 +41,7 @@
                 <li class="details-li">
                     <label for="StrengthMod">Strength Modifier</label>
                     <fieldset>
-                        <select name="StrengthMod" class="form-control" data-ng-model="add.StrengthModifer" required>
+                        <select name="StrengthMod" class="form-control" data-ng-model="add.Attribute.StrengthModifer" required>
                             <option ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>
@@ -50,7 +50,7 @@
                 <li class="details-li">
                     <label for="DefenceMod">Defence Modifier</label>
                     <fieldset>
-                        <select name="DefenceMod" class="form-control" data-ng-model="add.DefenceModifier" required>
+                        <select name="DefenceMod" class="form-control" data-ng-model="add.Attribute.DefenceModifier" required>
                             <option ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>

@@ -17,8 +17,8 @@ namespace Game_AVP2.ModelViews
         public string EquippedWeaponLink { get; set; }
         public string EquippedArmourLink { get; set; }
 
-        public StaticCharacterViewModel()
-        {
+        public StaticCharacterViewModel() :base()
+        { 
         }
         public StaticCharacterViewModel (StaticCharacter s)
         {
@@ -27,12 +27,13 @@ namespace Game_AVP2.ModelViews
             ImageId = s.CharacterImage.CharacterImageId;
             Name = s.Name;
             Description = s.Description;
-            Strength = s.Attribute.Strength;
-            Dexterity = s.Attribute.Dexterity;
-            Health = s.Attribute.Health;
-            LuckModifier = s.Attribute.LuckModifier;
-            DefenceModifier = s.Attribute.DefenceModifier;
-            StrengthModifier = s.Attribute.StrengthModifier;
+            Background = s.Background;
+            Attribute.Strength = s.Attribute.Strength;
+            Attribute.Dexterity = s.Attribute.Dexterity;
+            Attribute.Health = s.Attribute.Health;
+            Attribute.LuckModifier = s.Attribute.LuckModifier;
+            Attribute.DefenceModifier = s.Attribute.DefenceModifier;
+            Attribute.StrengthModifier = s.Attribute.StrengthModifier;
             EquippedArmourName = s.ArmourEquipped.Name;
             EquippedArmourId = s.ArmourEquipped.ArmourId;
             EquippedArmourLink = s.ArmourEquipped.ArmourImage.ImageLink;

@@ -38,11 +38,11 @@ namespace Game_AVP2.Models.Avp2.Items
 
         public Weapon()
         {
-            this.CharacterWeapons = new HashSet<CharacterItem>();
+            this.CharacterWeapons = new HashSet<CharacterWeapon>();
             this.StaticCharacters = new HashSet<StaticCharacter>();
         }
 
-        public virtual ICollection<CharacterItem> CharacterWeapons { get; set; }
+        public virtual ICollection<CharacterWeapon> CharacterWeapons { get; set; }
 
         [ForeignKey("ImageId")]
         //[JsonIgnore]

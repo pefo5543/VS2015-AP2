@@ -6,20 +6,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace Game_AVP2.Models.Avp2.Items.Tables
+namespace Game_AVP2.Models.Avp2.Items
 {
-    public class CharacterItem
+    public class CharacterWeapon
     {
         [Key]
-        public int CharacterItemId { get; set; }
+        public int CharacterWeaponId { get; set; }
 
         public int CharacterId { get; set; }
-        public int MiscId { get; set; }
+        public int WeaponId { get; set; }
+
+        [Required]
+        public bool Equipped { get; set; }
 
         [ForeignKey("CharacterId")]
         public virtual Character Character { get; set; }
 
-        [ForeignKey("MiscId")]
-        public virtual Misc Misc { get; set; }
+        [ForeignKey("WeaponId")]
+        public virtual Weapon Weapon { get; set; }
+
+
     }
 }

@@ -50,6 +50,11 @@
                                     </fieldset>
                                     <span class="text-danger" ng-show="editForm.ImageId.$invalid">Select image.</span>
                                 </li>
+                                <li class="details-li">
+                                    <label for="Background">Background</label>
+                                    <input name="Background" class="form-control" data-ng-model="detail.Background" type="text" ng-maxlength="250" />
+                                    <span class="text-danger" ng-show="editForm.Background.$error.maxlength">The background can be max 250 characters.</span>
+                                </li>
                             </ul>
                         </div>
                     </fieldset>

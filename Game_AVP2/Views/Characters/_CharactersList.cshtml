@@ -21,7 +21,7 @@
         </tbody>
     </table>*@
 <div class="col-md-12">
-    <div class="col-md-6" ng-repeat="c in characters" ng-click="changeDetail(c)">
+    <div class="col-md-6 characterbox" ng-repeat="c in characters" ng-click="changeDetail(c)">
         <div class="well well-lg wellOverflow hoverElem">
             <h4 class="text-capitalize">{{c.Name}} </h4>
             <div class="details-list">
@@ -46,15 +46,15 @@
                 </li>
                 <li class="list-group-item col-md-12">
                     Strength:
-                    <span class="tag tag-pill tag-default pull-right">{{c.Strength}}</span>                   
+                    <span class="label label-danger pull-right">{{c.Strength}}</span>                   
                 </li>
                 <li class="list-group-item col-md-12">
                     Health:
-                    <span class="tag tag-default tag-pill pull-xs-right">{{c.Health}}</span>
+                    <span class="label label-info pull-right">{{c.Health}}</span>
                 </li>
                 <li class="list-group-item col-md-12">
                     Dexterity:
-                    <span class="tag tag-default tag-pill pull-xs-right">{{c.Dexterity}}</span>
+                    <span class="label label-success pull-right">{{c.Dexterity}}</span>
                 </li>
             </ul>
         </div>

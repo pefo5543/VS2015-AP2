@@ -28,6 +28,8 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         [StringLength(150, ErrorMessage = "Choose a shorter description")]
         public string Description { get; set; }
 
+        public string Background { get; set; }
+
         public int EquippedWeaponId { get; set; }
 
         public int EquippedArmourId { get; set; }

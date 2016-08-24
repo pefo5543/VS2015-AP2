@@ -2,6 +2,7 @@
 using Game_AVP2.Models.Avp2.CharacterModels;
 using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using Game_AVP2.Models.Avp2.Items;
+using Game_AVP2.Models.Avp2.Items.Tables;
 using Game_AVP2.ModelViews;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,102 @@ namespace Game_AVP2.Models.Avp2
             }
 
             return noPropertyChanged;
+        }
+
+        internal bool CreateUserCharacter(int staticCharacterId, string userId, ApplicationDbContext dbCurrent)
+        {
+            bool result = true;
+            StaticCharacter c = dbCurrent.StaticCharacters.Find(staticCharacterId);
+            Character s = new Character();
+            CharacterModels.Tables.Attribute a = c.Attribute;
+            Weapon w = c.WeaponEquipped;
+            Armour armour = c.ArmourEquipped;
+            s.Name = c.Name;
+            s.Background = c.Background;
+            s.StaticCharacterId = c.StaticCharacterId;
+            s.UserId = userId;
+            s.CharacterId = -1;
+
+            try
+            {
+                s = dbCurrent.Characters.Add(s);
+            }
+            catch (Exception e)
+            {
+                result = false;
+                Console.WriteLine(e.Message);
+            }
+            try
+            {
+                dbCurrent.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            try
+            {
+                AddCharacterArmour(s.CharacterId, armour, dbCurrent);
+                AddCharacterWeapon(s.CharacterId, w, dbCurrent);
+                AddCharacterAttributes(s.CharacterId, a, dbCurrent);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+
+            try {
+                dbCurrent.SaveChanges();
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+                    }
+            return result;
+        }
+
+        private void AddCharacterAttributes(int characterId, CharacterModels.Tables.Attribute a, ApplicationDbContext dbCurrent)
+        {
+            CharacterAttribute ca = new CharacterAttribute();
+            
+            ca.AttributeId = a.StaticCharacterId;
+            ca.CharacterId = characterId;
+            ca.DefenceModifier = a.DefenceModifier;
+            ca.Dexterity = a.Dexterity;
+            ca.Health = a.Health;
+            ca.LuckModifier = a.LuckModifier;
+            ca.Strength = a.Strength;
+            ca.StrengthModifier = a.StrengthModifier;
+
+            try
+            {
+                dbCurrent.CharacterAttributes.Add(ca);
+                }
+            catch { }
+        }
+
+        private void AddCharacterWeapon(int characterId, Weapon w, ApplicationDbContext dbCurrent)
+        {
+            CharacterWeapon cw = new CharacterWeapon();
+            cw.CharacterId = characterId;
+            cw.WeaponId = w.WeaponId;
+            cw.Equipped = true;
+            try
+            {
+                dbCurrent.CharacterWeapons.Add(cw);
+            }
+            catch { }
+        }
+
+        private void AddCharacterArmour(int characterId, Armour armour, ApplicationDbContext dbCurrent)
+        {
+            CharacterArmour ca = new CharacterArmour();
+            ca.CharacterId = characterId;
+            ca.ArmourId = armour.ArmourId;
+            ca.Equipped = true;
+            try
+            {
+                dbCurrent.CharacterArmours.Add(ca);
+            }
+            catch { }
         }
 
         internal IEnumerable<SelectListItem> GetArmourSelectList(ApplicationDbContext dbCurrent)
@@ -151,12 +248,12 @@ namespace Game_AVP2.Models.Avp2
         {
             CharacterModels.Tables.Attribute a = new CharacterModels.Tables.Attribute();
             //Set properties auto
-            a.Dexterity = data.Dexterity;
-            a.Strength = data.Strength;
-            a.Health = data.Health;
-            a.LuckModifier = data.LuckModifier;
-            a.StrengthModifier = data.StrengthModifier;
-            a.DefenceModifier = data.DefenceModifier;
+            a.Dexterity = data.Attribute.Dexterity;
+            a.Strength = data.Attribute.Strength;
+            a.Health = data.Attribute.Health;
+            a.LuckModifier = data.Attribute.LuckModifier;
+            a.StrengthModifier = data.Attribute.StrengthModifier;
+            a.DefenceModifier = data.Attribute.DefenceModifier;
             a.StaticCharacterId = id;
             return a;
         }

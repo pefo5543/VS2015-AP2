@@ -2,9 +2,9 @@
 
 
 
-var AdminCharacterModel = angular
+var CharacterModel = angular
     .module("CharacterModel", ['angular-growl'])
-.controller("CharacterController", function ($scope, growl) {
+.controller("CharacterController", function ($scope, $location, growl, CharacterService) {
     $scope.detail = {};
     //$scope.enums = Enums;
     //$scope.detailShow = true;
@@ -13,8 +13,36 @@ var AdminCharacterModel = angular
         $scope.characters = model;
         $scope.detailBtnHide = true;
     }
-    $scope.changeDetail = function (detailObj) {
-        changeDetailFunc(detailObj)
+    $scope.selectCharacter = function (detailId) {
+        CharacterService.postCharacter(detailId)
+        .success(function (p) {
+            if (p) {
+                url = $location.absUrl();
+                $window.location.href = url;
+            }
+            else {
+                $scope.detailShow = false;
+                $scope.showWarning("Something went wrong, please try again");
+            }
+        })
+        .error(function (error) {
+            $scope.status = 'Something went wrong' + error.message;
+            console.log($scope.status);
+        })
+    }
+    $scope.changeDetail = function (detail) {
+        //CharacterService.getCharacter(detail)
+        //.success(function (detail) {
+        //    changeDetailFunc(detail)
+        //    $scope.detailShow = true;
+        //    $scope.detailBtnHide = false;
+        //})
+        //.error(function (error) {
+        //    $scope.status = 'Something went wrong' + error.message;
+        //    console.log($scope.status);
+        //})
+
+        changeDetailFunc(detail)
         $scope.detailShow = true;
         $scope.detailBtnHide = false;
     }
@@ -41,19 +69,20 @@ var AdminCharacterModel = angular
     }
 });
 
-//AdminCharacterModel.factory('CharacterService', ['$http', '$location', function ($http, $location) {
-//    var CharacterService = {};
-//    url = $location.absUrl();
+CharacterModel.factory('CharacterService', ['$http', '$location', function ($http, $location) {
+    var CharacterService = {};
+    url = $location.absUrl();
 
-//    CharacterService.getCharacters = function () {
-
-//        return $http.get(url + '/AdminStaticCharacters/GetStaticCharacters');
-//    }
-//    CharacterService.getCharacter = function (id) {
-//        return $http.get(url + '/AdminStaticCharacters/GetDetail', id);
-//    }
-//    return CharacterService;
-//}])
+    CharacterService.postCharacter = function (staticId) {
+        var data = { 'StaticCharacterId': staticId };
+        return $http.post('SetCharacter', data);
+    }
+    //CharacterService.getCharacter = function (StaticCharacterId) {
+    //    var data = { 'StaticCharacterId': StaticCharacterId };
+    //    return $http.post('GetCharacter', data);
+    //}
+    return CharacterService;
+}])
 
 //factory post edit Character
 //AdminCharacterModel.factory('EditCharacterService', ['$http', '$location', function ($http, $location) {
@@ -84,7 +113,7 @@ var AdminCharacterModel = angular
 //               }
 
 //               return entityService;
-           //}]);
+//}]);
 
 //factory post delete item
 //AdminCharacterModel.factory('DeleteCharacterService', ['$http', '$location', function ($http, $location) {

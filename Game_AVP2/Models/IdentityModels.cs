@@ -39,6 +39,8 @@ namespace Game_AVP2.Models
         public DbSet<Armour> Armours { get; set; }
         public DbSet<Misc> Misc { get; set; }
         //public DbSet<Item> Items { get; set; }
+        public DbSet<CharacterWeapon> CharacterWeapons { get; set; }
+        public DbSet<CharacterArmour> CharacterArmours { get; set; }
         public DbSet<CharacterItem> CharacterItems { get; set; }
         public DbSet<WeaponImage> WeaponImages { get; set; }
         public DbSet<ArmourImage> ArmourImages { get; set; }
@@ -62,6 +64,9 @@ namespace Game_AVP2.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // Change the name of the table to be Users instead of AspNetUsers
+            //modelBuilder.Entity<IdentityUser>()
+            //    .ToTable("Users");
             //behövs
             modelBuilder.Entity<Attribute>()
     .HasRequired(m => m.StaticCharacter)
@@ -71,6 +76,10 @@ namespace Game_AVP2.Models
     .HasRequired(m => m.Character)
     .WithOptional(m => m.CharacterAttribute)
     .WillCascadeOnDelete(true);
+    // modelBuilder.Entity<Character>()
+    //.HasMany(f => f.CharacterArmours)
+    //.WithOptional()
+    //.WillCascadeOnDelete(false);
             //    modelBuilder.Entity<StaticCharacter>()
             //.HasOptional(a => a.Attribute)
             //.WithOptionalDependent(ad => ad.StaticCharacter)

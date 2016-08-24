@@ -36,9 +36,11 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Alvprinsessan 2</p>
-        </footer>
+        <div class="row col-md-12">
+            <footer>
+                <p class="text-center navbar-fixed-bottom">&copy; @DateTime.Now.Year - Alvprinsessan 2</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

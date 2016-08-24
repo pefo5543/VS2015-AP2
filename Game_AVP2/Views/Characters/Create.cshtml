@@ -9,10 +9,10 @@
 
 <div class="row col-md-12" ng-app="CharacterModel">
     <div ng-controller="CharacterController" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
-        <div class="col-md-7">
+        <div class="col-md-6">
             @Html.Partial("_CharactersList")
         </div>
-        <div class="col-md-5" ng-show="detailShow">
+        <div class="col-md-6" ng-show="detailShow">
     @Html.Partial("_CharacterDetail")
 </div>
 
