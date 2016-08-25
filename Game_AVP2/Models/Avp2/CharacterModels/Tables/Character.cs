@@ -12,8 +12,9 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
 {
     public class Character
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int CharacterId { get; set; }
+        public Int32 CharacterId { get; set; }
 
         //[Required]
         //public int CharacterAttributeId { get; set;}
@@ -33,19 +34,23 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public int Experience { get; set; }
         [Required]
         public int Credits { get; set; }
+        public string Description { get; set; }
         public string Background { get; set; }
         //Relation to StaticCharacter
         [Required]
         public int StaticCharacterId { get; set; }
         [ForeignKey("StaticCharacterId")]
+        [Column(Order = 2)]
         public virtual StaticCharacter StaticCharacter { get; set; }
         //Relation to AspNetUsers   
         [Required] 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
+        [Column(Order = 1)]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public virtual Tables.CharacterAttribute CharacterAttribute { get; set; }
+        public virtual GameModels.Tables.Game Game { get; set; }
 
         public virtual ICollection<CharacterWeapon> CharacterWeapons { get; set; }
         public virtual ICollection<CharacterArmour> CharacterArmours { get; set; }
@@ -90,6 +95,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
 
         public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<StaticCharacter> StaticCharacters { get; set; }
+        public virtual ICollection<Monster> Monsters { get; set; }
 
     }
 

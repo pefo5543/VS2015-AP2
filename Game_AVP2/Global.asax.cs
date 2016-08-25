@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,11 @@ namespace Game_AVP2
             //};
 
 
+        }
+        protected void Session_Start(Object sender, EventArgs e)
+        {
+            //string userId = User.Identity.GetUserId();
+            //HttpContext.Current.Session.Add("_UserId", userId);
         }
 
     }

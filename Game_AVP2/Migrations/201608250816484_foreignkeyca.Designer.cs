@@ -7,13 +7,13 @@ namespace Game_AVP2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class characteritems2 : IMigrationMetadata
+    public sealed partial class foreignkeyca : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(characteritems2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(foreignkeyca));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608241059195_characteritems2"; }
+            get { return "201608250816484_foreignkeyca"; }
         }
         
         string IMigrationMetadata.Source

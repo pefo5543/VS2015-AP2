@@ -1,4 +1,5 @@
 ﻿using Game_AVP2.Models.Avp2.CharacterModels;
+using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -40,13 +41,14 @@ namespace Game_AVP2.Models.Avp2.Items
         {
             this.CharacterWeapons = new HashSet<CharacterWeapon>();
             this.StaticCharacters = new HashSet<StaticCharacter>();
+            this.Monsters = new HashSet<Monster>();
         }
 
         public virtual ICollection<CharacterWeapon> CharacterWeapons { get; set; }
 
         [ForeignKey("ImageId")]
-        //[JsonIgnore]
         public virtual WeaponImage WeaponImage { get; set; }
         public virtual ICollection<StaticCharacter> StaticCharacters { get; set; }
+        public virtual ICollection<Monster> Monsters { get; set; }
     }
 }

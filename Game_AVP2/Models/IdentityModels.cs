@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Game_AVP2.Models.Avp2.Items;
 using Game_AVP2.Models.Avp2.Items.Tables;
 using Game_AVP2.Models.Avp2.CharacterModels.Tables;
+using System.ComponentModel.DataAnnotations.Schema;
+using Game_AVP2.Models.Avp2.GameModels.Tables;
 
 namespace Game_AVP2.Models
 {
@@ -46,6 +48,11 @@ namespace Game_AVP2.Models
         public DbSet<ArmourImage> ArmourImages { get; set; }
         public DbSet<CharacterImage> CharacterImages { get; set; }
         public DbSet<CharacterAttribute> CharacterAttributes { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Battle> Battles { get; set; }
+        public DbSet<Monster> Monsters { get; set; }
+        public DbSet<MonsterImage> MonsterImages { get; set; }
+        public DbSet<MonsterAttribute> MonsterAttributes { get; set; }
 
 
         public ApplicationDbContext()
@@ -76,10 +83,29 @@ namespace Game_AVP2.Models
     .HasRequired(m => m.Character)
     .WithOptional(m => m.CharacterAttribute)
     .WillCascadeOnDelete(true);
-    // modelBuilder.Entity<Character>()
-    //.HasMany(f => f.CharacterArmours)
-    //.WithOptional()
-    //.WillCascadeOnDelete(false);
+            modelBuilder.Entity<CharacterAttribute>()
+            .HasRequired(m => m.Attribute)
+            .WithMany(m => m.CharacterAttributes)
+            .WillCascadeOnDelete(false);
+            modelBuilder.Entity<CharacterArmour>()
+    .HasRequired(m => m.Character)
+    .WithMany(c=>c.CharacterArmours)
+    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<CharacterWeapon>()
+    .HasRequired(m => m.Character)
+    .WithMany(c => c.CharacterWeapons)
+    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Battle>()
+    .HasRequired(m => m.Monster)
+    .WithMany(c => c.Battles)
+    .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Character>()
+            //    .Property(c => c.CharacterId)
+            //    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            // modelBuilder.Entity<Character>()
+            //.HasMany(f => f.CharacterArmours)
+            //.WithOptional()
+            //.WillCascadeOnDelete(false);
             //    modelBuilder.Entity<StaticCharacter>()
             //.HasOptional(a => a.Attribute)
             //.WithOptionalDependent(ad => ad.StaticCharacter)

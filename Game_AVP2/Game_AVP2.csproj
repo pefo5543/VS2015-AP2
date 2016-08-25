@@ -220,37 +220,36 @@
     <Compile Include="Controllers\AdminWeaponsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CharactersController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
-    <Compile Include="Migrations\201608221941116_init.cs" />
-    <Compile Include="Migrations\201608221941116_init.Designer.cs">
-      <DependentUpon>201608221941116_init.cs</DependentUpon>
+    <Compile Include="Migrations\201608250806051_init.cs" />
+    <Compile Include="Migrations\201608250806051_init.Designer.cs">
+      <DependentUpon>201608250806051_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608221949124_Character.cs" />
-    <Compile Include="Migrations\201608221949124_Character.Designer.cs">
-      <DependentUpon>201608221949124_Character.cs</DependentUpon>
+    <Compile Include="Migrations\201608250816484_foreignkeyca.cs" />
+    <Compile Include="Migrations\201608250816484_foreignkeyca.Designer.cs">
+      <DependentUpon>201608250816484_foreignkeyca.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608240828525_backgroundcolumn.cs" />
-    <Compile Include="Migrations\201608240828525_backgroundcolumn.Designer.cs">
-      <DependentUpon>201608240828525_backgroundcolumn.cs</DependentUpon>
+    <Compile Include="Migrations\201608251142306_monstermigration.cs" />
+    <Compile Include="Migrations\201608251142306_monstermigration.Designer.cs">
+      <DependentUpon>201608251142306_monstermigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608240956370_characteritems.cs" />
-    <Compile Include="Migrations\201608240956370_characteritems.Designer.cs">
-      <DependentUpon>201608240956370_characteritems.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608241059195_characteritems2.cs" />
-    <Compile Include="Migrations\201608241059195_characteritems2.Designer.cs">
-      <DependentUpon>201608241059195_characteritems2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608241218530_charateritemsequipped.cs" />
-    <Compile Include="Migrations\201608241218530_charateritemsequipped.Designer.cs">
-      <DependentUpon>201608241218530_charateritemsequipped.cs</DependentUpon>
+    <Compile Include="Migrations\201608251211125_gameprops.cs" />
+    <Compile Include="Migrations\201608251211125_gameprops.Designer.cs">
+      <DependentUpon>201608251211125_gameprops.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Avp2\AttributeBase.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\Attribute.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\CharacterAttribute.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\CharacterImage.cs" />
+    <Compile Include="Models\Avp2\CharacterModels\Tables\Monster.cs" />
+    <Compile Include="Models\Avp2\CharacterModels\Tables\MonsterAttribute.cs" />
+    <Compile Include="Models\Avp2\CharacterModels\Tables\MonsterImage.cs" />
+    <Compile Include="Models\Avp2\GameModels\GameModel.cs" />
+    <Compile Include="Models\Avp2\GameModels\Tables\Battle.cs" />
+    <Compile Include="Models\Avp2\GameModels\Tables\Game.cs" />
     <Compile Include="Models\Avp2\Items\ArmourModel.cs" />
     <Compile Include="Models\Avp2\BaseModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\ArmourImage.cs" />
@@ -258,6 +257,7 @@
     <Compile Include="Models\Avp2\Items\Tables\CharacterItem.cs" />
     <Compile Include="Models\Avp2\Items\Tables\WeaponImage.cs" />
     <Compile Include="Models\Avp2\Items\WeaponModel.cs" />
+    <Compile Include="Models\Avp2\TableImageBase.cs" />
     <Compile Include="ModelViews\Armour\ArmourViewModel.cs" />
     <Compile Include="Models\Avp2\Items\ItemModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1130,9 +1130,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Game\About.cshtml" />
+    <Content Include="Views\Game\Contact.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -1206,23 +1206,17 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608221941116_init.resx">
-      <DependentUpon>201608221941116_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608250806051_init.resx">
+      <DependentUpon>201608250806051_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608221949124_Character.resx">
-      <DependentUpon>201608221949124_Character.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608250816484_foreignkeyca.resx">
+      <DependentUpon>201608250816484_foreignkeyca.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608240828525_backgroundcolumn.resx">
-      <DependentUpon>201608240828525_backgroundcolumn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608251142306_monstermigration.resx">
+      <DependentUpon>201608251142306_monstermigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608240956370_characteritems.resx">
-      <DependentUpon>201608240956370_characteritems.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608241059195_characteritems2.resx">
-      <DependentUpon>201608241059195_characteritems2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608241218530_charateritemsequipped.resx">
-      <DependentUpon>201608241218530_charateritemsequipped.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608251211125_gameprops.resx">
+      <DependentUpon>201608251211125_gameprops.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

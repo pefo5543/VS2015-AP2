@@ -1,4 +1,5 @@
 ﻿using Game_AVP2.Models.Avp2.CharacterModels;
+using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using Game_AVP2.Models.Avp2.Items.Tables;
 using System;
 using System.Collections.Generic;
@@ -45,11 +46,13 @@ namespace Game_AVP2.Models.Avp2.Items
         {
             this.CharacterItems = new HashSet<CharacterItem>();
             this.StaticCharacters = new HashSet<StaticCharacter>();
+            this.Monsters = new HashSet<Monster>();
         }
         public virtual ICollection<CharacterItem> CharacterItems { get; set; }
 
         [ForeignKey("ImageId")]
         public virtual ArmourImage ArmourImage { get; set; }
         public virtual ICollection<StaticCharacter> StaticCharacters { get; set; }
+        public virtual ICollection<Monster> Monsters { get; set; }
     }
 }

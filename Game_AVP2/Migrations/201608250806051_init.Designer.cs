@@ -13,7 +13,7 @@ namespace Game_AVP2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201608221941116_init"; }
+            get { return "201608250806051_init"; }
         }
         
         string IMigrationMetadata.Source

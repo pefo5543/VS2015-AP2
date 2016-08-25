@@ -23,12 +23,12 @@ namespace Game_AVP2.Controllers
 
                 if (!isAdminUser())
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Game");
                 }
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Game");
             }
 
             var Roles = context.Roles.ToList();

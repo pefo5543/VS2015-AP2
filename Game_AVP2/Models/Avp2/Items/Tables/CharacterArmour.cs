@@ -18,10 +18,8 @@ namespace Game_AVP2.Models.Avp2.Items.Tables
 
         [Required]
         public bool Equipped { get; set; }
-
         [ForeignKey("CharacterId")]
         public virtual Character Character { get; set; }
-
         [ForeignKey("ArmourId")]
         public virtual Armour Armour { get; set; }
     }

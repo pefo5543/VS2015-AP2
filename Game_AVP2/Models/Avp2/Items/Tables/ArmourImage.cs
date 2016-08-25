@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Game_AVP2.Models.Avp2.Items.Tables
 {
-    public class ArmourImage
+    public class ArmourImage : TableImageBase
     {
         public ArmourImage()
         {
@@ -14,15 +14,7 @@ namespace Game_AVP2.Models.Avp2.Items.Tables
         }
         [Key]
         public int ArmourImageId { get; set; }
-        [Required]
-        public string ImageLink { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string FileName { get; set; }
-        public string ThumbnailLink { get; set; }
 
-        //[Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual ICollection<Armour> Armours { get; set; }
     }
 }

@@ -3908,8 +3908,8 @@ var ngAnimateSwapDirective = ['$animate', '$rootScope', function($animate, $root
       angular.module('anchoringExample', ['ngAnimate', 'ngRoute'])
         .config(['$routeProvider', function($routeProvider) {
           $routeProvider.when('/', {
-            templateUrl: 'home.html',
-            controller: 'HomeController as home'
+            templateUrl: 'game.html',
+            controller: 'GameController as game'
           });
           $routeProvider.when('/profile/:id', {
             templateUrl: 'profile.html',
@@ -3930,7 +3930,7 @@ var ngAnimateSwapDirective = ['$animate', '$rootScope', function($animate, $root
             { id:10, title: "Alexandrea Sauer" }
           ];
         }])
-        .controller('HomeController', [function() {
+        .controller('GameController', [function() {
           //empty
         }])
         .controller('ProfileController', ['$rootScope', '$routeParams', function($rootScope, $routeParams) {
@@ -3941,7 +3941,7 @@ var ngAnimateSwapDirective = ['$animate', '$rootScope', function($animate, $root
           this.id = record.id;
         }]);
     </file>
-    <file name="home.html">
+    <file name="game.html">
       <h2>Welcome to the home page</h1>
       <p>Please click on an element</p>
       <a class="record"

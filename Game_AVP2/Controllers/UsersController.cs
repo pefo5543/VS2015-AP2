@@ -26,7 +26,8 @@ namespace Game_AVP2.Controllers
                 {
                     ViewBag.displayMenu = "Yes";
                 }
-                return View();
+                //return View();
+                return RedirectToAction("Index", "Game", null);
             }
             else
             {

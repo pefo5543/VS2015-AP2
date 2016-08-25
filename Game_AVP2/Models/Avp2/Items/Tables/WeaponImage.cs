@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Game_AVP2.Models.Avp2.Items
 {
-    public class WeaponImage
+    public class WeaponImage : TableImageBase
     {
         public WeaponImage()
         {
@@ -14,13 +14,6 @@ namespace Game_AVP2.Models.Avp2.Items
         }
         [Key]
         public int WeaponImageId { get; set; }
-        [Required]
-        public string ImageLink { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string FileName { get; set; }
-        public string ThumbnailLink { get; set; }
 
         //[Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual ICollection<Weapon> Weapons { get; set; }

@@ -7,13 +7,13 @@ namespace Game_AVP2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class backgroundcolumn : IMigrationMetadata
+    public sealed partial class gameprops : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(backgroundcolumn));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(gameprops));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608240828525_backgroundcolumn"; }
+            get { return "201608251211125_gameprops"; }
         }
         
         string IMigrationMetadata.Source

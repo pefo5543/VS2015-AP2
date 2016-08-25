@@ -74,18 +74,21 @@ namespace Game_AVP2.Models.Avp2
         {
             bool result = true;
             StaticCharacter c = dbCurrent.StaticCharacters.Find(staticCharacterId);
+            ApplicationUser u = dbCurrent.Users.Find(userId);
             Character s = new Character();
             CharacterModels.Tables.Attribute a = c.Attribute;
             Weapon w = c.WeaponEquipped;
             Armour armour = c.ArmourEquipped;
             s.Name = c.Name;
+            s.Description = c.Description;
             s.Background = c.Background;
             s.StaticCharacterId = c.StaticCharacterId;
             s.UserId = userId;
-            s.CharacterId = -1;
 
             try
             {
+                u.Characters.Add(s);
+                c.Characters.Add(s);
                 s = dbCurrent.Characters.Add(s);
             }
             catch (Exception e)

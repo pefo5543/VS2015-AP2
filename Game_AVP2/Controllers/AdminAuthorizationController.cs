@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Game_AVP2.Controllers
 {
-    public abstract class AdminAuthorizationController : Controller
+    public abstract class AdminAuthorizationController : BaseController
     {
         public Boolean isAdminUser()
         {

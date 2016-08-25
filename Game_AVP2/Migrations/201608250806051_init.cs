@@ -21,18 +21,17 @@ namespace Game_AVP2.Migrations
                 "dbo.Characters",
                 c => new
                     {
-                        CharacterId = c.Int(nullable: false),
+                        CharacterId = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 50),
                         Experience = c.Int(nullable: false),
                         Credits = c.Int(nullable: false),
+                        Background = c.String(),
                         StaticCharacterId = c.Int(nullable: false),
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.CharacterId)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .ForeignKey("dbo.StaticCharacters", t => t.StaticCharacterId, cascadeDelete: true)
-                .ForeignKey("dbo.CharacterAttributes", t => t.CharacterId)
-                .Index(t => t.CharacterId)
                 .Index(t => t.StaticCharacterId)
                 .Index(t => t.UserId);
             
@@ -95,58 +94,19 @@ namespace Game_AVP2.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.CharacterAttributes",
+                "dbo.CharacterArmours",
                 c => new
                     {
-                        CharacterAttributeId = c.Int(nullable: false, identity: true),
-                        AttributeId = c.Int(nullable: false),
-                        Health = c.Int(nullable: false),
-                        Strength = c.Int(nullable: false),
-                        Dexterity = c.Int(nullable: false),
-                        LuckModifier = c.Int(nullable: false),
-                        DefenceModifier = c.Int(nullable: false),
-                        StrengthModifier = c.Int(nullable: false),
-                        Attribute_StaticCharacterId = c.Int(),
+                        CharacterArmourId = c.Int(nullable: false, identity: true),
+                        CharacterId = c.Int(nullable: false),
+                        ArmourId = c.Int(nullable: false),
+                        Equipped = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.CharacterAttributeId)
-                .ForeignKey("dbo.Attributes", t => t.Attribute_StaticCharacterId)
-                .Index(t => t.Attribute_StaticCharacterId);
-            
-            CreateTable(
-                "dbo.Attributes",
-                c => new
-                    {
-                        StaticCharacterId = c.Int(nullable: false),
-                        Health = c.Int(nullable: false),
-                        Strength = c.Int(nullable: false),
-                        Dexterity = c.Int(nullable: false),
-                        LuckModifier = c.Int(nullable: false),
-                        DefenceModifier = c.Int(nullable: false),
-                        StrengthModifier = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.StaticCharacterId)
-                .ForeignKey("dbo.StaticCharacters", t => t.StaticCharacterId, cascadeDelete: true)
-                .Index(t => t.StaticCharacterId);
-            
-            CreateTable(
-                "dbo.StaticCharacters",
-                c => new
-                    {
-                        StaticCharacterId = c.Int(nullable: false, identity: true),
-                        AbilityID = c.Int(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 50),
-                        Description = c.String(maxLength: 150),
-                        EquippedWeaponId = c.Int(nullable: false),
-                        EquippedArmourId = c.Int(nullable: false),
-                        ImageId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.StaticCharacterId)
-                .ForeignKey("dbo.Weapons", t => t.EquippedWeaponId, cascadeDelete: true)
-                .ForeignKey("dbo.Armours", t => t.EquippedArmourId, cascadeDelete: true)
-                .ForeignKey("dbo.CharacterImages", t => t.ImageId, cascadeDelete: true)
-                .Index(t => t.EquippedWeaponId)
-                .Index(t => t.EquippedArmourId)
-                .Index(t => t.ImageId);
+                .PrimaryKey(t => t.CharacterArmourId)
+                .ForeignKey("dbo.Armours", t => t.ArmourId, cascadeDelete: true)
+                .ForeignKey("dbo.Characters", t => t.CharacterId)
+                .Index(t => t.CharacterId)
+                .Index(t => t.ArmourId);
             
             CreateTable(
                 "dbo.Armours",
@@ -183,20 +143,80 @@ namespace Game_AVP2.Migrations
                 c => new
                     {
                         CharacterItemId = c.Int(nullable: false, identity: true),
-                        CharacterId = c.Int(),
-                        WeaponId = c.Int(),
-                        ArmourId = c.Int(),
-                        Misc_MiscId = c.Int(),
+                        CharacterId = c.Int(nullable: false),
+                        MiscId = c.Int(nullable: false),
+                        Armour_ArmourId = c.Int(),
                     })
                 .PrimaryKey(t => t.CharacterItemId)
-                .ForeignKey("dbo.Armours", t => t.ArmourId)
-                .ForeignKey("dbo.Characters", t => t.CharacterId)
-                .ForeignKey("dbo.Weapons", t => t.WeaponId)
-                .ForeignKey("dbo.Miscs", t => t.Misc_MiscId)
+                .ForeignKey("dbo.Characters", t => t.CharacterId, cascadeDelete: true)
+                .ForeignKey("dbo.Miscs", t => t.MiscId, cascadeDelete: true)
+                .ForeignKey("dbo.Armours", t => t.Armour_ArmourId)
                 .Index(t => t.CharacterId)
-                .Index(t => t.WeaponId)
-                .Index(t => t.ArmourId)
-                .Index(t => t.Misc_MiscId);
+                .Index(t => t.MiscId)
+                .Index(t => t.Armour_ArmourId);
+            
+            CreateTable(
+                "dbo.Miscs",
+                c => new
+                    {
+                        MiscId = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Description = c.String(),
+                        MiscType = c.String(nullable: false),
+                        HealthBonus = c.Int(nullable: false),
+                        Rarity = c.Int(nullable: false),
+                        Value = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.MiscId);
+            
+            CreateTable(
+                "dbo.StaticCharacters",
+                c => new
+                    {
+                        StaticCharacterId = c.Int(nullable: false, identity: true),
+                        AbilityID = c.Int(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        Description = c.String(maxLength: 150),
+                        Background = c.String(),
+                        EquippedWeaponId = c.Int(nullable: false),
+                        EquippedArmourId = c.Int(nullable: false),
+                        ImageId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.StaticCharacterId)
+                .ForeignKey("dbo.Armours", t => t.EquippedArmourId, cascadeDelete: true)
+                .ForeignKey("dbo.CharacterImages", t => t.ImageId, cascadeDelete: true)
+                .ForeignKey("dbo.Weapons", t => t.EquippedWeaponId, cascadeDelete: true)
+                .Index(t => t.EquippedWeaponId)
+                .Index(t => t.EquippedArmourId)
+                .Index(t => t.ImageId);
+            
+            CreateTable(
+                "dbo.Attributes",
+                c => new
+                    {
+                        StaticCharacterId = c.Int(nullable: false),
+                        Health = c.Int(nullable: false),
+                        Strength = c.Int(nullable: false),
+                        Dexterity = c.Int(nullable: false),
+                        LuckModifier = c.Int(nullable: false),
+                        DefenceModifier = c.Int(nullable: false),
+                        StrengthModifier = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.StaticCharacterId)
+                .ForeignKey("dbo.StaticCharacters", t => t.StaticCharacterId, cascadeDelete: true)
+                .Index(t => t.StaticCharacterId);
+            
+            CreateTable(
+                "dbo.CharacterImages",
+                c => new
+                    {
+                        CharacterImageId = c.Int(nullable: false, identity: true),
+                        ImageLink = c.String(nullable: false),
+                        Name = c.String(nullable: false),
+                        FileName = c.String(nullable: false),
+                        ThumbnailLink = c.String(),
+                    })
+                .PrimaryKey(t => t.CharacterImageId);
             
             CreateTable(
                 "dbo.Weapons",
@@ -217,6 +237,21 @@ namespace Game_AVP2.Migrations
                 .Index(t => t.ImageId);
             
             CreateTable(
+                "dbo.CharacterWeapons",
+                c => new
+                    {
+                        CharacterWeaponId = c.Int(nullable: false, identity: true),
+                        CharacterId = c.Int(nullable: false),
+                        WeaponId = c.Int(nullable: false),
+                        Equipped = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.CharacterWeaponId)
+                .ForeignKey("dbo.Characters", t => t.CharacterId)
+                .ForeignKey("dbo.Weapons", t => t.WeaponId, cascadeDelete: true)
+                .Index(t => t.CharacterId)
+                .Index(t => t.WeaponId);
+            
+            CreateTable(
                 "dbo.WeaponImages",
                 c => new
                     {
@@ -229,30 +264,24 @@ namespace Game_AVP2.Migrations
                 .PrimaryKey(t => t.WeaponImageId);
             
             CreateTable(
-                "dbo.CharacterImages",
+                "dbo.CharacterAttributes",
                 c => new
                     {
-                        CharacterImageId = c.Int(nullable: false, identity: true),
-                        ImageLink = c.String(nullable: false),
-                        Name = c.String(nullable: false),
-                        FileName = c.String(nullable: false),
-                        ThumbnailLink = c.String(),
+                        CharacterId = c.Int(nullable: false),
+                        AttributeId = c.Int(nullable: false),
+                        Health = c.Int(nullable: false),
+                        Strength = c.Int(nullable: false),
+                        Dexterity = c.Int(nullable: false),
+                        LuckModifier = c.Int(nullable: false),
+                        DefenceModifier = c.Int(nullable: false),
+                        StrengthModifier = c.Int(nullable: false),
+                        Attribute_StaticCharacterId = c.Int(),
                     })
-                .PrimaryKey(t => t.CharacterImageId);
-            
-            CreateTable(
-                "dbo.Miscs",
-                c => new
-                    {
-                        MiscId = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false),
-                        Description = c.String(),
-                        MiscType = c.String(nullable: false),
-                        HealthBonus = c.Int(nullable: false),
-                        Rarity = c.Int(nullable: false),
-                        Value = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.MiscId);
+                .PrimaryKey(t => t.CharacterId)
+                .ForeignKey("dbo.Attributes", t => t.Attribute_StaticCharacterId)
+                .ForeignKey("dbo.Characters", t => t.CharacterId, cascadeDelete: true)
+                .Index(t => t.CharacterId)
+                .Index(t => t.Attribute_StaticCharacterId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -295,21 +324,24 @@ namespace Game_AVP2.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.CharacterItems", "Misc_MiscId", "dbo.Miscs");
-            DropForeignKey("dbo.Characters", "CharacterId", "dbo.CharacterAttributes");
+            DropForeignKey("dbo.CharacterAttributes", "CharacterId", "dbo.Characters");
             DropForeignKey("dbo.CharacterAttributes", "Attribute_StaticCharacterId", "dbo.Attributes");
-            DropForeignKey("dbo.Attributes", "StaticCharacterId", "dbo.StaticCharacters");
-            DropForeignKey("dbo.Characters", "StaticCharacterId", "dbo.StaticCharacters");
-            DropForeignKey("dbo.StaticCharacters", "ImageId", "dbo.CharacterImages");
-            DropForeignKey("dbo.StaticCharacters", "EquippedArmourId", "dbo.Armours");
+            DropForeignKey("dbo.CharacterArmours", "CharacterId", "dbo.Characters");
+            DropForeignKey("dbo.CharacterArmours", "ArmourId", "dbo.Armours");
             DropForeignKey("dbo.Weapons", "ImageId", "dbo.WeaponImages");
             DropForeignKey("dbo.StaticCharacters", "EquippedWeaponId", "dbo.Weapons");
-            DropForeignKey("dbo.CharacterItems", "WeaponId", "dbo.Weapons");
-            DropForeignKey("dbo.CharacterItems", "CharacterId", "dbo.Characters");
-            DropForeignKey("dbo.CharacterItems", "ArmourId", "dbo.Armours");
-            DropForeignKey("dbo.Armours", "ImageId", "dbo.ArmourImages");
+            DropForeignKey("dbo.CharacterWeapons", "WeaponId", "dbo.Weapons");
+            DropForeignKey("dbo.CharacterWeapons", "CharacterId", "dbo.Characters");
+            DropForeignKey("dbo.Characters", "StaticCharacterId", "dbo.StaticCharacters");
+            DropForeignKey("dbo.StaticCharacters", "ImageId", "dbo.CharacterImages");
+            DropForeignKey("dbo.Attributes", "StaticCharacterId", "dbo.StaticCharacters");
+            DropForeignKey("dbo.StaticCharacters", "EquippedArmourId", "dbo.Armours");
             DropForeignKey("dbo.StaticCharacterAbilities", "Ability_AbilityId", "dbo.Abilities");
             DropForeignKey("dbo.StaticCharacterAbilities", "StaticCharacter_StaticCharacterId", "dbo.StaticCharacters");
+            DropForeignKey("dbo.CharacterItems", "Armour_ArmourId", "dbo.Armours");
+            DropForeignKey("dbo.CharacterItems", "MiscId", "dbo.Miscs");
+            DropForeignKey("dbo.CharacterItems", "CharacterId", "dbo.Characters");
+            DropForeignKey("dbo.Armours", "ImageId", "dbo.ArmourImages");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -321,17 +353,21 @@ namespace Game_AVP2.Migrations
             DropIndex("dbo.CharacterAbilities", new[] { "Ability_AbilityId" });
             DropIndex("dbo.CharacterAbilities", new[] { "Character_CharacterId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.CharacterAttributes", new[] { "Attribute_StaticCharacterId" });
+            DropIndex("dbo.CharacterAttributes", new[] { "CharacterId" });
+            DropIndex("dbo.CharacterWeapons", new[] { "WeaponId" });
+            DropIndex("dbo.CharacterWeapons", new[] { "CharacterId" });
             DropIndex("dbo.Weapons", new[] { "ImageId" });
-            DropIndex("dbo.CharacterItems", new[] { "Misc_MiscId" });
-            DropIndex("dbo.CharacterItems", new[] { "ArmourId" });
-            DropIndex("dbo.CharacterItems", new[] { "WeaponId" });
-            DropIndex("dbo.CharacterItems", new[] { "CharacterId" });
-            DropIndex("dbo.Armours", new[] { "ImageId" });
+            DropIndex("dbo.Attributes", new[] { "StaticCharacterId" });
             DropIndex("dbo.StaticCharacters", new[] { "ImageId" });
             DropIndex("dbo.StaticCharacters", new[] { "EquippedArmourId" });
             DropIndex("dbo.StaticCharacters", new[] { "EquippedWeaponId" });
-            DropIndex("dbo.Attributes", new[] { "StaticCharacterId" });
-            DropIndex("dbo.CharacterAttributes", new[] { "Attribute_StaticCharacterId" });
+            DropIndex("dbo.CharacterItems", new[] { "Armour_ArmourId" });
+            DropIndex("dbo.CharacterItems", new[] { "MiscId" });
+            DropIndex("dbo.CharacterItems", new[] { "CharacterId" });
+            DropIndex("dbo.Armours", new[] { "ImageId" });
+            DropIndex("dbo.CharacterArmours", new[] { "ArmourId" });
+            DropIndex("dbo.CharacterArmours", new[] { "CharacterId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -339,20 +375,21 @@ namespace Game_AVP2.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Characters", new[] { "UserId" });
             DropIndex("dbo.Characters", new[] { "StaticCharacterId" });
-            DropIndex("dbo.Characters", new[] { "CharacterId" });
             DropTable("dbo.StaticCharacterAbilities");
             DropTable("dbo.CharacterAbilities");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Miscs");
-            DropTable("dbo.CharacterImages");
+            DropTable("dbo.CharacterAttributes");
             DropTable("dbo.WeaponImages");
+            DropTable("dbo.CharacterWeapons");
             DropTable("dbo.Weapons");
+            DropTable("dbo.CharacterImages");
+            DropTable("dbo.Attributes");
+            DropTable("dbo.StaticCharacters");
+            DropTable("dbo.Miscs");
             DropTable("dbo.CharacterItems");
             DropTable("dbo.ArmourImages");
             DropTable("dbo.Armours");
-            DropTable("dbo.StaticCharacters");
-            DropTable("dbo.Attributes");
-            DropTable("dbo.CharacterAttributes");
+            DropTable("dbo.CharacterArmours");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
