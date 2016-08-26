@@ -32,11 +32,30 @@ namespace Game_AVP2.Controllers
                 HttpContext.Session["GameId"] = value.ToString();
             }
         }
+        public string UserId
+        {
+            get
+            {
+                var userId = HttpContext.Session["UserId"] as string;
+                if (null == userId)
+                {
+                    userId = "";
+                    //HttpContext.Session["UserId"] = userId;
+                }
+                return userId;
+            }
+            set
+            {
+                HttpContext.Session["UserId"] = value;
+            }
+        }
         public GameController()
         {
             model = new GameModel();
-            string userId = User.Identity.GetUserId();
-            HttpContext.Session["userId"] = userId;
+            if(User != null && User.Identity != null)
+            {
+                UserId = User.Identity.GetUserId();
+            }
                 
         }
         public ActionResult Index()
@@ -72,8 +91,8 @@ namespace Game_AVP2.Controllers
         public ActionResult NewGame()
         {
             string userId = User.Identity.GetUserId();
-            Game g = model.CreateGame();
-            GameId = g.GameId;
+            //Game g = model.CreateGame();
+            //GameId = g.GameId;
             return RedirectToAction("Index", "Game");
         }
 

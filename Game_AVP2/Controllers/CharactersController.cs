@@ -70,6 +70,12 @@ namespace Game_AVP2.Controllers
            string userId = User.Identity.GetUserId();
             bool result = model.CreateUserCharacter(staticCharacterId, userId, DbCurrent);
             return Json(result, JsonRequestBehavior.AllowGet);
+
+            //return Json(new
+            //{
+            //    redirectUrl = Url.Action("Index", "Game"),
+            //    isRedirect = true?result:false
+            //});
         }
     }
 }

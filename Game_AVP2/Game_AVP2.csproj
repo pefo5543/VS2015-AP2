@@ -222,21 +222,9 @@
     <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
-    <Compile Include="Migrations\201608250806051_init.cs" />
-    <Compile Include="Migrations\201608250806051_init.Designer.cs">
-      <DependentUpon>201608250806051_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608250816484_foreignkeyca.cs" />
-    <Compile Include="Migrations\201608250816484_foreignkeyca.Designer.cs">
-      <DependentUpon>201608250816484_foreignkeyca.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608251142306_monstermigration.cs" />
-    <Compile Include="Migrations\201608251142306_monstermigration.Designer.cs">
-      <DependentUpon>201608251142306_monstermigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608251211125_gameprops.cs" />
-    <Compile Include="Migrations\201608251211125_gameprops.Designer.cs">
-      <DependentUpon>201608251211125_gameprops.cs</DependentUpon>
+    <Compile Include="Migrations\201608261037123_init.cs" />
+    <Compile Include="Migrations\201608261037123_init.Designer.cs">
+      <DependentUpon>201608261037123_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\AttributeBase.cs" />
@@ -1206,17 +1194,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608250806051_init.resx">
-      <DependentUpon>201608250806051_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608250816484_foreignkeyca.resx">
-      <DependentUpon>201608250816484_foreignkeyca.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608251142306_monstermigration.resx">
-      <DependentUpon>201608251142306_monstermigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608251211125_gameprops.resx">
-      <DependentUpon>201608251211125_gameprops.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608261037123_init.resx">
+      <DependentUpon>201608261037123_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

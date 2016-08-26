@@ -4,11 +4,11 @@
 @{
     ViewBag.Title = "Create";
 }
-
 <h2>Choose a character</h2>
 
 <div class="row col-md-12" ng-app="CharacterModel">
     <div ng-controller="CharacterController" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+        <div growl></div> <!-- adding the grow directive to html -->
         <div class="col-md-6">
             @Html.Partial("_CharactersList")
         </div>

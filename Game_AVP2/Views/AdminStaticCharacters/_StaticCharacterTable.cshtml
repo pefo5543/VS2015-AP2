@@ -14,9 +14,9 @@
         <tbody>
             <tr ng-repeat="s in characters | limitTo : 20:0 | orderBy : sortListColumn : reverseListSort" class="" ng-click="changeDetail(s)">
                 <td class="col-md-2">{{s.Name}}</td>
-                <td class="col-md-1">{{s.Strength}}</td>
-                <td class="col-md-1">{{s.Health}}</td>
-                <td class="col-md-2">{{s.Dexterity}}</td>
+                <td class="col-md-1">{{s.Attribute.Strength}}</td>
+                <td class="col-md-1">{{s.Attribute.Health}}</td>
+                <td class="col-md-2">{{s.Attribute.Dexterity}}</td>
             </tr>
         </tbody>
     </table>

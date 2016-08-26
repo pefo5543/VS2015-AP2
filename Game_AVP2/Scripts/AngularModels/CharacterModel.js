@@ -4,7 +4,7 @@
 
 var CharacterModel = angular
     .module("CharacterModel", ['angular-growl'])
-.controller("CharacterController", function ($scope, $location, growl, CharacterService) {
+.controller("CharacterController", function ($scope, $window, $location, growl, CharacterService) {
     $scope.detail = {};
     //$scope.enums = Enums;
     //$scope.detailShow = true;
@@ -12,24 +12,24 @@ var CharacterModel = angular
     $scope.init = function (model) {
         $scope.characters = model;
         $scope.detailBtnHide = true;
-    }
+    };
     $scope.selectCharacter = function (detailId) {
         CharacterService.postCharacter(detailId)
-        .success(function (p) {
-            if (p) {
-                url = $location.absUrl();
-                $window.location.href = url;
-            }
-            else {
-                $scope.detailShow = false;
-                $scope.showWarning("Something went wrong, please try again");
-            }
-        })
-        .error(function (error) {
-            $scope.status = 'Something went wrong' + error.message;
-            console.log($scope.status);
-        })
-    }
+            .then(function (p) {
+                if (p) {
+                    $scope.showSuccess("Character successfully added.");
+                    //$location.path('Game');
+                    $window.location.href = '/Game';
+                }
+                else {
+                    $scope.showWarning("Something went wrong, please try again");
+                }
+            })
+    };
+        //.error(function (error) {
+        //    $scope.status = 'Something went wrong' + error.message;
+        //    console.log($scope.status);
+        //})
     $scope.changeDetail = function (detail) {
         //CharacterService.getCharacter(detail)
         //.success(function (detail) {
@@ -82,7 +82,8 @@ CharacterModel.factory('CharacterService', ['$http', '$location', function ($htt
     //    return $http.post('GetCharacter', data);
     //}
     return CharacterService;
-}])
+}]);
+
 
 //factory post edit Character
 //AdminCharacterModel.factory('EditCharacterService', ['$http', '$location', function ($http, $location) {
