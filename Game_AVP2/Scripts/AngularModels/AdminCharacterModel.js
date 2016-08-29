@@ -44,6 +44,7 @@ var AdminCharacterModel = angular
         ],
     })
 .controller("StaticCharacterController", function ($scope, $location, Enums, growl, CharacterService, EditCharacterService, DeleteCharacterService, entityService) {
+    var controller = 'AdminStaticCharacters';
     $scope.detail = {};
     $scope.enums = Enums;
     //$scope.addShow = true;
@@ -54,8 +55,9 @@ var AdminCharacterModel = angular
     }
 
     $scope.addCharacter = function (add) {
-        entityService.addCharacter(add)
+        entityService.addCharacter(add, controller)
             .then(function (p) {
+                $scope.characters = {};
                 getCharacters();
                 if (p) {
                     $scope.detail = {};
@@ -187,7 +189,169 @@ var AdminCharacterModel = angular
         $scope.detail = detailObj;
     }
     $scope.getEquipment = function getEquipment() {
-        entityService.getImages()
+        entityService.getImages(controller)
+        .success(function (imagelist) {
+            $scope.images = imagelist;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load imagelist' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        entityService.getArmours()
+        .success(function (armourlist) {
+            $scope.armours = armourlist;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load armourlist' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        entityService.getWeapons()
+        .success(function (weaponlist) {
+            $scope.weapons = weaponlist;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load weaponlist' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        return true;
+    }
+})
+
+.controller("MonsterController", function ($scope, $location, Enums, growl, MonsterService, EditMonsterService, DeleteMonsterService, entityService) {
+    var controller = 'AdminMonsters';
+    $scope.detail = {};
+    $scope.enums = Enums;
+    //$scope.addShow = true;
+    getMonsters(true, 0);
+    console.log($location.path);
+    $scope.init = function (name) {
+        $scope.images = name;
+    }
+
+    $scope.addMonster = function (add) {
+        entityService.addCharacter(add, controller)
+            .then(function (p) {
+                $scope.monsters = {};
+                getMonsters();
+                if (p) {
+                    $scope.detail = {};
+                    $scope.addShow = false;
+                    $scope.detailHide = false,
+                    $scope.showSuccess("Monster successfully added.");
+                }
+                else {
+                    $scope.showWarning("Please change some information and try again");
+                }
+            })
+    };
+
+    function getMonsters(init, id) {
+        MonsterService.getMonsters()
+        .success(function (p) {
+            $scope.monsters = p;
+            if (init === true) {
+                $scope.detail = {};
+                $scope.detail.ImageLink = {};
+                $scope.detailBtnHide = true;
+            } else if (id > 0) {
+                //set detail to Monster with id
+                angular.forEach(p, function (value, key) {
+                    if (value.MonsterId === id) {
+                        $scope.detail = value;
+                    }
+                });
+            } else {
+                $scope.detail = {};
+                //hide edit and delete buttons
+                $scope.detailBtnHide = true;
+            }
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load Monster data' + error.message;
+            console.log($scope.status);
+            return false;
+        })
+        return true;
+    }
+    $scope.reverseListSort = false;
+    $scope.sortListColumn = "Name";
+    $scope.sortList = function (column) {
+        $scope.reverseListSort = ($scope.sortListColumn == column) ? !$scope.reverseListSort : false;
+        $scope.sortListColumn = column;
+    };
+    $scope.getListSortClass = function (column) {
+        if ($scope.sortListColumn == column) {
+            return $scope.reverseListSort ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down';
+        }
+        //to remove previously set arrow class
+        return '';
+    };
+    $scope.showWarning = function (text) {
+        growl.warning(text, { title: 'Warning!' });
+    }
+    $scope.showError = function (text) {
+        growl.error(text, { title: 'Error!' });
+    }
+    $scope.showSuccess = function (text) {
+        growl.success(text, { title: 'Success!' });
+    }
+    $scope.showInfo = function () {
+        growl.info('This is an info message.', { title: 'Info!' });
+    }
+    $scope.showAll = function () {
+        growl.warning('This is warning message.', { title: 'Warning!' });
+        growl.error('This is error message.', { title: 'Error!' });
+        growl.success('This is success message.', { title: 'Success!' });
+        growl.info('This is an info message.', { title: 'Info!' });
+    }
+
+    $scope.editMonster = function (dataObj) {
+        EditMonsterService.editMonster(dataObj)
+        .success(function (p) {
+            getMonsters(false, dataObj.MonsterId);
+            if (p) {
+                $scope.editShow = false;
+                $scope.detailHide = false;
+                $scope.showSuccess("Monster info successfully updated.");
+            }
+            else {
+                $scope.editShow = true;
+                $scope.showWarning("Something went wrong, please try again");
+            }
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to edit Monster' + error.message;
+            console.log($scope.status);
+        })
+    }
+    $scope.delete = function () {
+        var id = {
+            "Id": $scope.detail.MonsterId
+        };
+        DeleteMonsterService.deleteMonster(id)
+        .success(function (p) {
+            getMonsters(true, 0);
+            $scope.editShow = false;
+            $scope.showSuccess("Monster deleted.");
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to delete Monster data' + error.message;
+            $scope.showWarning("Something went wrong.");
+            console.log($scope.status);
+        })
+    }
+    $scope.changeDetail = function (detailObj) {
+        changeDetailFunc(detailObj)
+        $scope.detailBtnHide = false;
+    }
+    function changeDetailFunc(detailObj) {
+        $scope.detail = detailObj;
+    }
+    $scope.getEquipment = function getEquipment() {
+        entityService.getImages(controller)
         .success(function (imagelist) {
             $scope.images = imagelist;
         })
@@ -246,19 +410,20 @@ AdminCharacterModel.factory("entityService",
            ['$http', '$location', function ($http, $location) {
                var entityService = {};
                url = $location.absUrl();
-               entityService.addCharacter = function (dataObj) {
+               entityService.addCharacter = function (dataObj, controller) {
 
-                   return $http.post(url + '/AdminStaticCharacters/AddStaticCharacter', dataObj);
+                   return $http.post(url + '/' + controller + '/Add', dataObj);
                }
-               entityService.getImages = function () {
-                   return $http.get(url + '/AdminStaticCharacters/GetImages');
+               entityService.getImages = function (controller) {
+                   return $http.get(url + '/' + controller + '/GetImages');
                }
                entityService.getArmours = function () {
-                   return $http.get(url + '/AdminStaticCharacters/GetArmours');
+                   return $http.get(url + '/AdminStaticCharacters/GetArmoursSelectList');
                }
                entityService.getWeapons = function () {
-                   return $http.get(url + '/AdminStaticCharacters/GetWeapons');
+                   return $http.get(url + '/AdminStaticCharacters/GetWeaponsSelectList');
                }
+               //for monstercontroller
 
                return entityService;
            }]);
@@ -272,6 +437,44 @@ AdminCharacterModel.factory('DeleteCharacterService', ['$http', '$location', fun
     }
     return DeleteCharacterService;
 }])
+
+
+AdminCharacterModel.factory('MonsterService', ['$http', '$location', function ($http, $location) {
+    var MonsterService = {};
+    url = $location.absUrl();
+
+    MonsterService.getMonsters = function () {
+
+        return $http.get(url + '/AdminMonsters/GetMonsters');
+    }
+    MonsterService.getMonster = function (id) {
+        return $http.get(url + '/AdminMonsters/GetDetail', id);
+    }
+    return MonsterService;
+}])
+
+//factory post edit Monster
+AdminCharacterModel.factory('EditMonsterService', ['$http', '$location', function ($http, $location) {
+    var EditMonsterService = {};
+    url = $location.absUrl();
+    EditMonsterService.editMonster = function (dataObj) {
+
+        return $http.post(url + '/AdminMonsters/EditMonster', dataObj);
+    }
+    return EditMonsterService;
+}])
+
+//factory post delete item
+AdminCharacterModel.factory('DeleteMonsterService', ['$http', '$location', function ($http, $location) {
+    var DeleteMonsterService = {};
+    url = $location.absUrl();
+    DeleteMonsterService.deleteMonster = function (id) {
+        return $http.post(url + '/AdminMonsters/DeleteMonster', id);
+    }
+    return DeleteMonsterService;
+}])
+
+
 AdminCharacterModel.config(['$compileProvider', function ($compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|ftp|blob):|data:image\//);
 }]);

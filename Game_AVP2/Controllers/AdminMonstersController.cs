@@ -1,6 +1,4 @@
-﻿using Game_AVP2.Helpers;
-using Game_AVP2.Models;
-using Game_AVP2.Models.Avp2;
+﻿using Game_AVP2.Models;
 using Game_AVP2.Models.Avp2.CharacterModels;
 using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using Game_AVP2.ModelViews;
@@ -12,14 +10,14 @@ using System.Web.Mvc;
 
 namespace Game_AVP2.Controllers
 {
-    public class AdminStaticCharactersController : AdminController
+    public class AdminMonstersController : AdminController
     {
-        public CharacterModel model { get; set; }
-        public AdminStaticCharactersController()
+        public MonsterModel model { get; set; }
+        public AdminMonstersController()
         {
-            model = new CharacterModel();
+            model = new MonsterModel();
         }
-        // GET: AdminStaticCharacters
+        // GET: AdminMonsters
         public new ActionResult Index()
         {
             return RedirectToAction("index", "admin", null);
@@ -27,42 +25,41 @@ namespace Game_AVP2.Controllers
 
         [ChildActionOnly]
 
-        public ActionResult CharacterStart()
+        public ActionResult MonsterStart()
         {
-            Context = "staticCharacter";
             //IEnumerable<SelectListItem> imageList = GetImageList();
-            return PartialView("_CharacterStart");
+            return PartialView("_MonsterStart");
         }
 
         [HttpPost]
-        public ActionResult Add([Bind(Exclude = "StaticCharacterId")]StaticCharacterShorthandViewModel data)
+        public ActionResult Add([Bind(Exclude = "MonsterId")]MonsterShorthandViewModel data)
         {
-            bool result = model.AddStaticCharacter(data, DbCurrent);
+            bool result = model.AddMonster(data, DbCurrent);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //Gets here from json post from angular
-        public JsonResult DeleteStaticCharacter(int Id)
+        public JsonResult DeleteMonster(int Id)
         {
-            bool result = model.DeleteCharacter(Id, DbCurrent);
+            bool result = model.DeleteMonster(Id, DbCurrent);
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }
 
-        public JsonResult EditStaticCharacter([Bind] StaticCharacterViewModel data)
+        public JsonResult EditMonster([Bind] MonsterViewModel data)
         {
-            bool result = model.EditStaticCharacter(data, DbCurrent);
+            bool result = model.EditMonster(data, DbCurrent);
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }
 
         //Json get from angular to retrieve all items in db.
-        public JsonResult GetStaticCharacters()
+        public JsonResult GetMonsters()
         {
-            List<StaticCharacter> characters = null;
+            List<Monster> Monsters = null;
             int count = 0;
             try
             {
-                count = DbCurrent.StaticCharacters.Count();
+                count = DbCurrent.Monsters.Count();
             }
             catch
             {
@@ -70,21 +67,21 @@ namespace Game_AVP2.Controllers
             }
             try
             {
-                characters = DbCurrent.StaticCharacters.ToList();
+                Monsters = DbCurrent.Monsters.ToList();
             }
             catch (Exception)
             {
                 //...
             }
-            List<StaticCharacterViewModel> list = model.RenderStaticCharacterList(characters, DbCurrent);
+            List<MonsterViewModel> list = model.RenderMonsterList(Monsters, DbCurrent);
 
             return Json(list, JsonRequestBehavior.AllowGet);
-    }
+        }
 
         [HttpPost]
         public JsonResult GetDetail(int Id)
         {
-            StaticCharacterViewModel c = model.GetDetail(Id, DbCurrent, Context);
+            MonsterViewModel c = model.GetDetail(Id, DbCurrent);
             return Json(c, JsonRequestBehavior.AllowGet);
         }
 
@@ -97,7 +94,7 @@ namespace Game_AVP2.Controllers
 
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
-            string map = "characters";
+            string map = "Monsters";
 
             if (file != null)
             {
@@ -109,20 +106,20 @@ namespace Game_AVP2.Controllers
                 file.SaveAs(physicalPath);
 
                 //save new record in database
-                CharacterImage newRecord = new CharacterImage();
+                MonsterImage newRecord = new MonsterImage();
                 newRecord.Name = Request.Form["name"];
                 newRecord.FileName = file.FileName;
                 newRecord.ImageLink = "Content/Images/" + map + "/" + ImageName;
-                db.CharacterImages.Add(newRecord);
+                db.MonsterImages.Add(newRecord);
                 db.SaveChanges();
 
             }
             //Display records
-            return RedirectToAction("../AdminStaticCharacters/DisplayCharacterImages/");
+            return RedirectToAction("../AdminMonsters/DisplayMonsterImages/");
         }
-        public ActionResult DisplayCharacterImages()
+        public ActionResult DisplayMonsterImages()
         {
-            List<CharacterImage> c = DbCurrent.CharacterImages.ToList();
+            List<MonsterImage> c = DbCurrent.MonsterImages.ToList();
             return View(c);
         }
 

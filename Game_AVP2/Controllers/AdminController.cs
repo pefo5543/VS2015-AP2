@@ -1,5 +1,6 @@
 ﻿using Game_AVP2.Helpers;
 using Game_AVP2.Models;
+using Game_AVP2.Models.Avp2;
 using Game_AVP2.Models.Avp2.Items;
 using Newtonsoft.Json;
 using System;
@@ -43,6 +44,22 @@ namespace Game_AVP2.Controllers
         public ActionResult AddAbility()
         {
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetArmoursSelectList()
+        {
+            CharacterModel model = new CharacterModel();
+            IEnumerable<SelectListItem> armours = model.GetArmourSelectList(DbCurrent);
+            return Json(armours, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetWeaponsSelectList()
+        {
+            CharacterModel model = new CharacterModel();
+            IEnumerable<SelectListItem> weapons = model.GetWeaponSelectList(DbCurrent);
+            return Json(weapons, JsonRequestBehavior.AllowGet);
         }
 
         //Gets here from json post from angular

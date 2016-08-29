@@ -126,8 +126,12 @@ namespace Game_AVP2.Controllers
                 newRecord.Name = Request.Form["name"];
                 newRecord.FileName = file.FileName;
                 newRecord.ImageLink = "Content/Images/weapons/" + ImageName;
-                db.WeaponImages.Add(newRecord);
-                db.SaveChanges();
+                try {
+                    db.WeaponImages.Add(newRecord);
+                    db.SaveChanges();
+                } catch (Exception e) {
+                    Console.WriteLine(e.Message);
+                }
 
             }
             //Display records

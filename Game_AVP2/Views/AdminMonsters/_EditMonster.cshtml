@@ -1,0 +1,77 @@
+﻿@using Game_AVP2.Helpers
+@using Game_AVP2.Models.Avp2.Items
+<div class="col-md-7">
+    <div class="well well-lg wellOverflow">
+        <form name="editForm" novalidate>
+            <fieldset>
+                <legend class="text-center">edit monster</legend>
+                <img class="center-block" ng-src="/{{detail.ImageLink}}" />
+                <div class="col-md-6">
+                    <fieldset>
+                        <div class="form-group">
+                            <ul class="col-md-12 my-ul">
+                                <li class="details-li">
+                                    <label for="Name">Name</label>
+
+                                    <input name="Name" class="form-control" data-ng-model="detail.Name" type="text" ng-maxlength="50" required />
+                                    <span class="text-danger" ng-show="editForm.Name.$invalid">A name is required.</span>
+                                    <span class="text-danger" ng-show="editForm.Name.$error.maxlength">The name can be max 50 characters.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="Description">Description</label>
+
+                                    <input name="Description" class="form-control" data-ng-model="detail.Description" type="text" ng-maxlength="150" />
+                                    <span class="text-danger" ng-show="editForm.Description.$error.maxlength">The description can be max 150 characters.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="EquippedWeapon">Default weapon</label>
+                                    <fieldset>
+                                        <select name="EquippedWeapon" class="form-control" required>
+                                            <option ng-mouseup="detail.EquippedWeaponId = w.Value" ng-selected="detail.EquippedWeaponId" ng-repeat="w in weapons" value={{w.Value}}>{{w.Text}}</option>
+                                        </select>
+                                    </fieldset>
+                                    <span class="text-danger" ng-show="editForm.EquippedWeaponId.$invalid">Select default weapon.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="EquippedArmour">Default armour</label>
+                                    <fieldset>
+                                        <select name="EquippedArmour" class="form-control"required>
+                                            <option ng-mouseup="detail.EquippedArmourId = a.Value" ng-selected="detail.EquippedArmourId" ng-repeat="a in armours" value={{a.Value}}>{{a.Text}}</option>
+                                        </select>
+                                    </fieldset>
+                                    <span class="text-danger" ng-show="editForm.EquippedArmourId.$invalid">Select default armour.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="Image">Image</label>
+                                    <fieldset>
+                                        <select name="Image" class="form-control" required>
+                                            <option ng-mouseup="detail.ImageId = i.Value" ng-selected="detail.ImageId" ng-repeat="i in images" value={{i.Value}}>{{i.Text}}</option>
+                                        </select>
+                                    </fieldset>
+                                    <span class="text-danger" ng-show="editForm.ImageId.$invalid">Select image.</span>
+                                </li>
+                                <li class="details-li">
+                                    <label for="Background">Background</label>
+                                    <input name="Background" class="form-control" data-ng-model="detail.Background" type="text" ng-maxlength="250" />
+                                    <span class="text-danger" ng-show="editForm.Background.$error.maxlength">The background can be max 250 characters.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </div>
+                @Html.Partial("_EditAttributes")
+            </fieldset>
+        </form>
+        <div class="change-buttons col-md-12">
+
+            <button ng-click="editMonster(detail)" type="button" name="submit" class="btn btn-success btn-block"
+                    ng-disabled="(editForm.Name.$invalid)">
+                edit
+            </button>
+
+            <button ng-click="editShow=false;addShow=false;detailHide=false" type="button" name="cancel" class="btn btn-warning btn-block">Cancel</button>
+        </div>
+    </div>
+</div>
+
+

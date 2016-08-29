@@ -1,0 +1,45 @@
+﻿
+<div class="col-md-7">
+    <div class="well well-lg wellOverflow">
+        <fieldset>
+            <legend class="text-center">Monster info</legend>
+            <div class="details-list col-md-6">
+                <dl class="dl-horizontal">
+
+                    <dt>Name:</dt>
+                    <dd>{{detail.Name}}</dd>
+
+                    <dt>Description:</dt>
+                    <dd>{{detail.Description}}</dd>
+
+                    <dt>Ability:</dt>
+                    <dd>Not implemented</dd>
+
+                    <dt>Equipped Armour:</dt>
+                    <dd>{{detail.EquippedArmourName}}</dd>
+
+                    <dt>Equipped Weapon:</dt>
+                    <dd>{{detail.EquippedWeaponName}}</dd>
+
+                    <dt>Background:</dt>
+                    <dd>{{detail.Background}}</dd>
+                </dl>
+            </div>
+            @Html.Partial("_CharacterAttributesInfo")
+
+            <div class="weapon-img col-md-2">
+
+                <img ng-src="/{{detail.ImageLink}}" />
+            </div>
+        </fieldset>
+        <div ng-hide="detailBtnHide" class="change-buttons col-md-12">
+            <button ng-click="editShow=true; detailHide=true; getEquipment()" type="button" name="edit" class="btn btn-success btn-block" ng-disabled="detail.Name==null">Edit</button>
+            <button ng-click="delete()" type="button" name="edit" class="btn btn-danger btn-block" ng-disabled="detail.Name==null">Delete</button>
+        </div>
+    </div>
+    <div class="btn-group">
+        <span class="button"><button ng-click="editShow=false;detailHide=true;addShow=true;getEquipment();" type="button" name="add" class="btn btn-info">Add Monster</button></span>
+        @Html.ActionLink("Manage images", "DisplayMonsterImages", "AdminMonsters", null, new { @class = "button btn btn-default pull-right" })
+    </div>
+</div>
+

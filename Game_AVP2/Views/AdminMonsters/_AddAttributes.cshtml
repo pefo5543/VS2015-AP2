@@ -1,0 +1,62 @@
+﻿<div class="col-md-4">
+    <fieldset>
+        <div class="form-group">
+            <ul class="col-md-6 my-ul">
+                <li class="details-li">
+                    <label class="" for="Strength">Strength</label>
+                    <fieldset>
+                        <select name="Strength" class="form-control" data-ng-model="add.Attribute.Strength" required>
+                            <option ng-repeat="r in enums.AttributeEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="addItemForm.Strength.$invalid">Select monsters strength.</span>
+                </li>
+                <li class="details-li">
+                    <label for="Health">Health</label>
+                    <fieldset>
+                        <select name="Health" class="form-control" data-ng-model="add.Attribute.Health" required>
+                            <option ng-repeat="r in enums.HealthEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="addItemForm.Health.$invalid">Select monsters health.</span>
+                </li>
+                <li class="details-li">
+                    <label for="Dexterity">Dexterity</label>
+                    <fieldset>
+                        <select name="Dexterity" class="form-control" data-ng-model="add.Attribute.Dexterity" required>
+                            <option ng-repeat="r in enums.AttributeEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="addItemForm.Dexterity.$invalid">Select monsters dexterity.</span>
+                </li>
+                <li class="details-li">
+                    <label for="Luck">Luck</label>
+                    <fieldset>
+                        <select name="Luck" class="form-control" data-ng-model="add.Attribute.LuckModifier" required>
+                            <option ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="addItemForm.Luck.$invalid">Select monsters luck.</span>
+                </li>
+                <li class="details-li">
+                    <label for="StrengthMod">Strength Modifier</label>
+                    <fieldset>
+                        <select name="StrengthMod" class="form-control" data-ng-model="add.Attribute.StrengthModifer" required>
+                            <option ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="addItemForm.StrengthMod.$invalid">Select monsters strength modifier.</span>
+                </li>
+                <li class="details-li">
+                    <label for="DefenceMod">Defence Modifier</label>
+                    <fieldset>
+                        <select name="DefenceMod" class="form-control" data-ng-model="add.Attribute.DefenceModifier" required>
+                            <option ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="addItemForm.DefenceMod.$invalid">Select monsters defence modifier.</span>
+                </li>
+            </ul>
+        </div>
+    </fieldset>
+</div>

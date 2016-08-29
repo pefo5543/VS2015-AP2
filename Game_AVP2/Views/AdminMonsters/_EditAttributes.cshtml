@@ -1,0 +1,63 @@
+﻿
+<div class="col-md-6">
+    <fieldset>
+        <div class="form-group">
+            <ul class="col-md-12 my-ul">
+                <li class="details-li">
+                    <label class="" for="Strength">Strength</label>
+                    <fieldset>
+                        <select name="Strength" class="form-control" required>
+                            <option ng-mouseup="detail.Strength = r.Value" ng-selected="detail.Attribute.Strength" ng-repeat="r in enums.AttributeEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="editItemForm.Strength.$invalid">Select monsters strength.</span>
+                </li>
+                <li class="details-li">
+                    <label for="Health">Health</label>
+                    <fieldset>
+                        <select name="Health" class="form-control" required>
+                            <option ng-mouseup="detail.Health = r.Value" ng-selected="detail.Attribute.Health" ng-repeat="r in enums.HealthEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="editItemForm.Health.$invalid">Select monsters health.</span>
+                </li>
+                <li class="details-li">
+                    <label for="Dexterity">Dexterity</label>
+                    <fieldset>
+                        <select name="Dexterity" class="form-control" required>
+                            <option ng-mouseup="detail.Dexterity = r.Value" ng-selected="detail.Attribute.Dexterity" ng-repeat="r in enums.AttributeEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="editItemForm.Dexterity.$invalid">Select monsters dexterity.</span>
+                </li>
+                <li class="details-li">
+                    <label for="Luck">Luck</label>
+                    <fieldset>
+                        <select name="Luck" class="form-control" required>
+                            <option ng-mouseup="detail.LuckModifier = r.Value" ng-selected="detail.Attribute.LuckModifier" ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="editItemForm.Luck.$invalid">Select monsters luck.</span>
+                </li>
+                <li class="details-li">
+                    <label for="StrengthMod">Strength Modifier</label>
+                    <fieldset>
+                        <select name="StrengthMod" class="form-control" required>
+                            <option ng-mouseup="detail.StrengthModifier = r.Value" ng-selected="detail.Attribute.StrengthModifier" ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="editItemForm.StrengthMod.$invalid">Select monsters strength modifier.</span>
+                </li>
+                <li class="details-li">
+                    <label for="DefenceMod">Defence Modifier</label>
+                    <fieldset>
+                        <select name="DefenceMod" class="form-control" required>
+                            <option ng-mouseup="detail.DefenceModifier = r.Value" ng-selected="detail.Attribute.DefenceModifier" ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
+                        </select>
+                    </fieldset>
+                    <span class="text-danger" ng-show="editItemForm.DefenceMod.$invalid">Select monsters defence modifier.</span>
+                </li>
+            </ul>
+        </div>
+    </fieldset>
+</div>

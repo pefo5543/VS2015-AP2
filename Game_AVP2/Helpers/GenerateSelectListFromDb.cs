@@ -80,6 +80,24 @@ namespace Game_AVP2.Helpers
         }
     }
 
+    public class MonsterImageSelectList
+    {
+        public List<ImageSelect> GetImages(ApplicationDbContext db)
+        {
+            List<ImageSelect> Images = new List<ImageSelect>();
+
+            List<MonsterImage> imgList = db.MonsterImages.ToList();
+            foreach (MonsterImage item in imgList)
+            {
+                ImageSelect c = new ImageSelect();
+                c.ImageName = item.Name;
+                c.ImageId = item.MonsterImageId;
+                Images.Add(c);
+            }
+            return Images;
+        }
+    }
+
     public class WeaponSelectList
     {
         public List<WeaponSelect> GetWeapons(ApplicationDbContext db)

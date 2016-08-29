@@ -216,6 +216,7 @@
     <Compile Include="Controllers\AdminArmoursController.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminMonstersController.cs" />
     <Compile Include="Controllers\AdminStaticCharactersController.cs" />
     <Compile Include="Controllers\AdminWeaponsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\AttributeBase.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
+    <Compile Include="Models\Avp2\CharacterModels\MonsterModel.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\Attribute.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\CharacterAttribute.cs" />
     <Compile Include="Models\Avp2\CharacterModels\Tables\CharacterImage.cs" />
@@ -271,6 +273,8 @@
     <Compile Include="Models\Avp2\Items\Tables\Weapon.cs" />
     <Compile Include="ModelViews\Character\StaticCharacterShorthandViewModel.cs" />
     <Compile Include="ModelViews\Character\StaticCharacterViewModel.cs" />
+    <Compile Include="ModelViews\Monster\MonsterShorthandViewModel.cs" />
+    <Compile Include="ModelViews\Monster\MonsterViewModel.cs" />
     <Compile Include="ModelViews\Weapon\WeaponViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -1173,11 +1177,20 @@
     <Content Include="Views\Characters\Create.cshtml" />
     <Content Include="Views\Characters\_CharacterDetail.cshtml" />
     <Content Include="Views\Characters\_CharactersList.cshtml" />
+    <Content Include="Views\AdminMonsters\_MonsterStart.cshtml" />
+    <Content Include="Views\AdminMonsters\_AddAttributes.cshtml" />
+    <Content Include="Views\AdminMonsters\_AddMonster.cshtml" />
+    <Content Include="Views\AdminMonsters\_EditAttributes.cshtml" />
+    <Content Include="Views\AdminMonsters\_EditMonster.cshtml" />
+    <Content Include="Views\AdminMonsters\_MonsterInfo.cshtml" />
+    <Content Include="Views\AdminMonsters\_MonsterTable.cshtml" />
+    <Content Include="Views\AdminMonsters\DisplayMonsterImages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\armours\" />
     <Folder Include="Content\Images\characters\" />
+    <Folder Include="Content\Images\monsters\" />
     <Folder Include="Views\AdminBase\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

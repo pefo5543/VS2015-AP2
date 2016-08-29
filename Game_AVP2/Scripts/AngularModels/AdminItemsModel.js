@@ -11,7 +11,9 @@ var AdminItemsModel = angular
             { id: 3, name: 'Long Sword' },
             { id: 4, name: 'Battle Axe' },
             { id: 5, name: 'Spear' },
-            { id: 6, name: 'Short Bow' }
+            { id: 6, name: 'Short Bow' },
+             { id: 7, name: 'Club' },
+              { id: 8, name: 'Orc Weapon' }
         ],
 
         DamageEnums: [
@@ -45,9 +47,11 @@ var AdminItemsModel = angular
         ],
         ArmourTypeEnums: [
     { id: 1, name: 'Leather armour' },
-    { id: 2, name: 'Iron Armour' },
-    { id: 3, name: 'Steel Armour' },
-    { id: 4, name: 'Dragon Armour' }
+    { id: 2, name: 'Studded leather armour' },
+    { id: 3, name: 'Chain mail' },
+    { id: 4, name: 'Scale Armour' },
+    { id: 5, name: 'Plate Armour' },
+    { id: 6, name: 'Dragon Armour' }
         ],
 
         DefenseEnums: [
@@ -376,7 +380,6 @@ AdminItemsModel.factory('ItemsService', ['$http', '$location', function ($http, 
     url = $location.absUrl();
 
     ItemsService.getWeapons = function () {
-
         return $http.get(url + '/AdminWeapons/GetWeapons');
     }
     ItemsService.getWeaponImage = function (id) {
@@ -387,7 +390,7 @@ AdminItemsModel.factory('ItemsService', ['$http', '$location', function ($http, 
         return $http.get(url + '/AdminArmours/GetArmours');
     }
     ItemsService.getArmourImage = function (id) {
-  
+
         return $http.post(url + '/AdminArmours/GetArmourImage', id);
     }
     return ItemsService;
