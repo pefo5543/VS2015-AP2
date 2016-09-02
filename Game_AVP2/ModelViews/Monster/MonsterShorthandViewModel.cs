@@ -19,6 +19,7 @@ namespace Game_AVP2.ModelViews
         public int EquippedArmourId { get; set; }
         public int AbilityID { get; set; }
         public int ImageId { get; set; }
+        public int Rarity { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }

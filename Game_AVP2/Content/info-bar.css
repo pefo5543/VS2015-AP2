@@ -1,0 +1,18 @@
+﻿body {
+}
+
+#infobar-wrapper {
+    height: 30px;
+    border-radius: 10px;
+    background: #cac6c6;
+    margin-bottom:10px;
+}
+.info-bar {
+    /*margin-top:4px;*/
+    margin-left:10px;
+}
+.info-bar-text {
+    margin-top:5px;
+    width:20%;
+    display:inline-block;
+}

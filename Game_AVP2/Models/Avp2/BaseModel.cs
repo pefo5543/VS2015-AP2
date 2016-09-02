@@ -1,4 +1,5 @@
 ﻿using Game_AVP2.Models.Avp2.CharacterModels;
+using Game_AVP2.Models.Avp2.GameModels.Tables;
 using Game_AVP2.ModelViews;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,30 @@ namespace Game_AVP2.Models
             }
 
             return noPropertyChanged;
+        }
+
+        internal int CreateNewGame(int characterId, ApplicationDbContext dbCurrent)
+        {
+            int res = 0;
+            Game newGame = new Game();
+            newGame.GameId = characterId;
+            newGame.BattleCount = 0;
+            newGame.Progress = 0;
+            newGame.Start = DateTime.Now;
+            newGame.LastPlayed = DateTime.Now;
+            try
+            {
+
+                dbCurrent.Games.Add(newGame);
+                dbCurrent.SaveChanges();
+                res = newGame.GameId;
+            }
+            catch (Exception e)
+            {
+                res = -1;
+                Console.WriteLine(e.Message);
+            }
+            return res;
         }
     }
 }

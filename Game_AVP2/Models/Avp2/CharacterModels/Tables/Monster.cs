@@ -35,6 +35,8 @@ namespace Game_AVP2.Models.Avp2.CharacterModels.Tables
 
         public virtual MonsterAttribute MonsterAttribute { get; set; }
 
+        public int Rarity { get; set; }
+
         [ForeignKey("EquippedWeaponId")]
         public virtual Weapon WeaponEquipped { get; set; }
         [ForeignKey("EquippedArmourId")]

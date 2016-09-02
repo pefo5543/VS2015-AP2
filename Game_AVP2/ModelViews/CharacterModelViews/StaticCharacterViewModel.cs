@@ -31,7 +31,7 @@ namespace Game_AVP2.ModelViews
             Attribute.Strength = s.Attribute.Strength;
             Attribute.Dexterity = s.Attribute.Dexterity;
             Attribute.Health = s.Attribute.Health;
-            Attribute.LuckModifier = s.Attribute.LuckModifier;
+            Attribute.Luck = s.Attribute.Luck;
             Attribute.DefenceModifier = s.Attribute.DefenceModifier;
             Attribute.StrengthModifier = s.Attribute.StrengthModifier;
             EquippedArmourName = s.ArmourEquipped.Name;

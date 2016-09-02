@@ -36,6 +36,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -223,9 +227,21 @@
     <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
-    <Compile Include="Migrations\201608261037123_init.cs" />
-    <Compile Include="Migrations\201608261037123_init.Designer.cs">
-      <DependentUpon>201608261037123_init.cs</DependentUpon>
+    <Compile Include="Migrations\201608311110557_init.cs" />
+    <Compile Include="Migrations\201608311110557_init.Designer.cs">
+      <DependentUpon>201608311110557_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608311325563_health.cs" />
+    <Compile Include="Migrations\201608311325563_health.Designer.cs">
+      <DependentUpon>201608311325563_health.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609010825206_score.cs" />
+    <Compile Include="Migrations\201609010825206_score.Designer.cs">
+      <DependentUpon>201609010825206_score.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609011008453_score1.cs" />
+    <Compile Include="Migrations\201609011008453_score1.Designer.cs">
+      <DependentUpon>201609011008453_score1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\AttributeBase.cs" />
@@ -240,6 +256,7 @@
     <Compile Include="Models\Avp2\GameModels\GameModel.cs" />
     <Compile Include="Models\Avp2\GameModels\Tables\Battle.cs" />
     <Compile Include="Models\Avp2\GameModels\Tables\Game.cs" />
+    <Compile Include="Models\Avp2\GameModels\Tables\Story.cs" />
     <Compile Include="Models\Avp2\Items\ArmourModel.cs" />
     <Compile Include="Models\Avp2\BaseModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\ArmourImage.cs" />
@@ -248,7 +265,7 @@
     <Compile Include="Models\Avp2\Items\Tables\WeaponImage.cs" />
     <Compile Include="Models\Avp2\Items\WeaponModel.cs" />
     <Compile Include="Models\Avp2\TableImageBase.cs" />
-    <Compile Include="ModelViews\Armour\ArmourViewModel.cs" />
+    <Compile Include="ModelViews\ArmourModelViews\ArmourViewModel.cs" />
     <Compile Include="Models\Avp2\Items\ItemModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -265,14 +282,16 @@
     <Compile Include="Models\Avp2\Items\Tables\Item.cs" />
     <Compile Include="ModelViews\AttributeViewModel.cs" />
     <Compile Include="ModelViews\BaseViewModel.cs" />
-    <Compile Include="ModelViews\Character\CharacterBaseViewModel.cs" />
-    <Compile Include="ModelViews\Character\CreateCharacterViewModel.cs" />
+    <Compile Include="ModelViews\CharacterModelViews\CharacterBaseViewModel.cs" />
+    <Compile Include="ModelViews\CharacterModelViews\CharacterViewModel.cs" />
+    <Compile Include="ModelViews\CharacterModelViews\CreateCharacterViewModel.cs" />
+    <Compile Include="ModelViews\Game\GameViewModel.cs" />
     <Compile Include="ModelViews\ItemViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Misc.cs" />
     <Compile Include="ModelViews\MiscViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Weapon.cs" />
-    <Compile Include="ModelViews\Character\StaticCharacterShorthandViewModel.cs" />
-    <Compile Include="ModelViews\Character\StaticCharacterViewModel.cs" />
+    <Compile Include="ModelViews\CharacterModelViews\StaticCharacterShorthandViewModel.cs" />
+    <Compile Include="ModelViews\CharacterModelViews\StaticCharacterViewModel.cs" />
     <Compile Include="ModelViews\Monster\MonsterShorthandViewModel.cs" />
     <Compile Include="ModelViews\Monster\MonsterViewModel.cs" />
     <Compile Include="ModelViews\Weapon\WeaponViewModel.cs" />
@@ -287,14 +306,39 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\GameRelated.css" />
     <Content Include="Content\Images\weapons\shortsword.png" />
+    <Content Include="Content\info-bar.css" />
+    <Content Include="Content\simple-sidebar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\dice\blank.gif" />
+    <Content Include="images\dice\dices-1.gif" />
+    <Content Include="images\dice\dices-2.gif" />
+    <Content Include="images\dice\dices-3.gif" />
+    <Content Include="images\dice\dices-4.gif" />
+    <Content Include="images\dice\dices-5.gif" />
+    <Content Include="images\dice\dices-6.gif" />
+    <Content Include="images\dice\dicet-1.gif" />
+    <Content Include="images\dice\dicet-2.gif" />
+    <Content Include="images\dice\dicet-3.gif" />
+    <Content Include="images\dice\dicet-4.gif" />
+    <Content Include="images\dice\dicet-5.gif" />
+    <Content Include="images\dice\dicet-6.gif" />
+    <Content Include="images\dice\die-1.gif" />
+    <Content Include="images\dice\die-2.gif" />
+    <Content Include="images\dice\die-3.gif" />
+    <Content Include="images\dice\die-4.gif" />
+    <Content Include="images\dice\die-5.gif" />
+    <Content Include="images\dice\die-6.gif" />
+    <Content Include="images\main\sidebar-bg-wall.png" />
+    <Content Include="images\main\sidebar_title_black_bg.png" />
     <Content Include="Scripts\AngularModels\AdminCharacterModel.js" />
     <Content Include="Scripts\AngularModels\CharacterModel.js" />
     <Content Include="Scripts\AngularModels\FileUploader.js" />
+    <Content Include="Scripts\AngularModels\GameModel.js" />
     <Content Include="Scripts\angular\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\angular\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\angular\angular-animate.js" />
@@ -342,6 +386,8 @@
     <Content Include="Scripts\angular\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular\angular-aria.min.js.map" />
     <Content Include="Scripts\angular\angular-animate.min.js.map" />
+    <Content Include="Scripts\diceJs\d6.js" />
+    <Content Include="Scripts\diceJs\daro.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -1185,6 +1231,12 @@
     <Content Include="Views\AdminMonsters\_MonsterInfo.cshtml" />
     <Content Include="Views\AdminMonsters\_MonsterTable.cshtml" />
     <Content Include="Views\AdminMonsters\DisplayMonsterImages.cshtml" />
+    <Content Include="Views\Game\Run.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Shared\_Infobar.cshtml" />
+    <Content Include="Views\Game\_BattleContainer.cshtml" />
+    <Content Include="Views\Game\_TextContainer.cshtml" />
+    <Content Include="Views\Game\_DiceRoller.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1207,8 +1259,17 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608261037123_init.resx">
-      <DependentUpon>201608261037123_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608311110557_init.resx">
+      <DependentUpon>201608311110557_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608311325563_health.resx">
+      <DependentUpon>201608311325563_health.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609010825206_score.resx">
+      <DependentUpon>201609010825206_score.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011008453_score1.resx">
+      <DependentUpon>201609011008453_score1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

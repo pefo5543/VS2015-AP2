@@ -51,6 +51,16 @@
                                     <span class="text-danger" ng-show="editForm.ImageId.$invalid">Select image.</span>
                                 </li>
                                 <li class="details-li">
+                                    <label for="Rarity">Rarity</label>
+                                    <fieldset>
+                                        <select name="Rarity" class="form-control" required ng-model="detail.Rarity" ng-selected="detail.Rarity">
+                                            <option ng-repeat="r in enums.RarityEnums" value={{r.name}}>{{r.name}} </option>
+                                            @*ng-options="option.name for option in enums.RarityEnums track by option.name">*@
+                                        </select>
+                                    </fieldset>
+                                    <span class="text-danger" ng-show="editForm.Rarity.$touched && editForm.Rarity.$invalid">Select monster rarity.</span>
+                                </li>
+                                <li class="details-li">
                                     <label for="Background">Background</label>
                                     <input name="Background" class="form-control" data-ng-model="detail.Background" type="text" ng-maxlength="250" />
                                     <span class="text-danger" ng-show="editForm.Background.$error.maxlength">The background can be max 250 characters.</span>

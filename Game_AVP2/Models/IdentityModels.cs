@@ -53,6 +53,7 @@ namespace Game_AVP2.Models
         public DbSet<Monster> Monsters { get; set; }
         public DbSet<MonsterImage> MonsterImages { get; set; }
         public DbSet<MonsterAttribute> MonsterAttributes { get; set; }
+        public DbSet<Story>Stories { get; set; }
 
 
         public ApplicationDbContext()

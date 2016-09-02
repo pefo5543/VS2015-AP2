@@ -9,16 +9,7 @@ namespace Game_AVP2.ModelViews
 {
     public class StaticCharacterShorthandViewModel : CharacterBaseViewModel
     {
-        public StaticCharacterShorthandViewModel()
-        {
-            this.Attribute = new AttributeViewModel();
-        }
         public int StaticCharacterId { get; set; }
-        public AttributeViewModel Attribute { get; set; }
-        public int EquippedWeaponId { get; set; }
-        public int EquippedArmourId { get; set; }
-        public int AbilityID { get; set; }
-        public int ImageId { get; set; }
         //public string ImageLink { get; set; }
     }
 }

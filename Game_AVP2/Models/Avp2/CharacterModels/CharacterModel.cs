@@ -1,6 +1,7 @@
 ﻿using Game_AVP2.Helpers;
 using Game_AVP2.Models.Avp2.CharacterModels;
 using Game_AVP2.Models.Avp2.CharacterModels.Tables;
+using Game_AVP2.Models.Avp2.GameModels.Tables;
 using Game_AVP2.Models.Avp2.Items;
 using Game_AVP2.Models.Avp2.Items.Tables;
 using Game_AVP2.ModelViews;
@@ -70,9 +71,9 @@ namespace Game_AVP2.Models.Avp2
             return noPropertyChanged;
         }
 
-        internal bool CreateUserCharacter(int staticCharacterId, string userId, ApplicationDbContext dbCurrent)
+        internal int CreateUserCharacter(int staticCharacterId, string userId, ApplicationDbContext dbCurrent)
         {
-            bool result = true;
+            int result = -1;
             StaticCharacter c = dbCurrent.StaticCharacters.Find(staticCharacterId);
             ApplicationUser u = dbCurrent.Users.Find(userId);
             Character s = new Character();
@@ -84,6 +85,9 @@ namespace Game_AVP2.Models.Avp2
             s.Background = c.Background;
             s.StaticCharacterId = c.StaticCharacterId;
             s.UserId = userId;
+            s.Credits = 0;
+            s.Experience = 0;
+            s.Level = 1;
 
             try
             {
@@ -93,15 +97,16 @@ namespace Game_AVP2.Models.Avp2
             }
             catch (Exception e)
             {
-                result = false;
                 Console.WriteLine(e.Message);
             }
             try
             {
                 dbCurrent.SaveChanges();
+                result = s.CharacterId;
             }
             catch (Exception e)
             {
+                result = -1;
                 Console.WriteLine(e.Message);
             }
             try
@@ -110,36 +115,41 @@ namespace Game_AVP2.Models.Avp2
                 AddCharacterWeapon(s.CharacterId, w, dbCurrent);
                 AddCharacterAttributes(s.CharacterId, a, dbCurrent);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
+                result = -1;
                 Console.WriteLine(e.Message);
-                result = false;
             }
 
-            try {
+            try
+            {
                 dbCurrent.SaveChanges();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
+                result = -1;
                 Console.WriteLine(e.Message);
-                    }
+            }
             return result;
         }
 
         private void AddCharacterAttributes(int characterId, CharacterModels.Tables.Attribute a, ApplicationDbContext dbCurrent)
         {
             CharacterAttribute ca = new CharacterAttribute();
-            
+
             ca.AttributeId = a.StaticCharacterId;
             ca.CharacterId = characterId;
             ca.DefenceModifier = a.DefenceModifier;
             ca.Dexterity = a.Dexterity;
             ca.Health = a.Health;
-            ca.LuckModifier = a.LuckModifier;
+            ca.Luck = a.Luck;
             ca.Strength = a.Strength;
             ca.StrengthModifier = a.StrengthModifier;
 
             try
             {
                 dbCurrent.CharacterAttributes.Add(ca);
-                }
+            }
             catch { }
         }
 
@@ -254,7 +264,7 @@ namespace Game_AVP2.Models.Avp2
             a.Dexterity = data.Attribute.Dexterity;
             a.Strength = data.Attribute.Strength;
             a.Health = data.Attribute.Health;
-            a.LuckModifier = data.Attribute.LuckModifier;
+            a.Luck = data.Attribute.Luck;
             a.StrengthModifier = data.Attribute.StrengthModifier;
             a.DefenceModifier = data.Attribute.DefenceModifier;
             a.StaticCharacterId = id;

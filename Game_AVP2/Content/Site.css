@@ -145,3 +145,6 @@ select.ng-invalid option {
     padding-left:0px;
     padding-right:0px;
 }
+.game_area_wrapper {
+    /*margin:10px 130px 50px 25px;*/
+}

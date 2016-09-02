@@ -1,0 +1,232 @@
+﻿<!-- Sidebar -->
+<div id="sidebar-wrapper">
+    @*<ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <span class="text-center">Information</span>
+            </li>
+            <li class="">
+                <img class="img-responsive img-circle menu-img" ng-src="/{{character.ImageLink}}" />
+            </li>
+            <li class="menu-item">
+                <div class="menu-label left"> Name:</div>
+                <div class="menu-info">{{character.Name}}</div>
+            </li>
+            <li class="menu-item">
+                <div class="menu-label left"> Credits:</div>
+                <div class="menu-info">{{character.Credits}}</div>
+            </li>
+            <li class="menu-item">
+                <div class="menu-label left"> Score:</div>
+                <div class="menu-info">{{character.Score}}</div>
+            </li>
+            <li class="menu-item">
+                <div class="menu-label left"> Level:</div>
+                <div class="menu-info">{{character.Level}}</div>
+            </li>
+            <li>
+                <label for="Progress">Health: {{character.HealthLeft}} / {{character.Attribute.Health}}</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="{{character.HealthLeft}}" aria-valuemin="0" aria-valuemax="{{character.Attribute.Health}}" style="width: {{((character.HealthLeft/character.Attribute.Health) * 100)}}%">
+                        <span class="sr-only">70% Complete (success)</span>
+                    </div>
+                </div>
+            </li>
+            <li class="menu-item">
+                <div class="menu-label left"> Weapon:</div>
+                <div class="menu-info">{{character.EquippedWeaponName}}</div>
+            </li>
+            <li class="menu-item">
+                <div class="menu-label left"> Armour:</div>
+                <div class="menu-info">{{character.EquippedArmourName}}</div>
+            </li>
+            <li class="menu-item"><hr /></li>
+        </ul>*@
+    <div class="sidebar-nav">
+        <div class="sidebar-brand">
+            <span class="text-center">Information</span>
+        </div>
+        <div class="panel-group" aria-multiselectable="true" role="tablist">
+            <div class="panel">
+                <div class="panel-heading " role="tab">
+                    <div class="">
+                        <img class="img-responsive img-circle menu-img" ng-src="/{{character.ImageLink}}" />
+                    </div>
+                </div>
+                <div id="info" class="">
+                    <div class="sidebar-accordion-nav">
+                        <div class="menu-item">
+                            <div class="menu-label left"> Name:</div>
+                            <div class="menu-info">{{character.Name}}</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-label left"> Credits:</div>
+                            <div class="menu-info">{{character.Credits}}</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-label left"> Score:</div>
+                            <div class="menu-info">{{character.Score}}</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-label left"> Level:</div>
+                            <div class="menu-info">{{character.Level}}</div>
+                        </div>
+                        <div>
+                            <label for="Progress">Health: {{character.HealthLeft}} / {{character.Attribute.Health}}</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="{{character.HealthLeft}}" aria-valuemin="0" aria-valuemax="{{character.Attribute.Health}}" style="width: {{((character.HealthLeft/character.Attribute.Health) * 100)}}%">
+                                    <span class="sr-only">70% Complete (success)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-label left"> W:</div>
+                            <div class="menu-info">{{character.EquippedWeaponName}}</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-label left"> A:</div>
+                            <div class="menu-info">{{character.EquippedArmourName}}</div>
+                        </div>
+                        <div class="menu-item"><hr /></div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="panel">
+            <div class="panel-heading " role="tab">
+                <span class="panel-title">
+                    <a data-toggle="collapse" href="#stats">Stats</a>
+                </span>
+            </div>
+            <div id="stats" class="panel-collapse collapse">
+                <div class="sidebar-accordion-nav">
+                    <div class="menu-item">
+                        <div class="menu-label left"> Strength:</div>
+                        <div class="menu-info">{{character.Attribute.Strength}}</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-label left"> Dexterity:</div>
+                        <div class="menu-info">{{character.Attribute.Dexterity}}</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-label left"> Luck:</div>
+                        <div class="menu-info">{{character.Attribute.Luck}}</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-label left"> Def. Mod:</div>
+                        <div class="menu-info">{{character.Attribute.DefenceModifier}}</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-label left"> Off. Mod:</div>
+                        <div class="menu-info">{{character.Attribute.StrengthModifier}}</div>
+                    </div>
+                    <div class="menu-item"><hr /></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading " role="tab">
+                <span class="panel-title">
+                    <a data-toggle="collapse" href="#items">Items</a>
+                </span>
+            </div>
+            <div id="items" class="panel-collapse collapse">
+                <div class="sidebar-accordion-nav">
+                    <div class="menu-item">
+                        <div class="menu-info"><a href="#">Weapons</a></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-info"><a href="#">Armours</a></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-info"><a href="#">Misc</a></div>
+                    </div>
+                    <div class="menu-item"><hr /></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    </div>
+<!-- /#sidebar-wrapper -->
+@*<div id="accordion" class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseBackground">Character</a>
+                </h4>
+            </div>
+            <div id="collapseBackground" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>{{character.Name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+
+
+
+
+@*<li class="sidebar-brand">
+        <div class="panel">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" href="#stats">Stats</a>
+                </h5>
+            </div>
+            <div id="stats" class="panel-collapse collapse">
+                <ul class="sidebar-accordion-nav">
+                    <li class="menu-item">
+                        <div class="menu-label left"> Strength:</div>
+                        <div class="menu-info">{{character.Attribute.Strength}}</div>
+                    </li>
+                    <li class="menu-item">
+                        <div class="menu-label left"> Dexterity:</div>
+                        <div class="menu-info">{{character.Attribute.Dexterity}}</div>
+                    </li>
+                    <li class="menu-item">
+                        <div class="menu-label left"> Luck:</div>
+                        <div class="menu-info">{{character.Attribute.Luck}}</div>
+                    </li>
+                    <li class="menu-item">
+                        <div class="menu-label left"> Def. Mod:</div>
+                        <div class="menu-info">{{character.Attribute.DefenceModifier}}</div>
+                    </li>
+                    <li class="menu-item">
+                        <div class="menu-label left"> Off. Mod:</div>
+                        <div class="menu-info">{{character.Attribute.StrengthModifier}}</div>
+                    </li>
+                    <li class="menu-item"><hr /></li>
+                </ul>
+            </div>
+        </div>
+    </li>
+
+    <li class="sidebar-brand">
+        <div class="panel">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" href="#items">Items</a>
+                </h5>
+            </div>
+            <div id="items" class="panel-collapse collapse">
+                <ul class="sidebar-accordion-nav">
+                    <li class="menu-item">
+                        <a href="#">Weapons</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Armours</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Misc</a>
+                    </li>
+                    <li class="menu-item"><hr /></li>
+                </ul>
+            </div>
+        </div>
+    </li>*@

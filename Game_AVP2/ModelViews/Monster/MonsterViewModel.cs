@@ -32,7 +32,7 @@ namespace Game_AVP2.ModelViews
             Attribute.Strength = s.MonsterAttribute.Strength;
             Attribute.Dexterity = s.MonsterAttribute.Dexterity;
             Attribute.Health = s.MonsterAttribute.Health;
-            Attribute.LuckModifier = s.MonsterAttribute.LuckModifier;
+            Attribute.Luck = s.MonsterAttribute.Luck;
             Attribute.DefenceModifier = s.MonsterAttribute.DefenceModifier;
             Attribute.StrengthModifier = s.MonsterAttribute.StrengthModifier;
             EquippedArmourName = s.ArmourEquipped.Name;
@@ -42,6 +42,7 @@ namespace Game_AVP2.ModelViews
             EquippedWeaponId = s.WeaponEquipped.WeaponId;
             EquippedWeaponLink = s.WeaponEquipped.WeaponImage.ImageLink;
             AbilityID = s.AbilityID;
+            Rarity = s.Rarity;
         }
     }
 }

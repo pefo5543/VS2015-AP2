@@ -1,14 +1,11 @@
-﻿using Game_AVP2.Models.Avp2.CharacterModels.Tables;
-using Game_AVP2.Models.Avp2.Items;
+﻿using Game_AVP2.Models.Avp2.Items;
 using Game_AVP2.Models.Avp2.Items.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
-namespace Game_AVP2.Models.Avp2.CharacterModels
+namespace Game_AVP2.Models.Avp2.CharacterModels.Tables
 {
     public class Character
     {
@@ -32,8 +29,14 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public string Name { get; set; }
         [Required]
         public int Experience { get; set; }
+
         [Required]
         public int Credits { get; set; }
+
+        public int Score { get; set; }
+
+        public int Level { get; set; }
+
         public string Description { get; set; }
         public string Background { get; set; }
         //Relation to StaticCharacter
@@ -56,25 +59,6 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
         public virtual ICollection<CharacterArmour> CharacterArmours { get; set; }
         public virtual ICollection<Ability> Abilities { get; set; }
     }
-
-    //public class CharacterAttribute
-    //{
-    //    [Key, ForeignKey("Character")]
-    //    public int CharacterId { get; set; }
-
-    //    public int AttributeId { get; set; }
-
-    //    public int Health { get; set; }
-    //    public int Strength { get; set; }
-    //    public int Dexterity { get; set; }
-    //    public int LuckModifier { get; set; }
-    //    public int DefenceModifier { get; set; }
-    //    public int StrengthModifier { get; set; }
-    //    [ForeignKey("AttributeId")]
-    //    public virtual Attribute Attribute { get; set; }
-
-    //    public virtual Character Character { get; set; }
-    //}
 
     public class Ability
     {

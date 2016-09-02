@@ -16,13 +16,19 @@ var CharacterModel = angular
     $scope.selectCharacter = function (detailId) {
         CharacterService.postCharacter(detailId)
             .then(function (p) {
-                if (p) {
-                    $scope.showSuccess("Character successfully added.");
-                    //$location.path('Game');
-                    $window.location.href = '/Game';
+                if (p === 0 || p === -1) {
+                    $scope.showWarning("Something went wrong, please try again");
                 }
                 else {
-                    $scope.showWarning("Something went wrong, please try again");
+                    $scope.showSuccess("Character successfully added.");
+                    //$location.path('Game');
+                    //$http.post('Game/Run', thing).success(function (id) {
+                    //    //skipReload();
+                    //    $window.location.href = '/Game/Run';
+                    //    //$location.path('/thing/' + id).replace();
+                    //});
+
+                    $window.location.href = '/Game';
                 }
             })
     };

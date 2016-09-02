@@ -23,5 +23,27 @@ namespace Game_AVP2.Controllers
                 return db;
             }
         }
+
+        private string[] GetRequestArray()
+        {
+            string path = HttpContext.Request.FilePath;
+            string[] pathArray = path.Split('/');
+
+            return pathArray;
+        }
+        public string GetRequestString(int index)
+        {
+            string[] pathArray = GetRequestArray();
+
+            return pathArray[index];
+        }
+
+        public int GetNumOfRequestParams()
+        {
+            string[] pathArray = GetRequestArray();
+            int count = pathArray.Count();
+
+            return count;
+        }
     }
 }

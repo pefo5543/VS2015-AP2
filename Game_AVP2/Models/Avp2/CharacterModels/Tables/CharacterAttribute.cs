@@ -14,6 +14,9 @@ namespace Game_AVP2.Models.Avp2.CharacterModels.Tables
         [Required]
         public int AttributeId { get; set; }
 
+        public int HealthLeft { get; set; }
+        public int StaminaLeft { get; set; }
+
         public virtual Character Character { get; set; }
         [ForeignKey("AttributeId")]
         public virtual Tables.Attribute Attribute { get; set; }

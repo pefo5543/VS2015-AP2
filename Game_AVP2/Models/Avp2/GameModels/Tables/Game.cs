@@ -1,4 +1,4 @@
-﻿using Game_AVP2.Models.Avp2.CharacterModels;
+﻿using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,12 +1,11 @@
 ﻿using Game_AVP2.Models.Avp2;
 using Game_AVP2.Models.Avp2.CharacterModels;
+using Game_AVP2.Models.Avp2.GameModels;
 using Game_AVP2.ModelViews;
-using Game_AVP2.ModelViews.Character;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Game_AVP2.Controllers
@@ -49,26 +48,18 @@ namespace Game_AVP2.Controllers
 
             return View(list);
         }
-        //Json get from angular to retrieve all items in db.
-        //public JsonResult GetCharacter(int StaticCharacterId)
-        //{
-        //    try
-        //    {
-        //        StaticCharacter character = DbCurrent.StaticCharacters.Find(StaticCharacterId);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        //...
-        //    }
-        //    CreateCharacterViewModel c = /*model.RenderCharacter(character, DbCurrent);*/ new CreateCharacterViewModel();
-
-        //    return Json(c, JsonRequestBehavior.AllowGet);
-        //}
         [HttpPost]
         public JsonResult SetCharacter (int staticCharacterId)
         {
+            int result = 0;
            string userId = User.Identity.GetUserId();
-            bool result = model.CreateUserCharacter(staticCharacterId, userId, DbCurrent);
+            int characterId = model.CreateUserCharacter(staticCharacterId, userId, DbCurrent);
+            if (characterId > 0)
+            {
+                GameModel gm = new GameModel();
+               result = model.CreateNewGame(characterId, DbCurrent);
+            }
+
             return Json(result, JsonRequestBehavior.AllowGet);
 
             //return Json(new

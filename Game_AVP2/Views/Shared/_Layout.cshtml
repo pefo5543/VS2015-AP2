@@ -2,7 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Petter Fogelqvist">
     <title>@ViewBag.Title - Alvprinsessan 2 - the Game</title>
     <link href="~/Content/angular-growl.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
@@ -10,41 +13,49 @@
     <script src="~/Scripts/typings/angular-growl.min.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Alvprinsessan 2", "Index", "Game", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Start", "Index", "Game")</li>
-                    <li>@Html.ActionLink("Om", "About", "Game")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Game")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <div id="wrapper">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Alvprinsessan 2", "Index", "Game", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Start", "Index", "Game")</li>
+                        <li>@Html.ActionLink("Om", "About", "Game")</li>
+                        <li>@Html.ActionLink("Kontakt", "Contact", "Game")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <div class="row col-md-12">
-            <footer>
-                <p class="text-center navbar-fixed-bottom">&copy; @DateTime.Now.Year - Alvprinsessan 2</p>
-            </footer>
-        </div>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <div class="row col-md-12">
+                <footer>
+                    <p class="text-center navbar-fixed-bottom">&copy; @DateTime.Now.Year - Alvprinsessan 2</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <!-- Menu Toggle Script -->
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
 </body>
 </html>

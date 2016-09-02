@@ -34,7 +34,7 @@
                     <label for="Luck">Luck</label>
                     <fieldset>
                         <select name="Luck" class="form-control" required>
-                            <option ng-mouseup="detail.LuckModifier = r.Value" ng-selected="detail.Attribute.LuckModifier" ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
+                            <option ng-mouseup="detail.Luck = r.Value" ng-selected="detail.Attribute.Luck" ng-repeat="r in enums.AttributeLowEnums" value={{r.name}}>{{r.name}}</option>
                         </select>
                     </fieldset>
                     <span class="text-danger" ng-show="editItemForm.Luck.$invalid">Select monsters luck.</span>

@@ -8,12 +8,5 @@ namespace Game_AVP2.Controllers
 {
     public abstract class AdminBaseController : BaseController
     {
-        public string GetRequestString(int index)
-        {
-            string path = HttpContext.Request.FilePath;
-            string[] pathArray = path.Split('/');
-
-            return pathArray[index];
-        }
     }
 }

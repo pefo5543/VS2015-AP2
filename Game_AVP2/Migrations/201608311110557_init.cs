@@ -182,6 +182,7 @@ namespace Game_AVP2.Migrations
                         EquippedWeaponId = c.Int(nullable: false),
                         EquippedArmourId = c.Int(nullable: false),
                         ImageId = c.Int(nullable: false),
+                        Rarity = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.MonsterId)
                 .ForeignKey("dbo.Armours", t => t.EquippedArmourId, cascadeDelete: true)
@@ -229,7 +230,7 @@ namespace Game_AVP2.Migrations
                         Health = c.Int(nullable: false),
                         Strength = c.Int(nullable: false),
                         Dexterity = c.Int(nullable: false),
-                        LuckModifier = c.Int(nullable: false),
+                        Luck = c.Int(nullable: false),
                         DefenceModifier = c.Int(nullable: false),
                         StrengthModifier = c.Int(nullable: false),
                     })
@@ -311,7 +312,7 @@ namespace Game_AVP2.Migrations
                         Health = c.Int(nullable: false),
                         Strength = c.Int(nullable: false),
                         Dexterity = c.Int(nullable: false),
-                        LuckModifier = c.Int(nullable: false),
+                        Luck = c.Int(nullable: false),
                         DefenceModifier = c.Int(nullable: false),
                         StrengthModifier = c.Int(nullable: false),
                     })
@@ -328,7 +329,7 @@ namespace Game_AVP2.Migrations
                         Health = c.Int(nullable: false),
                         Strength = c.Int(nullable: false),
                         Dexterity = c.Int(nullable: false),
-                        LuckModifier = c.Int(nullable: false),
+                        Luck = c.Int(nullable: false),
                         DefenceModifier = c.Int(nullable: false),
                         StrengthModifier = c.Int(nullable: false),
                     })
@@ -371,6 +372,17 @@ namespace Game_AVP2.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.Stories",
+                c => new
+                    {
+                        StoryId = c.Int(nullable: false, identity: true),
+                        Text = c.String(nullable: false),
+                        IsBattle = c.Boolean(nullable: false),
+                        NextText = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.StoryId);
             
             CreateTable(
                 "dbo.CharacterAbilities",
@@ -488,6 +500,7 @@ namespace Game_AVP2.Migrations
             DropTable("dbo.StaticCharacterAbilities");
             DropTable("dbo.MonsterAbilities");
             DropTable("dbo.CharacterAbilities");
+            DropTable("dbo.Stories");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.WeaponImages");
             DropTable("dbo.CharacterImages");

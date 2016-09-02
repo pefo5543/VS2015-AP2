@@ -76,7 +76,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
             ca.DefenceModifier = a.DefenceModifier;
             ca.Dexterity = a.Dexterity;
             ca.Health = a.Health;
-            ca.LuckModifier = a.LuckModifier;
+            ca.Luck = a.Luck;
             ca.Strength = a.Strength;
             ca.StrengthModifier = a.StrengthModifier;
 
@@ -172,7 +172,7 @@ namespace Game_AVP2.Models.Avp2.CharacterModels
             a.Dexterity = data.Attribute.Dexterity;
             a.Strength = data.Attribute.Strength;
             a.Health = data.Attribute.Health;
-            a.LuckModifier = data.Attribute.LuckModifier;
+            a.Luck = data.Attribute.Luck;
             a.StrengthModifier = data.Attribute.StrengthModifier;
             a.DefenceModifier = data.Attribute.DefenceModifier;
             a.MonsterId = id;

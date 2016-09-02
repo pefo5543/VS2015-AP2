@@ -1,0 +1,53 @@
+﻿<link href="~/Content/GameRelated.css" rel="stylesheet" />
+<link href="~/Content/simple-sidebar.css" rel="stylesheet" />
+<link href="~/Content/info-bar.css" rel="stylesheet" />
+<script src="~/Scripts/AngularModels/GameModel.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>
+@using Game_AVP2.ModelViews.Game
+@model GameViewModel
+@{
+    ViewBag.Title = "Game";
+}
+<div ng-app="GameModel">
+    <div ng-controller="GameController" ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+        <div growl></div> <!-- adding the grow directive to html -->
+        <div id="page-content-wrapper">
+            @Html.Partial("_Sidebar")
+            <div class="game_area_wrapper">
+                <div class="row col-lg-12 col-md-12 hidden-sm hidden-xs">
+                    <div id="infobar-wrapper">
+                        <div class="info-bar">
+                            @Html.Partial("_Infobar")
+
+                        </div>
+                    </div>
+                </div>
+                @*Main Game Content here*@
+                <div class="row col-lg-12 col-md-12">
+                    <div id="game-battletext-wrapper">
+                        <div ng-show="battleShow">
+                            @Html.Partial("_BattleContainer")
+                        </div>
+                        <div ng-hide="textHide">
+                            @Html.Partial("_TextContainer")
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    @*<div ng-hide="detailHide">
+                            @Html.Partial("_MonsterInfo")
+                        </div>
+                        <div ng-show="editShow">
+                            @Html.Partial("_EditMonster")
+                        </div>
+                        <div ng-show="addShow">
+                            @Html.Partial("_AddMonster")
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

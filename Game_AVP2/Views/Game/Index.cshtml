@@ -20,16 +20,26 @@
                 @Html.ActionLink("Create", "Create", "Characters", null, new { @class = "btn btn-primary" })
             </div>
         }
-        else if((bool)ViewBag.HasGame != true)
+        @*else if((bool)ViewBag.HasGame != true)
         {
-            <p>Starta  nytt spel här</p>
+            <p>Starta spel</p>
             <div class="btn-group btn-group-justified">
                 @Html.ActionLink("New Game", "NewGame", "Game", null, new { @class = "btn btn-primary" })
+            </div>
+        }*@
+        else if ((bool)ViewBag.HasGame == true && (int)ViewBag.Progress == 0)
+        {
+            <p>Starta spel</p>
+            <div class="btn-group btn-group-justified">
+                @Html.ActionLink("Start", "Run", "Game", null, new { @class = "btn btn-success" })
             </div>
         }
         else //Continue game
         {
             <p>Fortsätt spela här...</p>
+            <div class="btn-group btn-group-justified">
+                @Html.ActionLink("Continue", "Run", "Game", null, new { @class = "btn btn-success" })
+            </div>
 
         }
     </div>

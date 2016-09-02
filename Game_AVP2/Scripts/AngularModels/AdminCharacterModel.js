@@ -42,6 +42,13 @@ var AdminCharacterModel = angular
     { id: 5, name: 4 },
     { id: 6, name: 5 }
         ],
+        RarityEnums: [
+   { id: 1, name: 1 },
+   { id: 2, name: 2 },
+   { id: 3, name: 3 },
+   { id: 4, name: 4 },
+   { id: 5, name: 5 }
+        ],
     })
 .controller("StaticCharacterController", function ($scope, $location, Enums, growl, CharacterService, EditCharacterService, DeleteCharacterService, entityService) {
     var controller = 'AdminStaticCharacters';
