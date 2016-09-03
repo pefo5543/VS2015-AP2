@@ -361,7 +361,7 @@ D6AnimBuilder.prototype.genDiceHtml = function(layout, callback, callbackData) {
 	var numTotalImgs = this.groupsize * this.numGroups;
 	for (var i=0; i<layout.length; ++i) {
 		if (dieCount >= numTotalImgs) break;
-		genHtml += "<div id='" + this.id + "_diceGroup_" + i + "' class='diceGroup'>";
+		genHtml += "<div id='" + this.id + "_diceGroup_" + i + "' class='diceGroup' ng-hide='diceHide'>";
 		var imgsThisRow = layout[i] * this.groupsize;
 		for (var j=0; j<imgsThisRow; ++j) {
 			++dieCount;
@@ -461,9 +461,9 @@ D6.dice = function(numDice, callback, callbackData, useImages, buttonLabel) {
 		"callback" : callback,
 		"callbackData" : callbackData
 	};
-	var genHtml = "<div id='diceall'>" + builder.genDiceHtml(layout, D6.middleManCallback, middleManData);
+	var genHtml = "<div id='diceall' class='col-md-6 col-sm-6'>" + builder.genDiceHtml(layout, D6.middleManCallback, middleManData);
 	if (buttonLabel != "none") {
-		genHtml += "<div id='diceform'><form><input type='button' class='btn btn-info' id='dicebutton' value='" + buttonLabel + "' onclick='D6AnimBuilder.get(\"dice\").reset(); D6AnimBuilder.get(\"dice\").start()' /></form></div>";
+	    genHtml += "<div id='diceform'><form><input type='button' class='btn btn-info' id='dicebutton' value='" + buttonLabel + "'ng-hide='diceHide' onclick='D6AnimBuilder.get(\"dice\").reset(); D6AnimBuilder.get(\"dice\").start()'/></form></div>";
 	}
 	genHtml += "</div>";
 	D6.genHtml = genHtml;

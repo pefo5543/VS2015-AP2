@@ -12,18 +12,21 @@ var GameModel = angular
 
     $scope.detail = {};
     $scope.battleShow = true;
-    $scope.diceResult =
-    'I am test';
     $scope.textHide = true;
     //$scope.addShow = true;
     //console.log($location.path);
     $scope.init = function (gameViewModel) {
         $scope.character = gameViewModel.Character;
     }
-    $scope.test = function () {
-        alert($scope.diceResult);
-        console.log("hej");
+    $scope.diceResultFunc = function (diceResult) {
+        alert(diceResult);
+        $scope.resultPlayerDice = diceResult;
+        //$scope.diceHide = true;
+        $scope.diceRollMonsterMsg = "Test monster rolls 4";
     }
+    //$scope.test = function () {
+    //    alert($scope.diceResult);
+    //}
 
     $scope.showWarning = function (text) {
         growl.warning(text, { title: 'Warning!' });

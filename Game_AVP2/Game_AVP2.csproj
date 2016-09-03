@@ -227,21 +227,9 @@
     <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Helpers\GenerateSelectListFromDb.cs" />
-    <Compile Include="Migrations\201608311110557_init.cs" />
-    <Compile Include="Migrations\201608311110557_init.Designer.cs">
-      <DependentUpon>201608311110557_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608311325563_health.cs" />
-    <Compile Include="Migrations\201608311325563_health.Designer.cs">
-      <DependentUpon>201608311325563_health.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609010825206_score.cs" />
-    <Compile Include="Migrations\201609010825206_score.Designer.cs">
-      <DependentUpon>201609010825206_score.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609011008453_score1.cs" />
-    <Compile Include="Migrations\201609011008453_score1.Designer.cs">
-      <DependentUpon>201609011008453_score1.cs</DependentUpon>
+    <Compile Include="Migrations\201609032005549_init.cs" />
+    <Compile Include="Migrations\201609032005549_init.Designer.cs">
+      <DependentUpon>201609032005549_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\AttributeBase.cs" />
@@ -1236,7 +1224,8 @@
     <Content Include="Views\Shared\_Infobar.cshtml" />
     <Content Include="Views\Game\_BattleContainer.cshtml" />
     <Content Include="Views\Game\_TextContainer.cshtml" />
-    <Content Include="Views\Game\_DiceRoller.cshtml" />
+    <Content Include="Views\Game\_DiceRollerPlayer.cshtml" />
+    <Content Include="Views\Game\_DiceRollerMonster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1259,17 +1248,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608311110557_init.resx">
-      <DependentUpon>201608311110557_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608311325563_health.resx">
-      <DependentUpon>201608311325563_health.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609010825206_score.resx">
-      <DependentUpon>201609010825206_score.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609011008453_score1.resx">
-      <DependentUpon>201609011008453_score1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609032005549_init.resx">
+      <DependentUpon>201609032005549_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

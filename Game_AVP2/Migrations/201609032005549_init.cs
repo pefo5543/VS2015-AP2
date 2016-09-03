@@ -25,6 +25,8 @@ namespace Game_AVP2.Migrations
                         Name = c.String(nullable: false, maxLength: 50),
                         Experience = c.Int(nullable: false),
                         Credits = c.Int(nullable: false),
+                        Score = c.Int(nullable: false),
+                        Level = c.Int(nullable: false),
                         Description = c.String(),
                         Background = c.String(),
                         StaticCharacterId = c.Int(nullable: false),
@@ -326,6 +328,8 @@ namespace Game_AVP2.Migrations
                     {
                         CharacterId = c.Int(nullable: false),
                         AttributeId = c.Int(nullable: false),
+                        HealthLeft = c.Int(nullable: false),
+                        StaminaLeft = c.Int(nullable: false),
                         Health = c.Int(nullable: false),
                         Strength = c.Int(nullable: false),
                         Dexterity = c.Int(nullable: false),

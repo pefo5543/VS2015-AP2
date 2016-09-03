@@ -35,6 +35,7 @@ DARO.info = {sum: 0, result_string: "", results_id: "__results"};
 DARO.callback = function(total, info, results) {
   info.sum = info.sum + total;
   info.result_string = info.result_string + " (" + results[0] + "," + results[1] + ")";
+  //info.myResult = info.sum;
   DARO.update_results(info);
   if (results[0] == results[1]) {
 	// Here's how we make the dice roll again when doubles are rolled.
@@ -43,6 +44,11 @@ DARO.callback = function(total, info, results) {
   } else {
 	info.result_string = info.result_string + " = " + info.sum;
 	DARO.update_results(info);
+	var scope = angular.element($("div[ng-controller='GameController']")).scope();
+	scope.$apply(function () {
+	    //scope.diceResult = info.sum;
+	    scope.diceResultFunc(info.sum); //= info.sum;
+	})
 	info.result_string = "";
 	info.sum = 0;
   }
@@ -52,6 +58,7 @@ DARO.update_results = function(info) {
   var res_elem = document.getElementById(info.results_id);
   if (res_elem) {
       res_elem.innerHTML = info.result_string;
+      //res_elem.value = info.result_string;
       res_elem.value = info.result_string;
   }
 }
