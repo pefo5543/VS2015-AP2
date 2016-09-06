@@ -33,8 +33,6 @@ namespace Game_AVP2.Models.Avp2.CharacterModels.Tables
         [Required]
         public int Credits { get; set; }
 
-        public int Score { get; set; }
-
         public int Level { get; set; }
 
         public string Description { get; set; }

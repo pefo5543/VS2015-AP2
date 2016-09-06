@@ -54,6 +54,8 @@ namespace Game_AVP2.Models
         public DbSet<MonsterImage> MonsterImages { get; set; }
         public DbSet<MonsterAttribute> MonsterAttributes { get; set; }
         public DbSet<Story>Stories { get; set; }
+        public DbSet<Episode> Episodes { get; set; }
+        public DbSet<GameEpisode> GameEpisodes { get; set; }
 
 
         public ApplicationDbContext()
@@ -99,6 +101,10 @@ namespace Game_AVP2.Models
             modelBuilder.Entity<Battle>()
     .HasRequired(m => m.Monster)
     .WithMany(c => c.Battles)
+    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<GameEpisode>()
+    .HasRequired(m => m.Game)
+    .WithMany(c => c.GameEpisodes)
     .WillCascadeOnDelete(false);
             //modelBuilder.Entity<Character>()
             //    .Property(c => c.CharacterId)

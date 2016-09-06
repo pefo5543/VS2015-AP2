@@ -158,6 +158,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -213,6 +217,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -231,6 +236,22 @@
     <Compile Include="Migrations\201609032005549_init.Designer.cs">
       <DependentUpon>201609032005549_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609050909091_episodes.cs" />
+    <Compile Include="Migrations\201609050909091_episodes.Designer.cs">
+      <DependentUpon>201609050909091_episodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609050915358_storyupdate.cs" />
+    <Compile Include="Migrations\201609050915358_storyupdate.Designer.cs">
+      <DependentUpon>201609050915358_storyupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609050926396_episodeupdate.cs" />
+    <Compile Include="Migrations\201609050926396_episodeupdate.Designer.cs">
+      <DependentUpon>201609050926396_episodeupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609050956344_score.cs" />
+    <Compile Include="Migrations\201609050956344_score.Designer.cs">
+      <DependentUpon>201609050956344_score.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\AttributeBase.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
@@ -243,7 +264,10 @@
     <Compile Include="Models\Avp2\CharacterModels\Tables\MonsterImage.cs" />
     <Compile Include="Models\Avp2\GameModels\GameModel.cs" />
     <Compile Include="Models\Avp2\GameModels\Tables\Battle.cs" />
+    <Compile Include="Models\Avp2\GameModels\Tables\Episode.cs" />
+    <Compile Include="Models\Avp2\GameModels\Tables\EpisodeRarity.cs" />
     <Compile Include="Models\Avp2\GameModels\Tables\Game.cs" />
+    <Compile Include="Models\Avp2\GameModels\Tables\GameEpisode.cs" />
     <Compile Include="Models\Avp2\GameModels\Tables\Story.cs" />
     <Compile Include="Models\Avp2\Items\ArmourModel.cs" />
     <Compile Include="Models\Avp2\BaseModel.cs" />
@@ -273,7 +297,9 @@
     <Compile Include="ModelViews\CharacterModelViews\CharacterBaseViewModel.cs" />
     <Compile Include="ModelViews\CharacterModelViews\CharacterViewModel.cs" />
     <Compile Include="ModelViews\CharacterModelViews\CreateCharacterViewModel.cs" />
+    <Compile Include="ModelViews\Game\EpisodeViewModel.cs" />
     <Compile Include="ModelViews\Game\GameViewModel.cs" />
+    <Compile Include="ModelViews\Game\StoryViewModel.cs" />
     <Compile Include="ModelViews\ItemViewModel.cs" />
     <Compile Include="Models\Avp2\Items\Tables\Misc.cs" />
     <Compile Include="ModelViews\MiscViewModel.cs" />
@@ -294,14 +320,22 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\GameRelated.css" />
     <Content Include="Content\Images\weapons\shortsword.png" />
     <Content Include="Content\info-bar.css" />
+    <Content Include="Content\rpg-awesome.css" />
+    <Content Include="Content\rpg-awesome.min.css" />
     <Content Include="Content\simple-sidebar.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\rpg-icons.svg" />
+    <Content Include="fonts\rpgawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\bg\cave-800x600.png" />
     <Content Include="images\dice\blank.gif" />
     <Content Include="images\dice\dices-1.gif" />
     <Content Include="images\dice\dices-2.gif" />
@@ -1128,6 +1162,32 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\rpg-icons.eot" />
+    <Content Include="fonts\rpg-icons.ttf" />
+    <Content Include="fonts\rpg-icons.woff" />
+    <Content Include="fonts\rpgawesome-webfont.eot" />
+    <Content Include="fonts\rpgawesome-webfont.ttf" />
+    <Content Include="fonts\rpgawesome-webfont.woff" />
+    <Content Include="Content\rpg-awesome.css.map" />
+    <Content Include="Content\rpg-awesome-scss\.scss-lint.yml" />
+    <Content Include="Content\rpg-awesome-scss\rpg-awesome.scss" />
+    <Content Include="Content\rpg-awesome-scss\_bordered-pulled.scss" />
+    <Content Include="Content\rpg-awesome-scss\_core.scss" />
+    <Content Include="Content\rpg-awesome-scss\_fixed-width.scss" />
+    <Content Include="Content\rpg-awesome-scss\_icons.scss" />
+    <Content Include="Content\rpg-awesome-scss\_larger.scss" />
+    <Content Include="Content\rpg-awesome-scss\_list.scss" />
+    <Content Include="Content\rpg-awesome-scss\_mixins.scss" />
+    <Content Include="Content\rpg-awesome-scss\_path.scss" />
+    <Content Include="Content\rpg-awesome-scss\_rotated-flipped.scss" />
+    <Content Include="Content\rpg-awesome-scss\_spinning.scss" />
+    <Content Include="Content\rpg-awesome-scss\_stacked.scss" />
+    <Content Include="Content\rpg-awesome-scss\_variables.scss" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\angular\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\angular\jquery-3.1.0.js" />
     <Content Include="Scripts\angular\jquery-3.1.0.min.js" />
@@ -1226,6 +1286,19 @@
     <Content Include="Views\Game\_TextContainer.cshtml" />
     <Content Include="Views\Game\_DiceRollerPlayer.cshtml" />
     <Content Include="Views\Game\_DiceRollerMonster.cshtml" />
+    <Content Include="Styles\_core.scss" />
+    <Content Include="Styles\_fixed-width.scss" />
+    <Content Include="Styles\_icons.scss" />
+    <Content Include="Styles\_larger.scss" />
+    <Content Include="Styles\_list.scss" />
+    <Content Include="Styles\_mixins.scss" />
+    <Content Include="Styles\_path.scss" />
+    <Content Include="Styles\_rotated-flipped.scss" />
+    <Content Include="Styles\_spinning.scss" />
+    <Content Include="Styles\_stacked.scss" />
+    <Content Include="Styles\_variables.scss" />
+    <Content Include="Styles\rpg-awesome.scss" />
+    <Content Include="Styles\_bordered-pulled.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1250,6 +1323,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609032005549_init.resx">
       <DependentUpon>201609032005549_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050909091_episodes.resx">
+      <DependentUpon>201609050909091_episodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050915358_storyupdate.resx">
+      <DependentUpon>201609050915358_storyupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050926396_episodeupdate.resx">
+      <DependentUpon>201609050926396_episodeupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050956344_score.resx">
+      <DependentUpon>201609050956344_score.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

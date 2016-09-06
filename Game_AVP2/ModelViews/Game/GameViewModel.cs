@@ -10,8 +10,9 @@ namespace Game_AVP2.ModelViews.Game
     {
         //same as characterid
         public int GameId { get; set; }
-
+        //public StoryViewModel Story { get; set; }
         public CharacterViewModel Character { get; set; } 
+        public EpisodeViewModel Episode { get; set; }
 
         public GameViewModel()
         {
@@ -25,6 +26,12 @@ namespace Game_AVP2.ModelViews.Game
         {
             GameId = gameId;
             Character = c;
+        }
+        public GameViewModel(int gameId, CharacterViewModel c, EpisodeViewModel e)
+        {
+            GameId = gameId;
+            Character = c;
+            Episode = e;
         }
     }
 }

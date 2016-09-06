@@ -21,11 +21,17 @@ namespace Game_AVP2.ModelViews
         public MonsterViewModel() :base()
         { 
         }
-        public MonsterViewModel (Monster s)
+        public MonsterViewModel (Monster s, bool forUi = false)
         {
-            MonsterId = s.MonsterId;
+            if(!forUi)
+            {
+                MonsterId = s.MonsterId;
+                ImageId = s.MonsterImage.MonsterImageId;
+                EquippedArmourId = s.ArmourEquipped.ArmourId;
+                EquippedWeaponId = s.WeaponEquipped.WeaponId;
+                AbilityID = s.AbilityID;
+            }
             ImageLink = s.MonsterImage.ImageLink;
-            ImageId = s.MonsterImage.MonsterImageId;
             Name = s.Name;
             Description = s.Description;
             Background = s.Background;
@@ -36,12 +42,9 @@ namespace Game_AVP2.ModelViews
             Attribute.DefenceModifier = s.MonsterAttribute.DefenceModifier;
             Attribute.StrengthModifier = s.MonsterAttribute.StrengthModifier;
             EquippedArmourName = s.ArmourEquipped.Name;
-            EquippedArmourId = s.ArmourEquipped.ArmourId;
             EquippedArmourLink = s.ArmourEquipped.ArmourImage.ImageLink;
             EquippedWeaponName = s.WeaponEquipped.Name;
-            EquippedWeaponId = s.WeaponEquipped.WeaponId;
             EquippedWeaponLink = s.WeaponEquipped.WeaponImage.ImageLink;
-            AbilityID = s.AbilityID;
             Rarity = s.Rarity;
         }
     }

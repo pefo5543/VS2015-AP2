@@ -1,6 +1,7 @@
 ﻿using Game_AVP2.Models.Avp2;
 using Game_AVP2.Models.Avp2.CharacterModels;
 using Game_AVP2.Models.Avp2.GameModels;
+using Game_AVP2.Models.Avp2.GameModels.Tables;
 using Game_AVP2.ModelViews;
 using Microsoft.AspNet.Identity;
 using System;
@@ -49,15 +50,22 @@ namespace Game_AVP2.Controllers
             return View(list);
         }
         [HttpPost]
-        public JsonResult SetCharacter (int staticCharacterId)
+        public JsonResult SetCharacter(int staticCharacterId)
         {
-            int result = 0;
-           string userId = User.Identity.GetUserId();
+            int result = -1;
+            string userId = User.Identity.GetUserId();
             int characterId = model.CreateUserCharacter(staticCharacterId, userId, DbCurrent);
             if (characterId > 0)
             {
                 GameModel gm = new GameModel();
-               result = model.CreateNewGame(characterId, DbCurrent);
+                Game newGame = model.CreateNewGame(characterId, DbCurrent);
+                if (newGame != null && newGame.GameId > 0)
+                {
+                    result = newGame.GameId;
+                    //first episode should always have id 1
+                    gm.ConstructGameEpisode(newGame, 1, DbCurrent);
+
+                }
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

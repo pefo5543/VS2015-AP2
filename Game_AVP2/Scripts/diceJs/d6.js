@@ -463,7 +463,7 @@ D6.dice = function(numDice, callback, callbackData, useImages, buttonLabel) {
 	};
 	var genHtml = "<div id='diceall' class='col-md-6 col-sm-6'>" + builder.genDiceHtml(layout, D6.middleManCallback, middleManData);
 	if (buttonLabel != "none") {
-	    genHtml += "<div id='diceform'><form><input type='button' class='btn btn-info' id='dicebutton' value='" + buttonLabel + "'ng-hide='diceHide' onclick='D6AnimBuilder.get(\"dice\").reset(); D6AnimBuilder.get(\"dice\").start()'/></form></div>";
+	    genHtml += "<div id='diceform'><form><input type='button' class='btn btn-info' id='dicebutton' value='" + buttonLabel + "'ng-disabled='myButton' ng-click='myButton=true' ng-hide='diceHide' onclick='D6AnimBuilder.get(\"dice\").reset(); D6AnimBuilder.get(\"dice\").start()'/></form></div>";
 	}
 	genHtml += "</div>";
 	D6.genHtml = genHtml;

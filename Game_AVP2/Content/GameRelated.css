@@ -1,40 +1,152 @@
 ﻿body {
     background:#8b8383;
 }
-
+/*#game_area_wrapper {
+    background: rgba(0, 0, 0, 0) url("/images/bg/cave-800x600.png") scroll left top;
+     background-image: url("/images/bg/cave-800x600.png");
+    background-size: cover;
+}*/
 #game-battletext-wrapper {
+     border-radius:10px;
     height:400px;
-    background: #cac6c6;
+    /*background: #cac6c6;*/
+    background-image: url("/images/bg/cave-800x600.png");
+    background-size: cover;
     margin:5px;
+    padding:10px;
 }
+/*responsive images: img {
+    max-width: 100%;
+    height: auto;
+}*/
+/*battle related*/
 #battle-player {
     height:200px;
-    background: #4cff00;
+    /*background: #4cff00;*/
+    border-radius:9px;
+    background: rgba(76, 175, 80, 0.5);
     margin:0px;
+    padding:5px;
 }
 #battle-monster {
     height:200px;
-    background: #ff0000;
+    /*background: #ff0000;*/
+    border-radius:9px;
+    background: rgba(255, 00, 00, 0.5);
     margin:0px;
+    padding:5px;
+}
+#monsterimg {
+    padding:0;
+    width:100px;
+    height:100px;
+}
+.img-responsive {
+    max-width: 100%;
+     height: auto;
+    display:block;
+}/*max-width: 100%, height: auto, and display:block*/
+#battle-monster  h4{
+    font-weight:700;
+    color:blue;
+    margin:2px;
 }
 #dices-wrapper {
     height:100px;
     margin-top:20px;
+    color:#ffffff;
+}
+.battle-round-info {
+    /*background:#a18b8b;*/
+    /*background: rgba(0, 0, 0, 0) url("/images/main/sidebar-bg-wall.png") repeat scroll left top;*/
+    /*border-radius:8px;*/
+    margin-bottom:10px;
+    padding:10px;
+}
+#battleCounter h3, #roundCounter h3 {
+    margin:0px;
+}
+.battle_small_stats div {
+    background-color:transparent;
+    border:none;
+    color:black;
+    font-weight:600;
+    /*font-size: 80%;*/
+    line-height:50%;
+}
+.ra-hover {
+    /*color: #222222;*/
+    font-size: 17px;
+    /*font-family:Arial, Helvetica, sans-serif;*/
+    line-height: 40px;
 }
 
 /* Extra small devices (phones, up to 480px) */
 @media screen and (max-width: 767px) {
     p { font-size: 80%; }
+    #game_area_wrapper {width:50%;}
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
     p { font-size: 80%; }
+    #game_area_wrapper {width:75%;}
 }
 /* tablets/desktops and up ----------- */
 @media (min-width: 992px) and (max-width: 1199px) {
     p { font-size: 100%; }
+    #game_area_wrapper {width:100%;}
 }
 /* large desktops and up ----------- */
 @media screen and (min-width: 1200px) {
     p { font-size: 100%; }
+    #game_area_wrapper {width:100%;}
+}
+
+/*text scroll window*/
+.textStory {
+    background:#f7f5f5;
+ height: 30%;	
+ /*overflow: hidden;
+ position: relative;*/
+ margin-bottom:10px;
+ border-radius:10px;
+}
+.textStory h3 {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ line-height: 50px;
+ text-align: center;
+ /* Starting position */
+ -moz-transform:translateX(100%);
+ -webkit-transform:translateX(100%);	
+ transform:translateX(100%);
+ /* Apply animation to this element */	
+ -moz-animation: textStory 15s linear infinite;
+ -webkit-animation: textStory 15s linear infinite;
+ animation: textStory 15s linear infinite;
+}
+.textStory marquee {
+}
+/* Move it (define the animation) */
+@-moz-keyframes textStory {
+ 0%   { -moz-transform: translateX(100%); }
+ 100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes textStory {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes textStory {
+ 0%   { 
+ -moz-transform: translateX(100%); /* Firefox bug fix */
+ -webkit-transform: translateX(100%); /* Firefox bug fix */
+ transform: translateX(100%); 		
+ }
+ 100% { 
+ -moz-transform: translateX(-100%); /* Firefox bug fix */
+ -webkit-transform: translateX(-100%); /* Firefox bug fix */
+ transform: translateX(-100%); 
+ }
 }

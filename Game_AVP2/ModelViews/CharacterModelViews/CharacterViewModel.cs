@@ -21,7 +21,6 @@ namespace Game_AVP2.ModelViews.CharacterModelViews
         public int Experience { get; set; }
         public int Credits { get; set; }
         public int Level { get; set; }
-        public int Score { get; set; }
         public int HealthLeft { get; set; }
 
         public CharacterViewModel() :base()
@@ -37,7 +36,6 @@ namespace Game_AVP2.ModelViews.CharacterModelViews
             Background = s.Background;
             Experience = s.Experience;
             Credits = s.Credits;
-            Score = s.Score;
             Level = s.Level;
             HealthLeft = s.CharacterAttribute.HealthLeft;
             Attribute.Strength = s.CharacterAttribute.Strength;

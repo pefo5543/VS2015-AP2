@@ -30,7 +30,13 @@ namespace Game_AVP2
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       //"~/Content/simple-sidebar.css",
-                      "~/Content/site.css"));
+                      "~/Content/font-awesome.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/site.css",
+            "~/Content/rpg-awesome.css",
+            //"~/Content/rpg-awesome.css.map",
+            "~/Content/rpg-awesome.min.css",
+            "~/Content/rpg-awesome-scss/rpg-awesome.css"));
         }
     }
 }

@@ -18,6 +18,9 @@ namespace Game_AVP2.Models.Avp2.GameModels.Tables
         }
         [Required]
         public int Progress { get; set; }
+
+        public int Score { get; set; }
+
         [Required]
         public int BattleCount { get; set; }
         [Required]
@@ -28,6 +31,7 @@ namespace Game_AVP2.Models.Avp2.GameModels.Tables
         public virtual Character Character { get; set; }
 
         public virtual ICollection<Battle> Battles { get; set; }
+        public virtual ICollection<GameEpisode> GameEpisodes { get; set; }
         //public virtual ICollection<CharacterArmour> CharacterArmours { get; set; }
         //public virtual ICollection<Ability> Abilities { get; set; }
     }

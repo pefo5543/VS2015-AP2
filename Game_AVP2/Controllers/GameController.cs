@@ -3,6 +3,7 @@ using Game_AVP2.Models.Avp2.CharacterModels.Tables;
 using Game_AVP2.Models.Avp2.GameModels;
 using Game_AVP2.Models.Avp2.GameModels.Tables;
 using Game_AVP2.Models.Avp2.Items;
+using Game_AVP2.ModelViews;
 using Game_AVP2.ModelViews.CharacterModelViews;
 using Game_AVP2.ModelViews.Game;
 using Microsoft.AspNet.Identity;
@@ -101,13 +102,25 @@ namespace Game_AVP2.Controllers
             if (GameId > 0 && UserId != null)
             {
                 character = model.PopulateCharacterViewModel(GameId ,DbCurrent);
-                viewModel = new GameViewModel(GameId, character);
+                GameEpisode gameEpisode = model.GetCurrentGameEpisode(GameId, DbCurrent);
+                EpisodeViewModel episode = new EpisodeViewModel(GameId, gameEpisode, DbCurrent);
+                viewModel = new GameViewModel(GameId, character, episode);
             } else
             {
                 //redirect to index
                 RedirectToAction("Index");
             }
+
+
             return View(viewModel);
+        }
+        [HttpPost]
+        public JsonResult GetMonster(List<int> rarities)
+        {
+            Monster m = model.GenerateMonster(rarities, DbCurrent);
+            MonsterViewModel view = new MonsterViewModel(m,true);
+
+            return Json(view, JsonRequestBehavior.AllowGet);
         }
         //[Authorize(Roles = "Admin")]
         //public ActionResult Admin()
@@ -115,29 +128,29 @@ namespace Game_AVP2.Controllers
         //    string apiUri = Url.HttpRouteUrl("DefaultApi", new { controller = "Admin", });
         //    ViewBag.ApiUrl = new Uri(Request.Url, apiUri).AbsoluteUri.ToString();
 
-        //    return View();
-        //}
+            //    return View();
+            //}
 
             //dont need to come here, game created when character created
-        //public ActionResult NewGame()
-        //{
-        //    string userId = User.Identity.GetUserId();
-        //    Game g = model.CreateNewGame()
-        //    GameId = g.GameId;
-        //    return RedirectToAction("Run", "Game");
-        //}
+            //public ActionResult NewGame()
+            //{
+            //    string userId = User.Identity.GetUserId();
+            //    Game g = model.CreateNewGame()
+            //    GameId = g.GameId;
+            //    return RedirectToAction("Run", "Game");
+            //}
 
-        //public ActionResult Start()
-        //{
-        //    //Get the latest played game object for this user
-        //    DbCurrent.Games
-        //    //get last string in url (the just created gameid)
-        //    int index = GetNumOfRequestParams();
-        //    string param = GetRequestString(index - 1);
-        //    //int gameId = Int32.Parse(GetRequestString(index - 1));
-            
-        //    return RedirectToAction("Index", "Game");
-        //}
+            //public ActionResult Start()
+            //{
+            //    //Get the latest played game object for this user
+            //    DbCurrent.Games
+            //    //get last string in url (the just created gameid)
+            //    int index = GetNumOfRequestParams();
+            //    string param = GetRequestString(index - 1);
+            //    //int gameId = Int32.Parse(GetRequestString(index - 1));
+
+            //    return RedirectToAction("Index", "Game");
+            //}
 
         public ActionResult About()
         {

@@ -14,6 +14,16 @@ namespace Game_AVP2.Models.Avp2.GameModels.Tables
         public string Text { get; set; }
         [Required]
         public bool IsBattle { get; set; }
-        public int NextText { get; set; }
+        //First text in episode
+        [Required]
+        public bool IsFirst { get; set; }
+        //last story - then nextepisode
+        [Required]
+        public bool IsLast { get; set; }
+        //not implemented yet
+        public bool IsDialogue { get; set; }
+
+        public int? NextText { get; set; }
+
     }
 }

@@ -1,4 +1,12 @@
 ﻿<div class="">
+    <div class="battle-round-info col-md-12 col-sm-12">
+        <div id="battleCounter" class="pull-left">
+            <h3 class="text-capitalize text-warning">Battle {{battleCount}}</h3> 
+        </div>
+        <div id="roundCounter" class="pull-right">
+            <h3 class="text-capitalize text-warning">Round {{roundCount}}</h3>
+        </div>
+    </div>
 
     <div id="battle-player" class="col-md-6 col-sm-6">
         <p>test</p>
@@ -7,7 +15,24 @@
 
     @*<div id="battle-divider" class="col-md-1 col-sm-1"></div>*@
 
-    <div id="battle-monster" class="col-md-6 col-sm-6"></div>
+    <div id="battle-monster" class="col-md-6 col-sm-6">
+        <div class="col-md-12 col-sm-12 col-xs-12 text-uppercase">
+        <div class="col-md-4 col-sm-4"></div>
+            <div class="col-md-4 col-sm-4">
+                <h4 class="text-center"><i class="ra ra-monster-skull ra-fw"></i> {{monster.Name}}</h4>
+            </div>
+                <div id="monsterimg" class="col-md-4 col-sm-4 pull-right">
+                    <img class="img-responsive" ng-src="/{{monster.ImageLink}}" />
+                </div>
+            </div>
+
+        <div class="battle_small_stats col-md-6 col-sm-6 col-xs-12">
+                <div class="ra-hover col-md-12 col-sm-12 col-xs-12"> {{monster.Strength}}</div>
+                <div class="ra-hover col-md-12 col-sm-12 col-xs-12">{{monster.Dexterity}}</div>
+        </div>
+        <div class="battle_div_stats col-md-6 col-sm-6 col-xs-12"></div>
+
+    </div>
 
     @Html.Partial("_DiceRollerPlayer")
     @Html.Partial("_DiceRollerMonster")

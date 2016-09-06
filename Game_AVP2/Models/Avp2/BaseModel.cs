@@ -65,9 +65,8 @@ namespace Game_AVP2.Models
             return noPropertyChanged;
         }
 
-        internal int CreateNewGame(int characterId, ApplicationDbContext dbCurrent)
+        internal Game CreateNewGame(int characterId, ApplicationDbContext dbCurrent)
         {
-            int res = 0;
             Game newGame = new Game();
             newGame.GameId = characterId;
             newGame.BattleCount = 0;
@@ -79,14 +78,12 @@ namespace Game_AVP2.Models
 
                 dbCurrent.Games.Add(newGame);
                 dbCurrent.SaveChanges();
-                res = newGame.GameId;
             }
             catch (Exception e)
             {
-                res = -1;
                 Console.WriteLine(e.Message);
             }
-            return res;
+            return newGame;
         }
     }
 }
