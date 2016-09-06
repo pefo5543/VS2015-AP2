@@ -9,7 +9,39 @@
     </div>
 
     <div id="battle-player" class="col-md-6 col-sm-6">
-        <p>test</p>
+        <div class="col-md-12 col-sm-12 col-xs-12 text-uppercase">
+            <div class="battleimg col-md-4 col-sm-4 pull-left">
+                <img class="img-responsive img-circle" ng-src="/{{character.ImageLink}}" />
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <h4 class="text-center"><i class="ra ra-player-king ra-fw"></i> {{character.Name}}</h4>
+            </div>
+            <div class="col-md-4 col-sm-4"></div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="progress">
+                @*<label for="Progress">Health left</label>*@
+                <div ng-class="{'progress-bar-danger':progressColor=='Red','progress-bar-warning':progressColor=='Yellow','progress-bar-success':progressColor=='Green'}" class="progress-bar active" role="progressbar" aria-valuenow="{{character.HealthLeft}}" aria-valuemin="0" aria-valuemax="{{character.Attribute.Health}}" style="width: {{((character.Attribute.HealthLeft/character.Attribute.Health) * 100)}}%">
+                    <span class="sr-only">100% Complete (success)</span>
+                </div>
+            </div>
+        </div>
+        <div class="stats col-md-12 col-sm-12 col-xs-12">
+            @*<p>{{monster.Description}}</p>*@
+        </div>
+        <div class="battle_small_stats col-md-6 col-sm-6 col-xs-12">
+            <div class="stats col-md-12 col-sm-12 col-xs-12">
+                <p><i class="ra ra-sword ra-fw"></i> {{character.EquippedWeaponName}}</p>
+
+            </div>
+        </div>
+        <div class="battle_small_stats col-md-6 col-sm-6 col-xs-12">
+            <div class="stats col-md-12 col-sm-12 col-xs-12">
+                <p><i class="ra ra-broken-shield ra-fw"></i> {{character.EquippedArmourName}}</p>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -21,7 +53,7 @@
             <div class="col-md-4 col-sm-4">
                 <h4 class="text-center"><i class="ra ra-monster-skull ra-fw"></i> {{monster.Name}}</h4>
             </div>
-                <div id="monsterimg" class="col-md-4 col-sm-4 pull-right">
+                <div class="battleimg col-md-4 col-sm-4 pull-right">
                     <img class="img-responsive img-circle" ng-src="/{{monster.ImageLink}}" />
                 </div>
             </div>
@@ -33,13 +65,24 @@
                 </div>
             </div>
         </div>
-        <div class="battle_small_stats col-md-6 col-sm-6 col-xs-12">
-                <div class="ra-hover col-md-12 col-sm-12 col-xs-12"> {{monster.Strength}}</div>
-                <div class="ra-hover col-md-12 col-sm-12 col-xs-12">{{monster.Dexterity}}</div>
+        <div class="stats col-md-12 col-sm-12 col-xs-12">
+            <p>{{monster.Description}}</p>
         </div>
-        <div class="battle_div_stats col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="battle_small_stats col-md-6 col-sm-6 col-xs-12">
+                <div class="stats col-md-12 col-sm-12 col-xs-12">
+                    <p><i class="ra ra-sword ra-fw"></i> {{monster.EquippedWeaponName}}</p>
 
-    </div>
+                </div>
+            </div>
+            <div class="battle_small_stats col-md-6 col-sm-6 col-xs-12">
+                <div class="stats col-md-12 col-sm-12 col-xs-12">
+                 <p><i class="ra ra-broken-shield ra-fw"></i> {{monster.EquippedArmourName}}</p>
+
+                </div>
+
+            </div>
+
+        </div>
 
     @Html.Partial("_DiceRollerPlayer")
     @Html.Partial("_DiceRollerMonster")

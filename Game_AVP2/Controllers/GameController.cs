@@ -101,10 +101,15 @@ namespace Game_AVP2.Controllers
             CharacterViewModel character = new CharacterViewModel();
             if (GameId > 0 && UserId != null)
             {
-                character = model.PopulateCharacterViewModel(GameId ,DbCurrent);
-                GameEpisode gameEpisode = model.GetCurrentGameEpisode(GameId, DbCurrent);
-                EpisodeViewModel episode = new EpisodeViewModel(GameId, gameEpisode, DbCurrent);
-                viewModel = new GameViewModel(GameId, character, episode);
+                try {
+                    character = model.PopulateCharacterViewModel(GameId, DbCurrent);
+                    GameEpisode gameEpisode = model.GetCurrentGameEpisode(GameId, DbCurrent);
+                    EpisodeViewModel episode = new EpisodeViewModel(GameId, gameEpisode, DbCurrent);
+                    viewModel = new GameViewModel(GameId, character, episode);
+                } catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             } else
             {
                 //redirect to index

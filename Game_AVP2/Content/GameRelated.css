@@ -1,11 +1,7 @@
 ﻿body {
     background:#8b8383;
 }
-/*#game_area_wrapper {
-    background: rgba(0, 0, 0, 0) url("/images/bg/cave-800x600.png") scroll left top;
-     background-image: url("/images/bg/cave-800x600.png");
-    background-size: cover;
-}*/
+
 #game-battletext-wrapper {
      border-radius:10px;
     height:400px;
@@ -24,7 +20,7 @@
     height:200px;
     /*background: #4cff00;*/
     border-radius:9px;
-    background: rgba(76, 175, 80, 0.5);
+    background: rgba(255, 255, 255, 0.2);
     margin:0px;
     padding:5px;
 }
@@ -32,11 +28,11 @@
     height:200px;
     /*background: #ff0000;*/
     border-radius:9px;
-    background: rgba(255, 00, 00, 0.5);
+    background: rgba(00, 00, 00, 0.5);
     margin:0px;
     padding:5px;
 }
-#monsterimg {
+.battleimg {
     padding:0;
     width:45px;
     height:45px;
@@ -46,7 +42,7 @@
      height: auto;
     display:block;
 }/*max-width: 100%, height: auto, and display:block*/
-#battle-monster  h4{
+#battle-monster h4, #battle-player h4{
     font-weight:700;
     color:white;
     margin:2px;
@@ -87,11 +83,15 @@
     /*font-size: 80%;*/
     line-height:50%;
 }
-.ra-hover {
-    /*color: #222222;*/
+/*.ra-hover {
     font-size: 17px;
-    /*font-family:Arial, Helvetica, sans-serif;*/
     line-height: 40px;
+}*/
+.stats p {
+    display:inline-block;
+    color:white;
+    margin-top:5px;
+
 }
 
 /* Extra small devices (phones, up to 480px) */
@@ -117,13 +117,20 @@
 
 /*text scroll window*/
 .textStory {
-    background:#f7f5f5;
+    background-image: url("/images/bg/bg-paper-800x600.jpg");
+    background-size: cover;
+    
  height: 30%;	
  /*overflow: hidden;
  position: relative;*/
  margin-bottom:10px;
  border-radius:10px;
 }
+.textStory p {
+    color:black;
+    font-size:large;
+    font-weight:600;
+    }
 .textStory h3 {
  position: absolute;
  width: 100%;

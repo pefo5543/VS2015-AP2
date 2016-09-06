@@ -97,16 +97,20 @@ namespace Game_AVP2.Models.Avp2.GameModels
         internal Monster GenerateMonster(List<int> rarities, ApplicationDbContext dbCurrent)
         {
             Monster monster = new Monster();
-            int randNum = 1;
             //get all monsters that has a rarity value that exists in rarities list
             List<Monster> monsters = (from m in dbCurrent.Monsters
                                                where rarities.Contains(m.Rarity)
                                             select m).ToList();
-            if(monsters.Count > 1)
+            int count = monsters.Count;
+            if(count > 1)
             {
-                randNum = NextRan(monsters.Count);
+                int randNum = NextRan(monsters.Count);
+                monster = monsters[randNum - 1];
+            } else if(count == 1)
+            {
+                monster = monsters[0];
             }
-            monster = monsters[randNum - 1];
+
             //IQueryable<Monster> monsters = dbCurrent.Monsters.SelectMany(m => m, mr => mr.);
 
 
