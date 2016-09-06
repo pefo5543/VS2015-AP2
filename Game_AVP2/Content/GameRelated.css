@@ -38,8 +38,8 @@
 }
 #monsterimg {
     padding:0;
-    width:100px;
-    height:100px;
+    width:45px;
+    height:45px;
 }
 .img-responsive {
     max-width: 100%;
@@ -48,8 +48,21 @@
 }/*max-width: 100%, height: auto, and display:block*/
 #battle-monster  h4{
     font-weight:700;
-    color:blue;
+    color:white;
     margin:2px;
+}
+/*.battle-monster label {
+    margin-bottom:1px;
+    font-size:smaller;
+    font-weight:lighter;
+    color: #999999;
+
+}*/
+.progress {
+    height:10px;
+    margin-bottom:0px;
+    margin-left:0px;
+    width:90%;
 }
 #dices-wrapper {
     height:100px;

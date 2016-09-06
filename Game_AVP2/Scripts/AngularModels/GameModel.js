@@ -11,6 +11,7 @@ var GameModel = angular
 .controller("GameController", function ($scope, $location, Enums, growl, entityService) {
     //var keepgoing = true;
     $scope.currentStory = {};
+    $scope.progressColor = 'Green';
     $scope.battleCount = 1;
     $scope.roundCount = 1;
 
@@ -40,6 +41,8 @@ var GameModel = angular
             entityService.getMonster($scope.episode.MonsterRarities)
             .success(function (p) {
                 $scope.monster = p;
+                $scope.monsterOriginalHealth = p.Attribute.Health;
+                $scope.monsterHealth = p.Attribute.Health;
             })
         .error(function (error) {
             $scope.status = 'Unable to get monster' + error.message;
@@ -47,6 +50,18 @@ var GameModel = angular
         })
 
         }
+
+        //$scope.MyColors = ['Red', 'Yellow', 'Green'];
+
+        //$scope.getClass = function (strValue) {
+        //    if (strValue == ("Red"))
+        //        return "progress-bar-danger";
+        //    else if (strValue == ("Yellow"))
+        //        return "progress-bar-warning";
+        //    else if (strValue == ("Green"))
+        //        return "progress-bar-success";
+        //}
+
     }
 
 
@@ -60,6 +75,9 @@ var GameModel = angular
         //un-disable roll dice button
         $scope.myButton = false;
         $scope.diceRollMonsterMsg = "Test monster rolls 4";
+        //monster gets hurt
+        $scope.monsterHealth = $scope.monsterHealth - diceResult;
+
     }
 
     $scope.showWarning = function (text) {
