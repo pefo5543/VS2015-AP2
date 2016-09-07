@@ -45,13 +45,6 @@
     width: 160px;
 }
 
-#page-content-wrapper {
-    width:87%;
-    /*position: absolute;*/
-    padding: 15px;
-    margin-left: 20px;
-}
-
 #wrapper.toggled /*#page-content-wrapper*/ {
     position: absolute;
     margin-right: -160px;

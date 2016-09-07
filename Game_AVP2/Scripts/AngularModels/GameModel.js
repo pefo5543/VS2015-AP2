@@ -11,7 +11,8 @@ var GameModel = angular
 .controller("GameController", function ($scope, $location, Enums, growl, entityService) {
     //var keepgoing = true;
     $scope.currentStory = {};
-    $scope.progressColor = 'Green';
+    $scope.playerProgressColor = 'Green';
+    $scope.monsterProgressColor = 'Green';
     $scope.battleCount = 1;
     $scope.roundCount = 1;
 
@@ -22,9 +23,8 @@ var GameModel = angular
         $scope.character = gameViewModel.Character;
         $scope.episode = gameViewModel.Episode;
         //find first story
-        for (var i = 0, len = gameViewModel.Episode.Stories.length; i < len; i++) {
+        for (var i = 0, len = $scope.episode.Stories.length; i < len; i++) {
             if (gameViewModel.Episode.Stories[i].IsFirst === true) {
-                //$scope.currentStory = angular.fromJson(gameViewModel.Episode.Stories[i]);
                 $scope.currentStory = gameViewModel.Episode.Stories[i];
                 break;
             }
@@ -35,6 +35,7 @@ var GameModel = angular
     $scope.textContinue = function () {
         if ($scope.currentStory.IsBattle === true) {
             $scope.battleShow = true;
+            $scope.bottomHide = true;
             $scope.textHide = true;
 
             //get generated monster from server:
@@ -51,32 +52,51 @@ var GameModel = angular
 
         }
 
-        //$scope.MyColors = ['Red', 'Yellow', 'Green'];
-
-        //$scope.getClass = function (strValue) {
-        //    if (strValue == ("Red"))
-        //        return "progress-bar-danger";
-        //    else if (strValue == ("Yellow"))
-        //        return "progress-bar-warning";
-        //    else if (strValue == ("Green"))
-        //        return "progress-bar-success";
-        //}
-
     }
 
-
-
-
-
     $scope.diceResultFunc = function (diceResult) {
-        //alert(diceResult);
+        //dice has been rolled, lets do some battle result stuff here
         $scope.resultPlayerDice = diceResult;
         //$scope.diceHide = true;
         //un-disable roll dice button
         $scope.myButton = false;
         $scope.diceRollMonsterMsg = "Test monster rolls 4";
-        //monster gets hurt
-        $scope.monsterHealth = $scope.monsterHealth - diceResult;
+        monsterDamage(diceResult);
+        monsterDice = 10;
+        playerDamage(monsterDice);
+        $scope.resultShow = true;
+        $scope.bottomHide = false;
+    }
+
+    $scope.nextRound = function () {
+        //check if battle is over
+        if ($scope.character.HealthLeft > 0 && $scope.monsterHealth > 0) {
+            //battle continues
+            $scope.resultShow = false;
+            $scope.bottomHide = true;
+            $scope.roundCount += 1;
+        } else if ($scope.monsterHealth < 1) {
+            //monster dead - story continues
+            $scope.textHide = false;
+            $scope.battleShow = false;;
+            //save data to database ......................
+            if ($scope.currentStory.IsLast === true) {
+                //next episode
+                alert("here");
+            } else {
+                var nextStoryId = $scope.currentStory.NextText;
+                for (var i = 0, len = $scope.episode.Stories.length; i < len; i++) {
+                    if ($scope.episode.Stories[i].StoryId === nextStoryId) {
+                        $scope.currentStory = $scope.episode.Stories[i];
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            //player dead - game over
+            alert("Youre dead");
+        }
 
     }
 
@@ -106,6 +126,32 @@ var GameModel = angular
                 event.preventDefault();
             }
         });
+    }
+
+    function monsterDamage(diceResult) {
+        //monster gets hurt
+        $scope.monsterHealth = $scope.monsterHealth - diceResult;
+        $scope.monsterProgressColor = GetProgressClass($scope.monsterHealth, $scope.monsterOriginalHealth);
+    }
+
+    function playerDamage(diceResult) {
+        //player gets hurt:
+        $scope.character.HealthLeft = $scope.character.HealthLeft - diceResult;
+        $scope.playerProgressColor = GetProgressClass($scope.character.HealthLeft, $scope.character.Attribute.Health);
+    }
+
+    function GetProgressClass(healthLeft, healthOriginal) {
+        var div = healthLeft / healthOriginal;
+        var cssClass = "";
+        //Green
+        if(div > 0.6) {
+            cssClass = 'Green';
+        } else if (div > 0.3) {
+            cssClass = 'Yellow';
+        } else {
+            cssClass = 'Red';
+        }
+        return cssClass;
     }
 })
 

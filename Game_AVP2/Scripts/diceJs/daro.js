@@ -57,9 +57,7 @@ DARO.callback = function(total, info, results) {
 DARO.update_results = function(info) {
   var res_elem = document.getElementById(info.results_id);
   if (res_elem) {
-      res_elem.innerHTML = info.result_string;
-      //res_elem.value = info.result_string;
-      res_elem.value = info.result_string;
+      //res_elem.innerHTML = info.result_string;
   }
 }
 

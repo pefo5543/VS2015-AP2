@@ -252,6 +252,10 @@
     <Compile Include="Migrations\201609050956344_score.Designer.cs">
       <DependentUpon>201609050956344_score.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609070840417_storyupdate1.cs" />
+    <Compile Include="Migrations\201609070840417_storyupdate1.Designer.cs">
+      <DependentUpon>201609070840417_storyupdate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Avp2\AttributeBase.cs" />
     <Compile Include="Models\Avp2\CharacterModels\CharacterModel.cs" />
@@ -1300,6 +1304,10 @@
     <Content Include="Styles\_variables.scss" />
     <Content Include="Styles\rpg-awesome.scss" />
     <Content Include="Styles\_bordered-pulled.scss" />
+    <Content Include="Views\Game\_battlePlayer.cshtml" />
+    <Content Include="Views\Game\_battleMonster.cshtml" />
+    <Content Include="Views\Game\_resultPlayer.cshtml" />
+    <Content Include="Views\Game\_resultMonster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1336,6 +1344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609050956344_score.resx">
       <DependentUpon>201609050956344_score.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609070840417_storyupdate1.resx">
+      <DependentUpon>201609070840417_storyupdate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

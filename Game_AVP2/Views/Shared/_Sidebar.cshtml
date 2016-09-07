@@ -73,7 +73,8 @@
                         <div>
                             <label for="Progress">Health: {{character.HealthLeft}} / {{character.Attribute.Health}}</label>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="{{character.HealthLeft}}" aria-valuemin="0" aria-valuemax="{{character.Attribute.Health}}" style="width: {{((character.HealthLeft/character.Attribute.Health) * 100)}}%">
+                                <div ng-class="{'progress-bar-danger':playerProgressColor=='Red','progress-bar-warning':playerProgressColor=='Yellow','progress-bar-success':playerProgressColor=='Green'}" class="progress-bar active" role="progressbar" 
+                                     aria-valuenow="{{character.HealthLeft}}" aria-valuemin="0" aria-valuemax="{{character.Attribute.Health}}" style="width: {{((character.HealthLeft/character.Attribute.Health) * 100)}}%">
                                     <span class="sr-only">70% Complete (success)</span>
                                 </div>
                             </div>

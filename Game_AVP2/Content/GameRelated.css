@@ -1,15 +1,32 @@
-﻿body {
-    background:#8b8383;
+﻿#page-content-wrapper {
+    width: 87%;
+    /*position: absolute;*/
+    padding: 0px;
+    margin-left: 20px;
+    margin-top: 0px;
+}
+
+body {
+    background: #8b8383;
+}
+
+.navbar {
+    margin-bottom: 2px;
 }
 
 #game-battletext-wrapper {
-     border-radius:10px;
-    height:400px;
-    /*background: #cac6c6;*/
+    border-radius: 10px;
+    height: 500px;
     background-image: url("/images/bg/cave-800x600.png");
     background-size: cover;
-    margin:5px;
-    padding:10px;
+    margin: 5px;
+    padding: 10px;
+    position: relative;
+}
+
+#bottom-wrapper {
+    position: absolute;
+    bottom: 0;
 }
 /*responsive images: img {
     max-width: 100%;
@@ -17,156 +34,220 @@
 }*/
 /*battle related*/
 #battle-player {
-    height:200px;
-    /*background: #4cff00;*/
-    border-radius:9px;
+    height: 200px;
+    border-radius: 9px;
     background: rgba(255, 255, 255, 0.2);
-    margin:0px;
-    padding:5px;
+    margin: 0px;
+    padding: 5px;
 }
+
 #battle-monster {
-    height:200px;
-    /*background: #ff0000;*/
-    border-radius:9px;
+    height: 200px;
+    border-radius: 9px;
     background: rgba(00, 00, 00, 0.5);
-    margin:0px;
-    padding:5px;
+    margin: 0px;
+    padding: 5px;
 }
+
 .battleimg {
-    padding:0;
-    width:45px;
-    height:45px;
+    padding: 0;
+    width: 45px;
+    height: 45px;
 }
+
 .img-responsive {
     max-width: 100%;
-     height: auto;
-    display:block;
-}/*max-width: 100%, height: auto, and display:block*/
-#battle-monster h4, #battle-player h4{
-    font-weight:700;
-    color:white;
-    margin:2px;
+    height: auto;
+    display: block;
 }
-/*.battle-monster label {
-    margin-bottom:1px;
-    font-size:smaller;
-    font-weight:lighter;
-    color: #999999;
 
-}*/
+#battle-monster, #battle-player {
+    margin-bottom: 10px;
+}
+
+    #battle-monster h4, #battle-player h4 {
+        font-weight: 700;
+        color: white;
+        margin: 2px;
+    }
+
 .progress {
-    height:10px;
-    margin-bottom:0px;
-    margin-left:0px;
-    width:90%;
+    height: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    width: 90%;
 }
+
+#result_player p, #result_monster p {
+    color: white;
+}
+
+#result_player {
+    height: 200px;
+    /*background: #4cff00;*/
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0px;
+    padding: 5px;
+}
+
+#result_monster {
+    height: 200px;
+    border-radius: 9px;
+    background: rgba(00, 00, 00, 0.5);
+    margin: 0px;
+    padding: 5px;
+}
+
+#result_player, #result_monster {
+    margin-bottom: 5px;
+}
+
 #dices-wrapper {
-    height:100px;
-    margin-top:20px;
-    color:#ffffff;
+    margin-top: 5px;
+    color: #ffffff;
 }
+
+#diceall {
+    width: 82px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .battle-round-info {
     /*background:#a18b8b;*/
     /*background: rgba(0, 0, 0, 0) url("/images/main/sidebar-bg-wall.png") repeat scroll left top;*/
     /*border-radius:8px;*/
-    margin-bottom:10px;
-    padding:10px;
+    margin-bottom: 2px;
+    padding: 2px;
 }
-#battleCounter h3, #roundCounter h3 {
-    margin:0px;
-}
-.battle_small_stats div {
-    background-color:transparent;
-    border:none;
-    color:black;
-    font-weight:600;
-    /*font-size: 80%;*/
-    line-height:50%;
-}
-/*.ra-hover {
-    font-size: 17px;
-    line-height: 40px;
-}*/
-.stats p {
-    display:inline-block;
-    color:white;
-    margin-top:5px;
 
+#battleCounter h3, #roundCounter h3 {
+    margin: 0px;
+    font-size: medium;
+}
+
+.battle_small_stats div {
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-weight: 600;
+    /*font-size: 80%;*/
+    line-height: 50%;
+}
+
+.stats p {
+    display: inline-block;
+    color: white;
+    margin-top: 5px;
 }
 
 /* Extra small devices (phones, up to 480px) */
 @media screen and (max-width: 767px) {
-    p { font-size: 80%; }
-    #game_area_wrapper {width:50%;}
+    p {
+        font-size: 80%;
+    }
+
+    #game_area_wrapper {
+        width: 50%;
+    }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
-    p { font-size: 80%; }
-    #game_area_wrapper {width:75%;}
+    p {
+        font-size: 80%;
+    }
+
+    #game_area_wrapper {
+        width: 75%;
+    }
 }
 /* tablets/desktops and up ----------- */
 @media (min-width: 992px) and (max-width: 1199px) {
-    p { font-size: 100%; }
-    #game_area_wrapper {width:100%;}
+    p {
+        font-size: 100%;
+    }
+
+    #game_area_wrapper {
+        width: 100%;
+    }
 }
 /* large desktops and up ----------- */
 @media screen and (min-width: 1200px) {
-    p { font-size: 100%; }
-    #game_area_wrapper {width:100%;}
+    p {
+        font-size: 100%;
+    }
+
+    #game_area_wrapper {
+        width: 100%;
+    }
 }
 
 /*text scroll window*/
 .textStory {
     background-image: url("/images/bg/bg-paper-800x600.jpg");
     background-size: cover;
-    
- height: 30%;	
- /*overflow: hidden;
- position: relative;*/
- margin-bottom:10px;
- border-radius:10px;
+    height: 30%;
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
-.textStory p {
-    color:black;
-    font-size:large;
-    font-weight:600;
+
+    .textStory p {
+        color: black;
+        font-size: large;
+        font-weight: 600;
     }
-.textStory h3 {
- position: absolute;
- width: 100%;
- height: 100%;
- margin: 0;
- line-height: 50px;
- text-align: center;
- /* Starting position */
- -moz-transform:translateX(100%);
- -webkit-transform:translateX(100%);	
- transform:translateX(100%);
- /* Apply animation to this element */	
- -moz-animation: textStory 15s linear infinite;
- -webkit-animation: textStory 15s linear infinite;
- animation: textStory 15s linear infinite;
-}
-.textStory marquee {
-}
+
+    .textStory h3 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        line-height: 50px;
+        text-align: center;
+        /* Starting position */
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        /* Apply animation to this element */
+        -moz-animation: textStory 15s linear infinite;
+        -webkit-animation: textStory 15s linear infinite;
+        animation: textStory 15s linear infinite;
+    }
+
+    .textStory marquee {
+    }
 /* Move it (define the animation) */
 @-moz-keyframes textStory {
- 0%   { -moz-transform: translateX(100%); }
- 100% { -moz-transform: translateX(-100%); }
+    0% {
+        -moz-transform: translateX(100%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+    }
 }
+
 @-webkit-keyframes textStory {
- 0%   { -webkit-transform: translateX(100%); }
- 100% { -webkit-transform: translateX(-100%); }
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
 }
+
 @keyframes textStory {
- 0%   { 
- -moz-transform: translateX(100%); /* Firefox bug fix */
- -webkit-transform: translateX(100%); /* Firefox bug fix */
- transform: translateX(100%); 		
- }
- 100% { 
- -moz-transform: translateX(-100%); /* Firefox bug fix */
- -webkit-transform: translateX(-100%); /* Firefox bug fix */
- transform: translateX(-100%); 
- }
+    0% {
+        -moz-transform: translateX(100%); /* Firefox bug fix */
+        -webkit-transform: translateX(100%); /* Firefox bug fix */
+        transform: translateX(100%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%); /* Firefox bug fix */
+        -webkit-transform: translateX(-100%); /* Firefox bug fix */
+        transform: translateX(-100%);
+    }
 }
