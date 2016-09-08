@@ -43,32 +43,28 @@ namespace Game_AVP2.Controllers
         {
             get
             {
-                var userId = HttpContext.Session["UserId"] as string;
-                if (null == userId)
-                {
-                    if (User != null && User.Identity != null)
-                    {
-                        userId = User.Identity.GetUserId();
-                        HttpContext.Session["UserId"] = userId;
-                    } else
-                    {
-                        userId = null;
-                    }
-                }
+                var userId = User.Identity.GetUserId();
+                //if (null == userId)
+                //{
+                //    if (User != null && User.Identity != null)
+                //    {
+                //        userId = User.Identity.GetUserId();
+                //        HttpContext.Session["UserId"] = userId;
+                //    } else
+                //    {
+                //        userId = null;
+                //    }
+                //}
                 return userId;
             }
-            set
-            {
-                HttpContext.Session["UserId"] = value;
-            }
+            //set
+            //{
+                //HttpContext.Session["UserId"] = value;
+            //}
         }
         public GameController()
         {
             model = new GameModel();
-            //if(User != null && User.Identity != null)
-            //{
-            //    UserId = User.Identity.GetUserId();
-            //}
                 
         }
         public ActionResult Index()
@@ -127,35 +123,6 @@ namespace Game_AVP2.Controllers
 
             return Json(view, JsonRequestBehavior.AllowGet);
         }
-        //[Authorize(Roles = "Admin")]
-        //public ActionResult Admin()
-        //{
-        //    string apiUri = Url.HttpRouteUrl("DefaultApi", new { controller = "Admin", });
-        //    ViewBag.ApiUrl = new Uri(Request.Url, apiUri).AbsoluteUri.ToString();
-
-            //    return View();
-            //}
-
-            //dont need to come here, game created when character created
-            //public ActionResult NewGame()
-            //{
-            //    string userId = User.Identity.GetUserId();
-            //    Game g = model.CreateNewGame()
-            //    GameId = g.GameId;
-            //    return RedirectToAction("Run", "Game");
-            //}
-
-            //public ActionResult Start()
-            //{
-            //    //Get the latest played game object for this user
-            //    DbCurrent.Games
-            //    //get last string in url (the just created gameid)
-            //    int index = GetNumOfRequestParams();
-            //    string param = GetRequestString(index - 1);
-            //    //int gameId = Int32.Parse(GetRequestString(index - 1));
-
-            //    return RedirectToAction("Index", "Game");
-            //}
 
         public ActionResult About()
         {
